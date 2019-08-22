@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>drug-select</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-label>Select Drug</ion-label>
+  <ionic-selectable
+    [(ngModel)]="selectedDrugId"
+    [items]="drugs$ | async"
+    itemValueField="drug_id"
+    itemTextField="drug_name"
+    [canSearch]="true"
+    [isMultiple]="true"
+    (onChange)="selectDrug($event)">
+  </ionic-selectable>
+</ion-item>
+</ion-content>
