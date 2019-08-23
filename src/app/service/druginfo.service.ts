@@ -18,26 +18,7 @@ export class DruginfoService {
   constructor(private http: HttpClient, private storage: Storage) {}
 
   getDrugList(): Observable<Drug[]> {
-
-    const tokenObs = from(this.storage.get('ACCESS_TOKEN')).pipe(map(
-      (token) => {
-        // console.log('point 1', token);
-        return token;
-      })
-    );
-
-    return tokenObs.pipe(mergeMap(
-      (token) => {
-        // console.log('point 2', token);
-        const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'Authorization': 'JWT ' + token
-          })
-        };
-        return this.http.get<Drug[]>(this.api_url + '/api/drugs/?format=json', httpOptions);
-      }
-    ));
-
+    return this.http.get<Drug[]>(this.api_url + '/api/drugs/?format=json');
   }
+
 }
