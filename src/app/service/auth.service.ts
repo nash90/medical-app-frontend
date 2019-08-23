@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class AuthService {
   // the actual JWT token
   public token: string;
 
+  public $token: Subject<string> = Subject.create('none');
+
   // the token expiration date
   public token_expires: Date;
 
@@ -24,10 +28,14 @@ export class AuthService {
 
   public api_url = environment.apiUrl;
 
-  constructor(private http: HttpClient) {
+  constructor(private storage: Storage, private http: HttpClient) {
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
+
+    this.$token.subscribe((value) => {
+      this.token = value;
+    });
   }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
@@ -63,7 +71,7 @@ export class AuthService {
   private updateData(token) {
     this.token = token;
     this.errors = [];
-    localStorage.setItem('access_token', token);
+    this.storeToken(token);
 
     // decode the token to read the username and expiration timestamp
     // tslint:disable-next-line:variable-name
@@ -72,5 +80,23 @@ export class AuthService {
     this.token_expires = new Date(token_decoded.exp * 1000);
     this.username = token_decoded.username;
     console.log({username: this.username, expiry: this.token_expires});
+  }
+
+  private storeToken(token) {
+    console.log('storing token in storage');
+    this.storage.set('ACCESS_TOKEN', token).then(
+      () => {
+        this.$token.next(token);
+      }
+    );
+  }
+
+  public getToken() {
+    return this.storage.get('ACCESS_TOKEN').then(
+      (value: string) => {
+        console.log('emitting through getToken', value);
+        this.$token.next(value);
+      }
+    );
   }
 }

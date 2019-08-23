@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { DruginfoService } from '../service/druginfo.service';
 import { Drug } from '../model/drug';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { DRUG_LIST } from '../model/drug-mock';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-drug-select',
