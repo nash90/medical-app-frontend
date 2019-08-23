@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+
+import { NavController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,7 @@ export class AuthService {
 
   public api_url = environment.apiUrl;
 
-  constructor(private storage: Storage, private http: HttpClient) {
+  constructor(private storage: Storage, private http: HttpClient, private navCtrl: NavController) {
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
@@ -43,6 +45,7 @@ export class AuthService {
     this.http.post(this.api_url + '/api-token-auth/', JSON.stringify(user), this.httpOptions).subscribe(
       data => {
         this.updateData(data['token']);
+        this.navCtrl.navigateRoot('/drug-select');
       },
       err => {
         this.errors = err['error'];
