@@ -18,12 +18,17 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.user = {
       username: '',
-      password: ''
+      password: '',
+      year_of_birth: ''
     };
   }
 
   login() {
-    this.authService.login({'username': this.user.username, 'password': this.user.password});
+    this.authService.login({
+      'username': this.user.username,
+      'year_of_birth': this.user.year_of_birth,
+      'password': 'dummy value'
+    });
   }
 
   refreshToken() {

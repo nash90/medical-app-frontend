@@ -42,7 +42,7 @@ export class AuthService {
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    this.http.post(this.api_url + '/api-token-auth/', JSON.stringify(user), this.httpOptions).subscribe(
+    this.http.post(this.api_url + '/api/login/', JSON.stringify(user), this.httpOptions).subscribe(
       data => {
         this.updateData(data['token']);
         this.navCtrl.navigateRoot('/drug-select');

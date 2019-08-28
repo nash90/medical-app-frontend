@@ -16,9 +16,12 @@
             <ion-item>
               <ion-input name="username" type="username" placeholder="username" [(ngModel)]="user.username" required></ion-input>
             </ion-item>
-            <ion-item>
+            <!--<ion-item>
               <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="user.password" required></ion-input>
-            </ion-item>
+            </ion-item>-->
+            <ion-item>
+              <ion-input name="year_of_birth" type="text" placeholder="year of birth" [(ngModel)]="user.year_of_birth" required></ion-input>
+            </ion-item>            
           </div>
           <div padding>
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
