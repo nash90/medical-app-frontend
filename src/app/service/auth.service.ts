@@ -80,6 +80,12 @@ export class AuthService {
     this.token = null;
     this.token_expires = null;
     this.username = null;
+    this.storage.set('ACCESS_TOKEN', this.token).then(
+      () => {
+        this.$token.next(this.token);
+        this.navCtrl.navigateRoot('/login');
+      }
+    );
   }
 
   private updateData(token) {
