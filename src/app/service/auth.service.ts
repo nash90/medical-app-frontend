@@ -53,6 +53,17 @@ export class AuthService {
     );
   }
 
+  public register(profile) {
+    this.http.post(this.api_url + '/api/register/', JSON.stringify(profile), this.httpOptions).subscribe(
+      data => {
+        this.navCtrl.navigateRoot('/login');
+      },
+      err => {
+        this.errors = err['error'];
+      }
+    );
+  }
+
   // Refreshes the JWT token, to extend the time the user is logged in
   public refreshToken() {
     this.http.post(this.api_url + '/api-token-refresh/', JSON.stringify({token: this.token}), this.httpOptions).subscribe(

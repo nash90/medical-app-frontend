@@ -14,9 +14,9 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input  name="name" type="text" placeholder="Name" ngModel required></ion-input>
+              <ion-input  name="username" type="text" placeholder="User Name" [(ngModel)]="profile.user.username" required></ion-input>
             </ion-item>
-            <ion-item>
+            <!--<ion-item>
               <ion-input name="email" type="email" placeholder="your@email.com" ngModel required></ion-input>
             </ion-item>
             <ion-item>
@@ -24,7 +24,10 @@
             </ion-item>
             <ion-item>
               <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
-            </ion-item>
+            </ion-item>-->
+            <ion-item>
+              <ion-input  name="date_of_birth" type="date" placeholder="1980-01-01" [(ngModel)]="profile.date_of_birth" required></ion-input>
+            </ion-item>            
           </div>
           <div padding>
             <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
