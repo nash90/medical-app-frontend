@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DruginfoService } from 'src/app/service/druginfo.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-game',
@@ -36,7 +37,10 @@ export class GamePage implements OnInit {
 
   public game = null; // active game information
 
-  constructor(private druginfoService: DruginfoService) {}
+  constructor(
+    private druginfoService: DruginfoService,
+    private navCtrl: NavController
+    ) {}
 
   ngOnInit() {
     this.getData();
@@ -110,4 +114,7 @@ export class GamePage implements OnInit {
     console.log('getCurrentInfo', this.game);
   }
 
+  goToMenu() {
+    this.navCtrl.navigateRoot('/menu');
+  }
 }

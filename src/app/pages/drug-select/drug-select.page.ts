@@ -33,7 +33,11 @@ export class DrugSelectPage implements OnInit {
   }
 
   saveDrug() {
-    this.druginfoService.saveSelectedDrug(this.selectedDrug);
+    this.druginfoService.saveSelectedDrug(this.selectedDrug).then(
+      (item) => {
+        this.navCtrl.navigateRoot('/game');
+      }
+    );
   }
 
   goBack() {

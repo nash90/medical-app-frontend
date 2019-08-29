@@ -6,8 +6,14 @@
 
 <ion-content>
 <div *ngIf="game">
-<ion-text color="secondary">
-  <h1>{{game.drug.drug_name}}</h1>
-</ion-text>
+  <ion-text color="secondary">
+    <h1>{{game.drug.drug_name}}</h1>
+  </ion-text>
+  <p>{{game.drug_info_type.drug_information_type}}</p>
+  <p>{{game.drug_info_type.information}}</p>
+  <p>{{game.scrabble_hint}}</p>
+</div>
+<div padding>
+  <ion-button size="default" type="submit" expand="block" (click)='goToMenu()'>Menu</ion-button>
 </div>
 </ion-content>
