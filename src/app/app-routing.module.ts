@@ -18,7 +18,10 @@ const routes: Routes = [
     loadChildren: './pages/drug-select/drug-select.module#DrugSelectPageModule',
     canActivate: [AuthGuardService]
   },
-  { path: 'menu', loadChildren: './pages/menu/menu.module#MenuPageModule' }
+  { path: 'menu',
+    loadChildren: './pages/menu/menu.module#MenuPageModule',
+    canActivate: [AuthGuardService]
+  }
 ];
 @NgModule({
   imports: [

@@ -46,7 +46,7 @@ export class AuthService {
     this.http.post(this.api_url + '/api/login/', JSON.stringify(user), this.httpOptions).subscribe(
       data => {
         this.updateData(data['token']);
-        this.navCtrl.navigateRoot('/drug-select');
+        this.navCtrl.navigateRoot('/menu');
       },
       err => {
         this.errors = err['error'];
