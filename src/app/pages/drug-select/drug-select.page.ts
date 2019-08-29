@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { DRUG_LIST } from '../../model/drug-mock';
 import { Storage } from '@ionic/storage';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-drug-select',
@@ -18,7 +19,10 @@ export class DrugSelectPage implements OnInit {
   drugs$: Observable<Drug[]>;
   selectedDrug: Drug[] = [];
 
-  constructor(private druginfoService: DruginfoService, private storage: Storage) { }
+  constructor(
+    private druginfoService: DruginfoService,
+    private storage: Storage,
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     this.drugs$ = this.druginfoService.getDrugList();
@@ -30,5 +34,10 @@ export class DrugSelectPage implements OnInit {
 
   saveDrug() {
     this.druginfoService.saveSelectedDrug(this.selectedDrug);
+  }
+
+  goBack() {
+    console.log('go back');
+    this.navCtrl.navigateRoot('/menu');
   }
 }
