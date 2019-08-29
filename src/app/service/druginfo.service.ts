@@ -24,7 +24,11 @@ export class DruginfoService {
   async saveSelectedDrug(selectedDrug) {
     console.log('save selected drugs');
     const id_list = selectedDrug.map((item, idx) => {
-      return item.drug_id;
+      const obj = {
+        drug_id : item.drug_id,
+        played : false
+      };
+      return obj;
     }
     );
     await this.storage.set('SELECTED_DRUGS', id_list);
