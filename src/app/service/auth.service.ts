@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import * as jwt_decode from 'jwt-decode';
 
 import { NavController } from '@ionic/angular';
 import { Subject } from 'rxjs';
@@ -116,7 +117,32 @@ export class AuthService {
       (value: string) => {
         console.log('emitting through getToken', value);
         this.$token.next(value);
+        this.token = value;
       }
     );
+  }
+
+  public getTokenExpirationDate(token: string): Date {
+    const decoded = jwt_decode(token);
+    if (decoded.exp === undefined) {
+      return null;
+    }
+    const date = new Date(0);
+    date.setUTCSeconds(decoded.exp);
+    return date;
+  }
+
+  public async isTokenExpired(): Promise<boolean> {
+    await this.getToken();
+
+    if (this.token === undefined || this.token == null || this.token === '') {
+      return true;
+    }
+
+    const date = this.getTokenExpirationDate(this.token);
+    if (date === undefined) {
+      return false;
+    }
+    return !(date.valueOf() > new Date().valueOf());
   }
 }

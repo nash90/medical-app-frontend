@@ -14,6 +14,7 @@ import { AppComponent } from './app.component';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AuthService } from './service/auth.service';
 import { InterceptorService } from './service/interceptor.service';
+import { AuthGuardService } from './service/auth-guard.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { InterceptorService } from './service/interceptor.service';
   ],
   providers: [
     AuthService,
+    AuthGuardService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
