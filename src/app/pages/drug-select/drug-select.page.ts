@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DruginfoService } from '../service/druginfo.service';
-import { Drug } from '../model/drug';
+import { DruginfoService } from '../../service/druginfo.service';
+import { Drug } from '../../model/drug';
 import { Observable, Subject } from 'rxjs';
 
-import { DRUG_LIST } from '../model/drug-mock';
+import { DRUG_LIST } from '../../model/drug-mock';
 import { Storage } from '@ionic/storage';
 
 @Component({
