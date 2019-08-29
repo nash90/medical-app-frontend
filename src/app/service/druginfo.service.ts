@@ -21,4 +21,17 @@ export class DruginfoService {
     return this.http.get<Drug[]>(this.api_url + '/api/drugs/?format=json');
   }
 
+  async saveSelectedDrug(selectedDrug) {
+    console.log('save selected drugs');
+    const id_list = selectedDrug.map((item, idx) => {
+      return item.drug_id;
+    }
+    );
+    await this.storage.set('SELECTED_DRUGS', id_list);
+  }
+
+  async getSelectedDrug() {
+    await this.storage.get('SELECTED_DRUGS');
+  }
+
 }

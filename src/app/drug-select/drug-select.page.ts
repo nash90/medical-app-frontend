@@ -5,7 +5,7 @@ import { Drug } from '../model/drug';
 import { Observable, Subject } from 'rxjs';
 
 import { DRUG_LIST } from '../model/drug-mock';
-import { AuthService } from '../service/auth.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-drug-select',
@@ -16,16 +16,19 @@ export class DrugSelectPage implements OnInit {
 
   public drugs: Drug[] = [];
   drugs$: Observable<Drug[]>;
-  selectedDrugId: number;
+  selectedDrug: Drug[] = [];
 
-  constructor(private druginfoService: DruginfoService) { }
+  constructor(private druginfoService: DruginfoService, private storage: Storage) { }
 
   ngOnInit() {
     this.drugs$ = this.druginfoService.getDrugList();
   }
 
   selectDrug() {
-    console.log('selected', this.selectedDrugId);
+    console.log('selected', this.selectedDrug);
   }
 
+  saveDrug() {
+    this.druginfoService.saveSelectedDrug(this.selectedDrug);
+  }
 }
