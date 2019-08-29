@@ -5,8 +5,10 @@ import { AuthGuardService } from './service/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [AuthGuardService]
+    // loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    // canActivate: [AuthGuardService]
+    redirectTo: 'menu',
+    pathMatch: 'full'
   },
   { path: 'register',
     loadChildren: './auth/register/register.module#RegisterPageModule'
