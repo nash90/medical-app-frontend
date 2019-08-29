@@ -32,7 +32,7 @@ export class InterceptorService implements HttpInterceptor {
                 this.navCtrl.navigateRoot('/login');
             }
             //return err;
-            const error = err.error.message || err.statusText;
+            const error = err.error || err.statusText;
             return throwError(error);
           }));
       }
