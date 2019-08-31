@@ -141,14 +141,19 @@ export class GamePage implements OnInit {
           is_fixed: false,
         };
         if (char !== ' ' && Math.random() >= 0.5) {
-          char_state.value = '*';
-          char_state.is_fixed = false;
-          key_list.push(char_state);
-          option_list.push(char);
+          key_list.push({
+            value: '*',
+            is_fixed: false
+          });
+          option_list.push({
+            value: char,
+            is_fixed: false,
+          });
         } else {
-          char_state.is_fixed = true;
-          char_state.value = char;
-          key_list.push(char_state);
+          key_list.push({
+            value: char,
+            is_fixed: true
+          });
         }
       }
     this.scrabbled_value = key_list;
@@ -159,7 +164,7 @@ export class GamePage implements OnInit {
 
   removeChar(idx) {
     const pop = this.option_list.splice(idx, 1);
-    this.addToScrabble(pop);
+    this.addToScrabble(pop[0]);
   }
 
   addToScrabble(pop) {
@@ -170,6 +175,8 @@ export class GamePage implements OnInit {
         break;
       }
     }
-    this.scrabbled_value[position].value = pop;
+    console.log('pop', pop);
+    this.scrabbled_value[position] = pop;
+    console.log(this.scrabbled_value);
   }
 }
