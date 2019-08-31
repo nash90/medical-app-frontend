@@ -5,15 +5,38 @@
 </ion-header>
 
 <ion-content>
-<div *ngIf="game">
-  <ion-text color="secondary">
-    <h1>{{game.drug.drug_name}}</h1>
-  </ion-text>
-  <p>{{game.drug_info_type.drug_information_type}}</p>
-  <p>{{game.drug_info_type.information}}</p>
-  <p>{{game.scrabble_hint}}</p>
-</div>
-<div padding>
-  <ion-button size="default" type="submit" expand="block" (click)='goToMenu()'>Menu</ion-button>
-</div>
+  <div padding>
+    <div *ngIf="game">
+      <ion-text color="secondary">
+        <h1>{{game.drug.drug_name}}</h1>
+      </ion-text>
+      <ion-icon name="cog" size="default"></ion-icon>
+      <p>{{game.drug_info_type.drug_information_type}}</p>
+      <p>{{game.drug_info_type.information}}</p>
+      <p>{{game.scrabble_hint}}</p>
+    </div>
+  </div>
+  <div padding class="char-buttons" *ngIf="scrabbled_value">
+    <div *ngFor="let char of scrabbled_value">
+      <div *ngIf="char.value === '*', else blank">
+        <ion-button size="default" expand="" color="default" ></ion-button>
+      </div>
+      <ng-template #blank>
+        <div *ngIf="char.value === ' ', else showchar">
+          <div padding></div>
+        </div>
+      </ng-template>
+      <ng-template #showchar>
+        <ion-button size="default" disabled expand="" color="danger" >{{char.value}}</ion-button>
+      </ng-template>
+    </div>
+  </div>
+
+  <div padding class="char-buttons" *ngIf="option_list">
+    <div *ngFor="let char of option_list; let i = index">
+      <div >
+        <ion-button size="default" expand="" color="primary" (click)="removeChar(i)">{{char}}</ion-button>
+      </div>
+    </div>
+  </div>
 </ion-content>

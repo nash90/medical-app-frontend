@@ -11,6 +11,9 @@ export class GamePage implements OnInit {
 
   public gameItem = [];
   public current_level = '';
+  public current_keyword = null;
+  public scrabbled_value = null;
+  public option_list = null;
 
   public active_level = {
     indication: {
@@ -46,6 +49,10 @@ export class GamePage implements OnInit {
     this.getData();
   }
 
+  goToMenu() {
+    this.navCtrl.navigateRoot('/menu');
+  }
+
   getData() {
     this.druginfoService.getGameItem().subscribe((item) => {
       this.gameItem = item;
@@ -55,6 +62,8 @@ export class GamePage implements OnInit {
       console.log('counseling point', this.active_level.counseling_point);
       console.log('current level', this.current_level);
       this.getCurrentInformation();
+      this.getKeyword();
+      this.scrabble_key();
     },
     (err) => console.log('get Game Item subscribe Failure', err)
     );
@@ -114,7 +123,53 @@ export class GamePage implements OnInit {
     console.log('getCurrentInfo', this.game);
   }
 
-  goToMenu() {
-    this.navCtrl.navigateRoot('/menu');
+  getKeyword() {
+    const keys_length = this.game.keyword.length;
+    const keys_list = this.game.keyword;
+    const choice_idx = Math.floor(Math.random() * keys_length);
+    this.current_keyword = keys_list[choice_idx];
+    console.log('getKeyword', this.current_keyword);
+  }
+
+  scrabble_key() {
+    const key = this.current_keyword.keyword;
+    const key_list = [];
+    const option_list = [];
+    for (const char of key) {
+        const char_state = {
+          value: '',
+          is_fixed: false,
+        };
+        if (char !== ' ' && Math.random() >= 0.5) {
+          char_state.value = '*';
+          char_state.is_fixed = false;
+          key_list.push(char_state);
+          option_list.push(char);
+        } else {
+          char_state.is_fixed = true;
+          char_state.value = char;
+          key_list.push(char_state);
+        }
+      }
+    this.scrabbled_value = key_list;
+    this.option_list = option_list;
+    console.log(key_list);
+    console.log(option_list);
+  }
+
+  removeChar(idx) {
+    const pop = this.option_list.splice(idx, 1);
+    this.addToScrabble(pop);
+  }
+
+  addToScrabble(pop) {
+    let position = 0;
+    for (let idx = 0; idx < this.scrabbled_value.length; idx ++ ) {
+      if (this.scrabbled_value[idx].value === '*') {
+        position = idx;
+        break;
+      }
+    }
+    this.scrabbled_value[position].value = pop;
   }
 }
