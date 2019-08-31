@@ -162,7 +162,7 @@ export class GamePage implements OnInit {
     console.log(option_list);
   }
 
-  removeChar(idx) {
+  addChar(idx) {
     const pop = this.option_list.splice(idx, 1);
     this.addToScrabble(pop[0]);
   }
@@ -178,5 +178,16 @@ export class GamePage implements OnInit {
     console.log('pop', pop);
     this.scrabbled_value[position] = pop;
     console.log(this.scrabbled_value);
+  }
+
+  removeChar(idx) {
+    // console.log('removeChar: idx', idx);
+    const push_item = this.scrabbled_value[idx];
+    // console.log('push item', push_item);
+    this.option_list.push(push_item);
+    this.scrabbled_value[idx] = {
+      value: '*',
+      is_fixed: false
+    };
   }
 }

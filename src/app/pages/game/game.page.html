@@ -10,14 +10,14 @@
       <ion-text color="secondary">
         <h1>{{game.drug.drug_name}}</h1>
       </ion-text>
-      <ion-icon name="cog" size="default"></ion-icon>
+      <ion-icon name="cog" size="default" (click)="goToMenu()"></ion-icon>
       <p>{{game.drug_info_type.drug_information_type}}</p>
       <p>{{game.drug_info_type.information}}</p>
       <p>{{game.scrabble_hint}}</p>
     </div>
   </div>
   <div padding class="char-buttons" *ngIf="scrabbled_value">
-    <div *ngFor="let char of scrabbled_value">
+    <div *ngFor="let char of scrabbled_value; let i = index">
       <div *ngIf="char.value === '*', else blank">
         <ion-button size="default" expand="" color="default" ></ion-button>
       </div>
@@ -28,7 +28,7 @@
       </ng-template>
       <ng-template #showchanged>
         <div *ngIf="!char.is_fixed, else showfixed">
-          <ion-button size="default" expand="" color="primary">{{char.value}}</ion-button>
+          <ion-button size="default" expand="" color="primary" (click)="removeChar(i)">{{char.value}}</ion-button>
         </div>
       </ng-template>      
       <ng-template #showfixed>
@@ -40,7 +40,7 @@
   <div padding class="char-buttons" *ngIf="option_list">
     <div *ngFor="let char of option_list; let i = index">
       <div >
-        <ion-button size="default" expand="" color="primary" (click)="removeChar(i)">{{char.value}}</ion-button>
+        <ion-button size="default" expand="" color="primary" (click)="addChar(i)">{{char.value}}</ion-button>
       </div>
     </div>
   </div>
