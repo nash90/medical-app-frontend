@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.user = {
-      username: '',
+      email: '',
       password: '',
       year_of_birth: ''
     };
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
 
   login() {
     this.authService.login({
-      'username': this.user.username,
+      'email': this.user.email,
       'year_of_birth': this.user.year_of_birth,
       'password': 'dummy value'
     });
