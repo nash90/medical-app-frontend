@@ -15,7 +15,7 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.profile = {
       user: {
-        username: ''
+        email: ''
       },
       date_of_birth: ''
     };
@@ -24,7 +24,7 @@ export class RegisterPage implements OnInit {
   register() {
     this.authService.register({
       user: {
-        username: this.profile.user.username
+        email: this.profile.user.email
       },
       date_of_birth: this.profile.date_of_birth
     });
