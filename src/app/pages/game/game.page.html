@@ -3,7 +3,7 @@
     <ion-title>game</ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!--
 <ion-content>
   <div padding>
     <div *ngIf="game">
@@ -43,5 +43,88 @@
         <ion-button size="default" expand="" color="primary" (click)="addChar(i)">{{char.value}}</ion-button>
       </div>
     </div>
+  </div>
+</ion-content>
+-->
+<ion-content>
+  <script src="https://kit.fontawesome.com/22a47b5644.js"></script>
+   <div class="divheader">
+    <ion-header>
+      <ion-toolbar>
+        <ion-text class="header" (click)="goToMenu()">
+          MENU<i class="fas fa-band-aid"></i>
+          <ion-icon name="heart"></ion-icon>
+        </ion-text>
+      </ion-toolbar>
+    </ion-header>
+  </div>
+
+  <div class="divlevel" align="center">        
+    <ion-button class="level" fill="outline" color="black">
+      {{'Level ' + current_level.level + ": " + current_level.name}}
+    </ion-button>
+  </div>
+
+  <div *ngIf="game">
+    <div class="divinfo" align="center">
+      <div class="info" align="">
+        <ion-text class="infoa">NAME </ion-text>
+        <br><ion-text class="infob">{{game.drug.drug_name}}</ion-text> 
+        <br><ion-text class="infoc">CLASS </ion-text>
+        <br><ion-text class="infod">{{game.drug.drug_subclass.drug_class.drug_class_name}}</ion-text> 
+        <br><ion-text class="infoe">INFO </ion-text>
+        <br><ion-text class="infof">{{game.information}}</ion-text> 
+      </div>
+    </div>
+
+    <div class="divword" align="center">
+      <div class="word">
+        <div *ngFor="let char of scrabbled_value; let i = index">
+          <div *ngIf="char.value === '*', else blank">
+            <ion-button color="light" size="small"><font color="ffffff">_</font></ion-button>
+          </div>
+          <ng-template #blank>
+            <div *ngIf="char.value === ' ', else showchanged">
+              <div padding></div>
+            </div>
+          </ng-template>
+          <ng-template #showchanged>
+            <div *ngIf="!char.is_fixed, else showfixed">
+              <ion-button size="small" color="secondary" (click)="removeChar(i)">{{char.value}}</ion-button>
+            </div>
+          </ng-template>      
+          <ng-template #showfixed>
+            <ion-button size="small" disabled color="primary" >{{char.value}}</ion-button>
+          </ng-template>
+        </div>
+      </div>
+    </div> 
+
+    <div class="divletterbank" align="center">
+      <div class="letterbank word">
+        <div *ngFor="let char of option_list; let i = index">
+          <div >
+            <ion-button size="large" color="secondary" (click)="addChar(i)">{{char.value}}</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf= "hints" class="divhint" align="center">
+      <ion-text class="hint">         
+        <b>HINT</b> 
+        <div *ngFor="let hint of hints; let i = index">
+          <br>{{hint}}
+        </div>
+      </ion-text>
+    </div>
+
+    <div *ngIf="warning" class="divwarning" align="center">
+      <div class="warning">  
+        <b>WARNING:</b>
+        <br>{{warning}}
+      </div>
+    </div>
+
   </div>
 </ion-content>
