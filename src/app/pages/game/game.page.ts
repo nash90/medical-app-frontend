@@ -151,7 +151,7 @@ export class GamePage implements OnInit {
 
   getWarning() {
     let warning = this.game.drug.black_box_warning;
-    if (warning === "(none)") {
+    if (warning === '(none)') {
       warning = null;
     }
     this.warning = warning;
@@ -192,6 +192,7 @@ export class GamePage implements OnInit {
       }
     this.scrabbled_value = key_list;
     this.option_list = option_list;
+    this.shuffle(this.option_list);
     console.log(key_list);
     console.log(option_list);
   }
@@ -223,5 +224,12 @@ export class GamePage implements OnInit {
       value: '*',
       is_fixed: false
     };
+  }
+
+  shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
   }
 }
