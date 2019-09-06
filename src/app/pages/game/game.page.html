@@ -41,14 +41,13 @@
   </div>
 </ion-content>
 -->
-<ion-content>
-  <script src="https://kit.fontawesome.com/22a47b5644.js"></script>
+<ion-content class="contentArea">
+
    <div class="divheader">
     <ion-header>
       <ion-toolbar>
         <ion-text class="header" (click)="goToMenu()">
-          MENU<i class="fas fa-band-aid"></i>
-          <ion-icon name="heart"></ion-icon>
+          <ion-icon name="list"></ion-icon>
         </ion-text>
       </ion-toolbar>
     </ion-header>
@@ -56,25 +55,25 @@
 
   <div class="divlevel" align="center">        
     <ion-button class="level" fill="outline" color="black">
-      {{'Level ' + current_level.level + ": " + current_level.name}}
+      {{'Level ' + current_level.level + ": " + current_level.name | uppercase}}
     </ion-button>
   </div>
 
   <div *ngIf="game">
     <div class="divinfo" align="center">
-      <div class="info" align="">
+      <div class="info" align="left">
         <ion-text class="infoa">NAME </ion-text>
-        <br><ion-text class="infob">{{game.drug.drug_name}}</ion-text> 
+        <ion-text class="infob">{{game.drug.drug_name | uppercase}}</ion-text> 
         <br><ion-text class="infoc">CLASS </ion-text>
-        <br><ion-text class="infod">{{game.drug.drug_subclass.drug_class.drug_class_name}}</ion-text> 
+        <ion-text class="infod">{{game.drug.drug_subclass.drug_class.drug_class_name | uppercase}}</ion-text> 
         <br><ion-text class="infoe">INFO </ion-text>
-        <br><ion-text class="infof">{{game.information}}</ion-text> 
+        <ion-text class="infof">{{game.information | uppercase}}</ion-text> 
       </div>
     </div>
 
     <div class="divword" align="center">
       <div class="word">
-        <div *ngFor="let char of scrabbled_value; let i = index">
+        <div *ngFor="let char of scrabbled_value; let i = index" class="char">
           <div *ngIf="char.value === '*', else blank">
             <ion-button color="light" size="small"><font color="ffffff">_</font></ion-button>
           </div>
@@ -85,21 +84,21 @@
           </ng-template>
           <ng-template #showchanged>
             <div *ngIf="!char.is_fixed, else showfixed">
-              <ion-button size="small" color="secondary" (click)="removeChar(i)">{{char.value}}</ion-button>
+              <ion-button size="small" color="secondary" (click)="removeChar(i)">{{char.value | uppercase}}</ion-button>
             </div>
           </ng-template>      
           <ng-template #showfixed>
-            <ion-button size="small" disabled color="primary" >{{char.value}}</ion-button>
+            <ion-button size="small" disabled color="primary" >{{char.value | uppercase}}</ion-button>
           </ng-template>
         </div>
       </div>
     </div> 
 
     <div class="divletterbank" align="center">
-      <div class="letterbank word">
-        <div *ngFor="let char of option_list; let i = index">
+      <div class="letterbank">
+        <div *ngFor="let char of option_list; let i = index" class="char">
           <div >
-            <ion-button size="large" color="secondary" (click)="addChar(i)">{{char.value}}</ion-button>
+            <ion-button size="large" color="secondary" (click)="addChar(i)">{{char.value | uppercase}}</ion-button>
           </div>
         </div>
       </div>
@@ -107,17 +106,17 @@
 
     <div *ngIf= "hints" class="divhint" align="center">
       <ion-text class="hint">         
-        <b>HINT</b> 
+        <ion-icon class="hinta" name="bulb"></ion-icon>
         <div *ngFor="let hint of hints; let i = index">
-          <br>{{hint}}
+          <br>{{hint | uppercase}}
         </div>
       </ion-text>
     </div>
 
     <div *ngIf="warning" class="divwarning" align="center">
       <div class="warning">  
-        <b>WARNING:</b>
-        <br>{{warning}}
+        <ion-text class="warninga">WARNING: </ion-text>
+        <ion-text class="warningb">{{warning | uppercase}} </ion-text>
       </div>
     </div>
 
