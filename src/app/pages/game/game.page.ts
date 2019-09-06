@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -19,6 +20,7 @@ export class GamePage implements OnInit {
   public current_keyword = null;
   public scrabbled_value = null;
   public option_list = null;
+  public completed_word = false;
 
   public active_level = {
     indication: {
@@ -56,6 +58,8 @@ export class GamePage implements OnInit {
   public game = null; // active game information
   public hints = null;
   public warning = null;
+  public hide_option = false;
+  public wrong_answer = false;
 
   constructor(
     private druginfoService: DruginfoService,
@@ -75,17 +79,20 @@ export class GamePage implements OnInit {
       this.gameItem = item;
       // console.log('game item', item);
       this.setGame(item);
-      this.current_level = this.getLevel();
-      console.log('counseling point', this.active_level.counseling_point);
-      console.log('current level', this.current_level);
-      this.getCurrentInformation();
-      this.getKeyword();
-      this.scrabble_key();
-      this.getHint();
-      this.getWarning();
+      this.getScreenInfo();
     },
     (err) => console.log('get Game Item subscribe Failure', err)
     );
+  }
+
+  getScreenInfo() {
+    this.getLevel();
+    console.log('current level', this.current_level);
+    this.getCurrentInformation();
+    this.getKeyword();
+    this.scrabble_key();
+    this.getHint();
+    this.getWarning();
   }
 
   setGame(drug_infos) {
@@ -117,12 +124,13 @@ export class GamePage implements OnInit {
 
   getLevel() {
     const levels = this.active_level;
+    this.current_level = null;
     for (const item of Object.keys(levels)) {
       if (!levels[item].completed) {
-        return levels[item];
+        this.current_level = levels[item];
+        break;
       }
     }
-    return null;
   }
 
   getCurrentGameIndex() {
@@ -136,7 +144,7 @@ export class GamePage implements OnInit {
   }
 
   getCurrentInformation() {
-    const level_obj = this.active_level[this.current_level.name];
+    const level_obj = this.current_level;
     const current_index = this.getCurrentGameIndex();
     this.game = level_obj.data[current_index];
     console.log('getCurrentInfo', this.game);
@@ -213,6 +221,12 @@ export class GamePage implements OnInit {
     console.log('pop', pop);
     this.scrabbled_value[position] = pop;
     console.log(this.scrabbled_value);
+    this.completed_word = this.checkCompletion();
+    console.log(this.completed_word);
+
+    if (this.completed_word) {
+      this.checkCorrectKeyword();
+    }
   }
 
   removeChar(idx) {
@@ -224,6 +238,94 @@ export class GamePage implements OnInit {
       value: '*',
       is_fixed: false
     };
+  }
+
+  checkCompletion() {
+    const chars = this.scrabbled_value;
+    for (const char of chars) {
+      if (char.value === '*') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  checkCorrectKeyword() {
+    let answer = '';
+    for (const item of this.scrabbled_value) {
+      answer = answer + item.value;
+    }
+    this.druginfoService.checkAnswer(this.current_keyword.keyword_id, answer).subscribe(
+      (data) => {
+        console.log('ans response ', data);
+        if (data.correct) {
+          this.changeLevelIndex();
+          if (!this.checkCompletedSingleLevel()) {
+            this.getScreenInfo();
+          } else {
+            console.log('Single level was complete');
+            this.changeLevel();
+            if (!this.checkCompletedAllLevels()) {
+              this.getScreenInfo();
+            } else {
+              this.goToMenu();
+            }
+          }
+        } else {
+          this.wrong_answer = true;
+        }
+      },
+      (err) => {
+        console.log('err', err);
+      }
+    );
+  }
+
+  changeLevelIndex() {
+    const current_level = this.current_level;
+    for (const item of current_level.data) {
+      if (!item.completed) {
+        item.completed = true;
+        break;
+      }
+    }
+    this.current_level = current_level;
+  }
+
+  checkCompletedSingleLevel() {
+    const current_level = this.current_level;
+    let completed = true;
+    for (const item of current_level.data) {
+      if (!item.completed) {
+        completed = false;
+        break;
+      }
+    }
+    return completed;
+  }
+
+  changeLevel() {
+    const active_level = this.active_level;
+    const levels = Object.keys(active_level);
+    for (const item of levels) {
+      if (!active_level[item].completed) {
+        active_level[item].completed = true;
+        break;
+      }
+    }
+  }
+
+  checkCompletedAllLevels() {
+    const active_level = this.active_level;
+    const levels = Object.keys(active_level);
+    let completed = true;
+    for (const item of levels) {
+      if (!active_level[item].completed) {
+        completed = false;
+        break;
+      }
+    }
+    return completed;
   }
 
   shuffle(array) {

@@ -72,4 +72,8 @@ export class DruginfoService {
     }
     ));
   }
+
+  checkAnswer(key_id, answer) {
+    return this.http.get<any>(this.api_url + `/api/keys/${key_id}/answer/?answer=${answer}`);
+  }
 }
