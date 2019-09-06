@@ -200,6 +200,13 @@ export class GamePage implements OnInit {
       }
     this.scrabbled_value = key_list;
     this.option_list = option_list;
+    // useful in short keyword to aviod zero blank
+    if (this.checkCompletion()) {
+      this.option_list.push(this.scrabbled_value[0]);
+      this.scrabbled_value[0] = '*';
+
+    }
+
     this.shuffle(this.option_list);
     console.log(key_list);
     console.log(option_list);
