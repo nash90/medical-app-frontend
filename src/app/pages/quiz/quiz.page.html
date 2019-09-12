@@ -1,9 +1,68 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>quiz</ion-title>
+<ion-header align="left">
+  <ion-toolbar class="toolbar">
+    <ion-title>MedScrab</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
-</ion-content>
+<ion-content class="contentArea" >  
+  <div class="parent">
+
+    <div class="quizdrug" align="center">        
+      <ion-text class="quizdrugname">
+        SERTALINE
+      </ion-text>
+    </div>
+
+
+    <div class="qBox">
+      <div class="question">  
+        <ion-text class="prompt">Can you drink while taking Sertaline?</ion-text>
+      </div>
+      <div class="choices" align="left">
+        <ion-radio-group>
+            <ion-item lines="none" color="transparent">
+                <ion-label>Yes</ion-label>
+            <ion-radio mode="md" slot="start" value="Yes" class="radio"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" color="transparent">
+              <ion-label>No</ion-label>
+            <ion-radio mode="md" slot="start" value="No" class="radio"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" color="transparent">
+              <ion-label>Not Applicable</ion-label>
+            <ion-radio mode="md" slot="start" value="Not Applicable" class="radio"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+    </div>
+
+        <div class="qBox">
+            <div class="question">  
+              <ion-text class="prompt">Can you drink while taking Sertaline?</ion-text>
+            </div>
+            <div class="choices" align="left">
+              <ion-radio-group>
+                  <ion-item lines="none" color="transparent">
+                      <ion-label>Yes</ion-label>
+                  <ion-radio mode="md" slot="start" value="Yes" class="radio"></ion-radio>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                    <ion-label>No</ion-label>
+                  <ion-radio mode="md" slot="start" value="No" class="radio"></ion-radio>
+                </ion-item>
+                <ion-item lines="none" color="transparent">
+                    <ion-label>Not Applicable</ion-label>
+                  <ion-radio mode="md" slot="start" value="Not Applicable" class="radio"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </div>
+          </div>
+
+  <div>
+    <ion-button class="submit" expand="full" shape="round" fill="solid">S U B M I T</ion-button>
+  </div>
+
+  </div>
+</ion-content>  
+      

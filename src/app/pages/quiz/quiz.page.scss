@@ -1,0 +1,148 @@
+.toolbar {
+  align-self:left;
+}
+
+
+.parent {
+  /*parent flexbox - whole page*/
+  display: flex;
+  flex-wrap:wrap;
+  width:100%;
+  justify-content:center;    
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.quiztitle {
+  /*text*/
+  color: #D37203;
+  font-family: Courier New, Courier, monospace;
+  font-style: normal;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  /*flexbox*/
+  display: flex;
+
+  /*padding*/
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.quizdrug {
+  /*text*/
+  color: #f99820;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 2px;
+
+  /*flexbox*/
+  display: flex;
+  flex-direction: column;    
+  flex-wrap:wrap;
+
+  /*padding*/
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+}
+
+.qBox {
+  /*flexbox*/
+  display: flex; 
+  flex-direction: column;
+
+  /*padding*/
+  padding-top:7px;
+  padding-bottom:7px;
+}
+
+.prompt {
+  font-size: 20px;
+  color: white;
+}
+
+.radio  {
+  background: white;
+  border-radius: 10px; 
+}
+
+.question {
+  /*text*/
+  color: white; 
+  font-family: "tahoma";
+  letter-spacing: 2px;    
+
+  /*padding*/
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+  /*
+  color scheme:
+  terra cotta: ED6A5A
+  oxford blue: 0A014F
+  blond: F4F1BB
+  very pale yellow: F1FEC6
+  cambridge blue: 9BC1BC
+  */  
+
+  /*background
+  colors:
+  oxford blue: 0A014F 
+  */
+  background-color: #0A014F;
+  border: 1px solid #0A014F;
+  border-top-right-radius: 10px; 
+  border-top-left-radius: 10px;   
+
+  /*flexbox*/
+  width: calc(100vw - 20px);
+}
+
+.choices {
+  /*text*/
+  color: black; 
+  font-family: "tahoma";
+  letter-spacing: 2px; 
+  
+  /*padding*/
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:10px;
+
+  /*placement
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;*/  
+  
+  /*background
+  colors:
+  light cyan: CCFBFE
+  very pale yellow: F1FEC6
+  aero blue: D4F4DD
+  */
+  background-color: #F1FFE7;
+  border: 1px solid #F1FFE7;
+  border-bottom-right-radius: 10px; 
+  border-bottom-left-radius: 10px; 
+
+  /*flexbox*/
+  flex-wrap: wrap;
+  width:100%; 
+  justify-content:center;  
+  
+  .submit {
+      background-color: #f87203;
+  }
+  
+}
+
