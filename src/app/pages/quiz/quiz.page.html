@@ -6,62 +6,33 @@
 
 
 <ion-content class="contentArea" >  
-  <div class="parent">
+  <div *ngIf="quiz" class="parent">
 
     <div class="quizdrug" align="center">        
       <ion-text class="quizdrugname">
-        SERTALINE
+        {{drug.drug_name | uppercase}}
       </ion-text>
     </div>
 
-
-    <div class="qBox">
+    <div *ngFor="let item of quiz; let i = index" class="qBox">
       <div class="question">  
-        <ion-text class="prompt">Can you drink while taking Sertaline?</ion-text>
+        <ion-text class="prompt">{{item.drug_quiz.quiz_question}}</ion-text>
       </div>
       <div class="choices" align="left">
+      <ion-list>
         <ion-radio-group>
-            <ion-item lines="none" color="transparent">
-                <ion-label>Yes</ion-label>
-            <ion-radio mode="md" slot="start" value="Yes" class="radio"></ion-radio>
-          </ion-item>
-          <ion-item lines="none" color="transparent">
-              <ion-label>No</ion-label>
-            <ion-radio mode="md" slot="start" value="No" class="radio"></ion-radio>
-          </ion-item>
-          <ion-item lines="none" color="transparent">
-              <ion-label>Not Applicable</ion-label>
-            <ion-radio mode="md" slot="start" value="Not Applicable" class="radio"></ion-radio>
+          <ion-item *ngFor="let option of item.quiz_option; let z = index" lines="none" color="transparent">
+                <ion-label>{{option.quiz_option}}</ion-label>
+            <ion-radio mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
           </ion-item>
         </ion-radio-group>
+      </ion-list>
       </div>
     </div>
 
-        <div class="qBox">
-            <div class="question">  
-              <ion-text class="prompt">Can you drink while taking Sertaline?</ion-text>
-            </div>
-            <div class="choices" align="left">
-              <ion-radio-group>
-                  <ion-item lines="none" color="transparent">
-                      <ion-label>Yes</ion-label>
-                  <ion-radio mode="md" slot="start" value="Yes" class="radio"></ion-radio>
-                </ion-item>
-                <ion-item lines="none" color="transparent">
-                    <ion-label>No</ion-label>
-                  <ion-radio mode="md" slot="start" value="No" class="radio"></ion-radio>
-                </ion-item>
-                <ion-item lines="none" color="transparent">
-                    <ion-label>Not Applicable</ion-label>
-                  <ion-radio mode="md" slot="start" value="Not Applicable" class="radio"></ion-radio>
-                </ion-item>
-              </ion-radio-group>
-            </div>
-          </div>
-
-  <div>
-    <ion-button class="submit" expand="full" shape="round" fill="solid">S U B M I T</ion-button>
-  </div>
+    <div>
+      <ion-button class="submit" expand="full" shape="round" fill="solid">S U B M I T</ion-button>
+    </div>
 
   </div>
 </ion-content>  

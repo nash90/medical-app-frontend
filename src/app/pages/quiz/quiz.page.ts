@@ -8,7 +8,9 @@ import { QuizService } from 'src/app/service/quiz.service';
 })
 export class QuizPage implements OnInit {
 
-  public quiz = [];
+  public quiz = null;
+  public drug = null;
+
 
   constructor(
     private quizService: QuizService
@@ -17,8 +19,13 @@ export class QuizPage implements OnInit {
   ngOnInit() {
     this.quizService.getQuizInfo().subscribe((data) => {
       console.log('api return', data);
-      this.quiz = data;
+      this.setScreenData(data);
     });
+  }
+
+  setScreenData(data) {
+    this.quiz = data;
+    this.drug = data[0].drug_quiz.drug;
   }
 
 }
