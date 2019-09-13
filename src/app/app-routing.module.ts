@@ -24,7 +24,14 @@ const routes: Routes = [
     loadChildren: './pages/menu/menu.module#MenuPageModule',
     canActivate: [AuthGuardService]
   },
-  { path: 'game', loadChildren: './pages/game/game.module#GamePageModule' }
+  { path: 'game',
+    loadChildren: './pages/game/game.module#GamePageModule',
+    canActivate: [AuthGuardService]
+  },
+  { path: 'quiz',
+    loadChildren: './pages/quiz/quiz.module#QuizPageModule',
+    canActivate: [AuthGuardService]
+  }
 ];
 @NgModule({
   imports: [

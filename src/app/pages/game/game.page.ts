@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -60,14 +62,29 @@ export class GamePage implements OnInit {
   public warning = null;
   public hide_option = false;
   public wrong_answer = false;
+  public state = '';
 
   constructor(
     private druginfoService: DruginfoService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private storage: Storage
     ) {}
 
   ngOnInit() {
-    this.getData();
+    this.route.queryParams.subscribe(
+      (params) => {
+        console.log('all_params', params);
+        const state = params.state;
+        this.state = state;
+        console.log('state', this.state);
+        if (state === '1') {
+          console.log('here');
+        } else {
+          this.getData();
+        }
+      }
+    );
   }
 
   goToMenu() {
@@ -123,7 +140,8 @@ export class GamePage implements OnInit {
   }
 
   getLevel() {
-    const levels = this.active_level;
+    const levels = this.sort_object(this.active_level);
+
     this.current_level = null;
     for (const item of Object.keys(levels)) {
       if (!levels[item].completed) {
@@ -263,13 +281,14 @@ export class GamePage implements OnInit {
       answer = answer + item.value;
     }
     this.druginfoService.checkAnswer(this.current_keyword.keyword_id, answer).subscribe(
-      (data) => {
+      async (data) => {
         console.log('ans response ', data);
         if (data.correct) {
           this.changeLevelIndex();
           if (!this.checkCompletedSingleLevel()) {
             this.getScreenInfo();
           } else {
+            await this.cacheGame();
             console.log('Single level was complete');
             this.changeLevel();
             if (!this.checkCompletedAllLevels()) {
@@ -335,10 +354,32 @@ export class GamePage implements OnInit {
     return completed;
   }
 
+  async cacheGame() {
+    await this.storage.set('GAME', this.active_level);
+    await this.storage.set('QUIZ_LEVEL', this.current_level);
+  }
+
   shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+  }
+
+  sort_object(obj) {
+    const items = Object.keys(obj).map((key) => {
+        return [key, obj[key]];
+    });
+    items.sort((first, second) => {
+        return second[1] - first[1];
+    });
+    const sorted_obj = {};
+
+    items.forEach((item) => {
+        const use_key = item[0];
+        const use_value = item[1];
+        sorted_obj[use_key] = use_value;
+    });
+    return(sorted_obj);
   }
 }

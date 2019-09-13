@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://3.13.165.191:8000'
+  apiUrl: 'http://medscrab.com:8000'
 };
 
 /*

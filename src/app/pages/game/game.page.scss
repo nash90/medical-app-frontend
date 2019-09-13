@@ -1,10 +1,7 @@
-/*.word {
-  display: inline-flex
-}*/
-
 .char {
   display: inline-block;
 }
+
 
 .contentArea { 
   --background: white;
@@ -71,25 +68,68 @@
 .infoa {
   font-size: 12px;    
   font-weight: bold;  
-  letter-spacing: 3px;      
+  letter-spacing: 3px;         
 }
-.infob {
-  font-size: 18px;    
+
+.divwarning {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom:20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
 }
-.infoc {
+
+.warning {
+  color: white;
+  font-family: "tahoma";
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  background-color: #E74343;    
+  border: 1px solid #E74343;
+  /*opacity: .6;*/
+  filter: alpha(opacity=5);
+
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+}
+
+.warninga {
+  font-weight: bold;  
+}
+
+.warningb {
   font-size: 12px;        
-  font-weight: bold;   
 }
-.infod {
-  font-size: 18px;    
+
+.divhint {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:10px;
+  padding-bottom:20px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;    
 }
-.infoe {
-  font-size: 12px;        
-  font-weight: bold;     
-  letter-spacing: 4px;      
+.hint {
+  color: black;
+  font-family: "tahoma";
+  font-weight: bold;      
+  font-size: 20px;
+  letter-spacing: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
-.infof {
-  font-size: 18px;    
+
+.hinta {
+  color: #E49E09;  
+  font-size: 20px;  
 }
 
 .divword {
@@ -122,64 +162,5 @@
   border-radius: 10px;
 }
 
-.divhint {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:20px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;    
-}
-.hint {
-  color: black;
-  font-family: "tahoma";
-  font-weight: bold;      
-  font-size: 20px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
 
-.hinta {
-  color: #E49E09;  
-  font-size: 20px;  
-}
 
-.divwarning {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom:20px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 500px;
-
-}
-
-.warning {
-  color: white;
-  font-family: "tahoma";
-  font-size: 12px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  background-color: #E74343;    
-  border: 1px solid #E74343;
-  /*opacity: .6;*/
-  filter: alpha(opacity=5);
-
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
-}
-
-.warninga {
-  font-weight: bold;  
-}
-
-.warningb {
-  font-size: 12px;        
-}
