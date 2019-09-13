@@ -12,6 +12,7 @@ export class QuizPage implements OnInit {
   public drug = null;
   public answers = {};
   public error = false;
+  public feedback = null;
 
   constructor(
     private quizService: QuizService
@@ -59,11 +60,14 @@ export class QuizPage implements OnInit {
       this.error = true;
       return;
     }
-
-    const ans_result = {};
-    const q = Object.keys(this.answers);
     this.quizService.checkAnswers(this.answers).subscribe((ans) => {
-      console.log(ans);
+      const dic = {};
+      ans.forEach((item) => {
+        dic[item.quiz_id] = item;
+      });
+      this.feedback = dic;
+      console.log('answer check', dic);
+
     });
   }
 

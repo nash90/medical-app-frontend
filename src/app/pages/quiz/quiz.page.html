@@ -6,7 +6,7 @@
 
 
 <ion-content class="contentArea" >  
-  <div *ngIf="quiz" class="parent">
+  <div *ngIf="quiz && !feedback" class="parent">
 
     <div class="quizdrug" align="center">        
       <ion-text class="quizdrugname">
@@ -21,10 +21,12 @@
       <div class="choices" align="left">
       <ion-list>
         <ion-radio-group>
-          <ion-item *ngFor="let option of item.quiz_option; let z = index" lines="none" color="transparent">
+          <div *ngFor="let option of item.quiz_option; let z = index">
+              <ion-item lines="none" color="transparent">
                 <ion-label>{{option.quiz_option}}</ion-label>
-            <ion-radio mode="md" slot="start" name="{{item.drug_quiz.drug_quiz_id}}" value="{{option.quiz_option_id}}" (ionSelect)="radioSelect(item.drug_quiz.drug_quiz_id, option.quiz_option_id)" ></ion-radio>
-          </ion-item>
+                <ion-radio mode="md" slot="start" value="{{option.quiz_option_id}}" (ionSelect)="radioSelect(item.drug_quiz.drug_quiz_id, option.quiz_option_id)" ></ion-radio>
+              </ion-item>            
+          </div>
         </ion-radio-group>
       </ion-list>
       </div>
@@ -33,7 +35,59 @@
     <div>
       <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="submitAnswer()">S U B M I T</ion-button>
     </div>
-
   </div>
+
+  <div *ngIf="feedback" class="parent">
+
+    <div class="quizdrug" align="center">        
+      <ion-text class="quizdrugname">
+        {{drug.drug_name | uppercase}}
+      </ion-text>
+    </div>
+
+    <div *ngFor="let item of quiz; let i = index" class="qBox">
+      <div class="question">  
+        <ion-text class="prompt">{{item.drug_quiz.quiz_question}}</ion-text>
+      </div>
+      <div class="choices" align="left">
+      <ion-list>
+        <ion-radio-group>
+          <div *ngFor="let option of item.quiz_option; let z = index">
+            <ion-item 
+            *ngIf="feedback[item.drug_quiz.drug_quiz_id]['answer'] === option.quiz_option_id &&
+            feedback[item.drug_quiz.drug_quiz_id]['correct'],
+            else showRed  " lines="none" color="transparent">
+              <ion-label color="success">{{option.quiz_option}}</ion-label>
+              <ion-radio checked color="success" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
+            </ion-item>
+            <ng-template #showRed>
+              <ion-item 
+              *ngIf="feedback[item.drug_quiz.drug_quiz_id]['answer'] === option.quiz_option_id,
+              else showTransparent  " lines="none" color="transparent">
+                  <ion-label color="danger">{{option.quiz_option}}</ion-label>
+                  <ion-radio checked color="danger" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
+                </ion-item>        
+            </ng-template>
+            <ng-template #showTransparent>
+              <ion-item lines="none" color="transparent">
+                <ion-label>{{option.quiz_option}}</ion-label>
+                <ion-radio mode="md" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
+              </ion-item>            
+            </ng-template>
+          </div>
+        </ion-radio-group>
+      </ion-list>
+      <ion-text *ngIf="!feedback[item.drug_quiz.drug_quiz_id]['correct'], else showCorrect" color="danger">WRONG!! {{feedback[item.drug_quiz.drug_quiz_id]['message']}}</ion-text>
+      <ng-template #showCorrect>
+        <ion-text color="success">CORRECT</ion-text>
+      </ng-template>
+      </div>
+    </div>
+
+    <div>
+      <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="submitAnswer()">NEXT</ion-button>
+    </div>
+  </div>
+
 </ion-content>  
       
