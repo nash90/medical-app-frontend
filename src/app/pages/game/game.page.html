@@ -1,46 +1,3 @@
-<!--
-<ion-content>
-  <div padding>
-    <div *ngIf="game">
-      <ion-text color="secondary">
-        <h1>{{game.drug.drug_name}}</h1>
-      </ion-text>
-      <ion-icon name="cog" size="default" (click)="goToMenu()"></ion-icon>
-      <p>{{game.drug_info_type.drug_information_type}}</p>
-      <p>{{game.drug_info_type.information}}</p>
-      <p>{{game.scrabble_hint}}</p>
-    </div>
-  </div>
-  <div padding class="char-buttons" *ngIf="scrabbled_value">
-    <div *ngFor="let char of scrabbled_value; let i = index">
-      <div *ngIf="char.value === '*', else blank">
-        <ion-button size="default" expand="" color="default" ></ion-button>
-      </div>
-      <ng-template #blank>
-        <div *ngIf="char.value === ' ', else showchanged">
-          <div padding></div>
-        </div>
-      </ng-template>
-      <ng-template #showchanged>
-        <div *ngIf="!char.is_fixed, else showfixed">
-          <ion-button size="default" expand="" color="primary" (click)="removeChar(i)">{{char.value}}</ion-button>
-        </div>
-      </ng-template>      
-      <ng-template #showfixed>
-        <ion-button size="default" disabled expand="" color="danger" >{{char.value}}</ion-button>
-      </ng-template>
-    </div>
-  </div>
-
-  <div padding class="char-buttons" *ngIf="option_list">
-    <div *ngFor="let char of option_list; let i = index">
-      <div >
-        <ion-button size="default" expand="" color="primary" (click)="addChar(i)">{{char.value}}</ion-button>
-      </div>
-    </div>
-  </div>
-</ion-content>
--->
 <ion-content class="contentArea">
 
    <div class="divheader">
@@ -62,15 +19,26 @@
   <div *ngIf="game">
     <div class="divinfo" align="center">
       <div class="info" align="left">
-        <ion-text class="infoa">NAME </ion-text>
         <ion-text class="infob">{{game.drug.drug_name | uppercase}}</ion-text> 
-        <br><ion-text class="infoc">CLASS </ion-text>
-        <ion-text class="infod">{{game.drug.drug_subclass.drug_class.drug_class_name | uppercase}}</ion-text> 
-        <br><ion-text class="infoe">INFO </ion-text>
-        <ion-text class="infof">{{game.information | uppercase}}</ion-text> 
       </div>
     </div>
 
+    <div *ngIf="warning" class="divwarning" align="center">
+      <div class="warning">  
+        <ion-text class="warninga">WARNING: </ion-text>
+        <ion-text class="warningb">{{warning | uppercase}} </ion-text>
+      </div>
+    </div>
+
+    <div *ngIf= "hints" class="divhint" align="center">
+      <ion-text class="hint">         
+        <ion-icon class="hinta" name="bulb"></ion-icon>
+        <div *ngFor="let hint of hints; let i = index">
+          <br>{{hint | uppercase}}
+        </div>
+      </ion-text>
+    </div>
+    
     <div class="divword" align="center">
       <div class="word">
         <div *ngFor="let char of scrabbled_value; let i = index" class="char">
@@ -103,22 +71,5 @@
         </div>
       </div>
     </div>
-
-    <div *ngIf= "hints" class="divhint" align="center">
-      <ion-text class="hint">         
-        <ion-icon class="hinta" name="bulb"></ion-icon>
-        <div *ngFor="let hint of hints; let i = index">
-          <br>{{hint | uppercase}}
-        </div>
-      </ion-text>
-    </div>
-
-    <div *ngIf="warning" class="divwarning" align="center">
-      <div class="warning">  
-        <ion-text class="warninga">WARNING: </ion-text>
-        <ion-text class="warningb">{{warning | uppercase}} </ion-text>
-      </div>
-    </div>
-
   </div>
 </ion-content>
