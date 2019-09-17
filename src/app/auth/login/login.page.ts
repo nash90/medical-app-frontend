@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { UsernameValidator } from '../../validators/username.validator';
 import { BirthdateValidator } from '../../validators/birthdate.validator';
-import {Validators, FormGroup, FormControl, FormBuilder} from '@angular/forms';
+import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -45,8 +45,8 @@ export class LoginPage implements OnInit {
 
   login() {
     this.authService.login({
-      'email': this.user.email,
-      'year_of_birth': this.user.year_of_birth,
+      'email': this.validations_form.get('username').value,
+      'year_of_birth': this.validations_form.get('birthdate').value,
       'password': 'dummy value'
     });
   }
@@ -70,7 +70,7 @@ export class LoginPage implements OnInit {
       ],
       'birthdate': [
         { type: 'required', message: 'Birthdate is required.' },
-        { type: 'validUsDate', message: 'Please enter birthdate with format: MM/DD/YYYY'},
+        { type: 'validUsDate', message: 'Please enter birthdate with format: YYYY-MM-DD'},
       ]
     };
 
