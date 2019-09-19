@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from 'src/app/service/quiz.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-quiz',
@@ -15,7 +16,8 @@ export class QuizPage implements OnInit {
   public feedback = null;
 
   constructor(
-    private quizService: QuizService
+    private quizService: QuizService,
+    private navCtrl: NavController,
     ) { }
 
   ngOnInit() {
@@ -24,6 +26,10 @@ export class QuizPage implements OnInit {
       this.setScreenData(data);
       this.setAnswers();
     });
+  }
+
+  goToGame() {
+    this.navCtrl.navigateRoot('/game?state=1');
   }
 
   setScreenData(data) {
@@ -69,6 +75,10 @@ export class QuizPage implements OnInit {
       console.log('answer check', dic);
 
     });
+  }
+
+  next() {
+    this.goToGame();
   }
 
 }

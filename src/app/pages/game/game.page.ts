@@ -78,7 +78,7 @@ export class GamePage implements OnInit {
         this.state = state;
         console.log('state', this.state);
         if (state === '1') {
-          console.log('here');
+          this.onReturnFromQuiz();
         } else {
           this.play();
         }
@@ -88,6 +88,10 @@ export class GamePage implements OnInit {
 
   goToMenu() {
     this.navCtrl.navigateRoot('/menu');
+  }
+
+  goToQuiz() {
+    this.navCtrl.navigateRoot('/quiz');
   }
 
   play() {
@@ -288,10 +292,9 @@ export class GamePage implements OnInit {
             this.getScreenInfo();
           } else {
             await this.cacheGame();
-            console.log('Single level was complete');
-            this.changeLevel();
+            // console.log('Single level was complete');
             if (!this.checkCompletedAllLevels()) {
-              this.getScreenInfo();
+              this.goToQuiz();
             } else {
               await this.druginfoService.changePlayed(this.game.drug.drug_id);
               this.play();
@@ -357,6 +360,16 @@ export class GamePage implements OnInit {
   async cacheGame() {
     await this.storage.set('GAME', this.active_level);
     await this.storage.set('QUIZ_LEVEL', this.current_level);
+  }
+
+  onReturnFromQuiz() {
+    this.storage.get('GAME').then(
+      (game) => {
+        this.active_level = game;
+        this.changeLevel();
+        this.getScreenInfo();
+      }
+    );
   }
 
   shuffle(array) {
