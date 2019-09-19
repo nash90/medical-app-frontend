@@ -28,7 +28,7 @@ export class DruginfoService {
 
   getDrugInfoById(id): Observable<any> {
     const url = this.api_url + `/api/drugs/${id}/info/?format=json`;
-    console.log('getDrugInfoByID url:', url);
+    // console.log('getDrugInfoByID url:', url);
     return this.http.get<any>(url);
   }
 
@@ -91,7 +91,7 @@ export class DruginfoService {
       this.navCtrl.navigateRoot('/drug-select');
     }
 
-    console.log('getGameItemId: selectedDrugs', selectedDrugs);
+    // console.log('getGameItemId: selectedDrugs', selectedDrugs);
     let gameItemId = null;
     for (const element of selectedDrugs) {
       if (!element.played) {
@@ -104,7 +104,7 @@ export class DruginfoService {
 
   getGameItem(): Observable<any> {
     return from(this.getGameItemId()).pipe(mergeMap((gameItemId) => {
-      console.log('getGameItem: gameItemId', gameItemId );
+      // console.log('getGameItem: gameItemId', gameItemId );
       if (gameItemId !== null) {
         return this.getDrugInfoById(gameItemId.drug_id);
       } else {

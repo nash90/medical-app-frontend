@@ -74,7 +74,6 @@ export class GamePage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(
       (params) => {
-        console.log('all_params', params);
         const state = params.state;
         this.state = state;
         console.log('state', this.state);
@@ -172,7 +171,7 @@ export class GamePage implements OnInit {
     let hints = this.game.scrabble_hint;
     hints = hints.split(';');
     this.hints = hints;
-    console.log(hints);
+    // console.log(hints);
   }
 
   getWarning() {
@@ -226,8 +225,8 @@ export class GamePage implements OnInit {
     }
 
     this.shuffle(this.option_list);
-    console.log(key_list);
-    console.log(option_list);
+    // console.log(key_list);
+    // console.log(option_list);
   }
 
   addChar(idx) {
@@ -243,11 +242,11 @@ export class GamePage implements OnInit {
         break;
       }
     }
-    console.log('pop', pop);
+    // console.log('pop', pop);
     this.scrabbled_value[position] = pop;
-    console.log(this.scrabbled_value);
+    // console.log(this.scrabbled_value);
     this.completed_word = this.checkCompletion();
-    console.log(this.completed_word);
+    // console.log(this.completed_word);
 
     if (this.completed_word) {
       this.checkCorrectKeyword();

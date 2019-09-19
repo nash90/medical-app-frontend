@@ -115,7 +115,7 @@ export class AuthService {
   public getToken() {
     return this.storage.get('ACCESS_TOKEN').then(
       (value: string) => {
-        console.log('emitting through getToken', value);
+        // console.log('emitting through getToken', value);
         this.$token.next(value);
         this.token = value;
       }
