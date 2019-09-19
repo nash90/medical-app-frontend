@@ -22,7 +22,7 @@ export class QuizPage implements OnInit {
 
   ngOnInit() {
     this.quizService.getQuizInfo().subscribe((data) => {
-      console.log('api return', data);
+      // console.log('api return', data);
       this.setScreenData(data);
       this.setAnswers();
     });
@@ -46,7 +46,7 @@ export class QuizPage implements OnInit {
 
   radioSelect(quiz_id, option_id) {
     this.answers[quiz_id] = option_id;
-    console.log(this.answers);
+    // console.log(this.answers);
   }
 
   validateAnswers() {
@@ -61,7 +61,7 @@ export class QuizPage implements OnInit {
   }
 
   submitAnswer() {
-    console.log('submitAns');
+    // console.log('submitAns');
     if (this.validateAnswers() === false) {
       this.error = true;
       return;
@@ -72,7 +72,7 @@ export class QuizPage implements OnInit {
         dic[item.quiz_id] = item;
       });
       this.feedback = dic;
-      console.log('answer check', dic);
+      // console.log('answer check', dic);
 
     });
   }
