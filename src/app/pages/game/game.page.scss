@@ -2,14 +2,11 @@
   display: inline-block;
 }
 
-
 .contentArea { 
   --background: white;
 }
 
 .divheader {
-  padding-left: 10px;
-  padding-right: 10px;
   padding-top:10px;
   padding-bottom:10px;
 }
@@ -17,150 +14,244 @@
   color: black;
   font-family: "tahoma";
   font-size: 20px;
-  font-weight: bold;
+  font-weight: normal;
   letter-spacing: 2px;
+}
+
+.parent {
+  /*parent flexbox - whole page*/
+  display: flex;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+  justify-content: flex-start;    
+  align-items: stretch;
+  align-content: stretch;
+  
+  width:100%;
   padding-left: 10px;
-  padding-right: 10px; 
+  padding-right: 10px;
+
+  height: 100%;
+
+  /*page font size baseline*/
 }
 
 .divlevel {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  
+   /*flexbox*/
 }
 .level {
   color: black;
-  font-family: "tahoma";
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-family: "arial";
+  font-size: 18px;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.gamehere {
+  /*flexbox*/
+  display: flex;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+  justify-content: flex-start;    
+  align-items: stretch;
+  align-content: stretch;
+  width:100%;
+  height: 100%;
 }
 
 .divinfo {
   color: black;    
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
-  width: fit-content;
+
+  /*child flexbox*/
+  flex: .7;
+
+  /*parent flexbox*/
+  display: flex;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+  align-items: stretch;
+  align-content: stretch;
+  
+  width:100%;
+  max-width: 500px;  
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
-}
-.info {
-  color: black;
-  font-family: "tahoma";
-  letter-spacing: 2px;      
-  
-  background-color: #BCE9F0;
-  border: 1px solid #BCE9F0;
-  /*opacity: .6;*/    
-  filter: alpha(opacity=5);    
 
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;    
+  /*background*/
+  background-image: linear-gradient(to right, rgba(0, 169, 255, 0.4), rgba(0, 169, 255, 0.1));
+
+  /*padding*/
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px; 
+  
 }
-.infoa {
-  font-size: 12px;    
-  font-weight: bold;  
-  letter-spacing: 3px;         
+
+.info {
+  font-family: "arial";
+
+  /*Part 1/2 for blue info box*/
+  flex: 1;
+  max-height: 50%;
+}
+.infob {
+  color: black;  
+  font-size: 24px;    
+  font-weight: normal;  
+  letter-spacing:4px;   
+  text-align: justify; 
 }
 
 .divwarning {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom:20px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  max-width: 500px;
+
+   /*Part 2/2 for blue info box*/
+   flex: 1;
+   max-height: 50%;   
 }
 
 .warning {
-  color: white;
-  font-family: "tahoma";
-  font-size: 12px;
+  color: #831B1B;
+  font-family: "arial";
+  font-size: 14px;
   letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  background-color: #E74343;    
-  border: 1px solid #E74343;
-  /*opacity: .6;*/
-  filter: alpha(opacity=5);
-
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
 }
 
 .warninga {
-  font-weight: bold;  
+  /*text*/
+  font-weight: bold; 
 }
 
 .warningb {
-  font-size: 12px;        
+  /*text*/
+  font-size: 14px; 
 }
 
-.divhint {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:20px;
-  width: fit-content;
+.divhint { 
+  /*flexbox*/
+  flex: 1;
+
+  /*flexbox*/
+  display: flex;
+  flex-direction: row; 
+
+  max-width: 600px;
   margin-left: auto;
-  margin-right: auto;    
-}
-.hint {
-  color: black;
-  font-family: "tahoma";
-  font-weight: bold;      
-  font-size: 20px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-right: auto;
+  
+  flex-wrap: nowrap;
 }
 
-.hinta {
-  color: #E49E09;  
-  font-size: 20px;  
+.hintbulb {
+
+ /*flexbox*/
+ flex: .3;
+
+ /*padding*/
+ padding-top: 20px;
+ padding-bottom: 20px;
+}
+
+.hinta{
+  /*child flexbox*/
+  flex: .7;
+
+  /*parent flexbox*/
+  display: flex;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+  
+  /*padding*/
+  padding-top:10px;
+}
+
+.hintb {
+  /*text*/
+  color: #000000;  
+  font-size: 18px; 
+  font-family: "arial";
+  font-weight: normal;      
+  letter-spacing: 2px; 
+  
+  /*flexbox*/
+  flex: 1;  
+  max-height: 50%;
 }
 
 .divword {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:30px;
-  padding-bottom:20px;  
+  padding-top: 10px;
+  padding-bottom: 10px;  
+  
+   /*flexbox*/
+   flex: .5;
 }
 
 .divletterbank {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  
+   /*flexbox*/
+   flex: .5;
 }
 
 .letterbank {
-  background-color: #0929AB;
-  border: 1px solid #0929AB;
-  opacity: .6;
-  filter: alpha(opacity=5);
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
+  padding-bottom: 5px;
 }
+
+.btnletter {
+  font-weight: bold;
+  --border-radius: 0px;
+  --opacity: 0%;
+  --background-hover: #0929AB;
+  --box-shadow: #0929AB;
+  
+}
+
+div.btnletter {
+  color: black; /* #644B32; */
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: #C3C1BF;
+  padding-top: 6px;
+  border-radius: 4px;
+  margin: 6px;
+  box-shadow: 3px 5px #000000;
+  font-weight: bold;
+}
+
+.btnletter2 {
+  --border-radius: 0px;
+  --opacity: 0%;
+  --background-hover: #0929AB;
+  --box-shadow: #0929AB;
+  
+}
+
+div.btnletter2 {
+  color: #000000;
+  font-weight: bold;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background: #F3D4B4;
+  padding-top: 6px;
+  border-radius: 4px;
+  margin: 6px;
+  box-shadow: 3px 5px #000000;
+}
+
+
+
 
 
 
