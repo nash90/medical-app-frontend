@@ -81,7 +81,7 @@ export class GamePage implements OnInit {
         if (state === '1') {
           console.log('here');
         } else {
-          this.getData();
+          this.play();
         }
       }
     );
@@ -91,7 +91,7 @@ export class GamePage implements OnInit {
     this.navCtrl.navigateRoot('/menu');
   }
 
-  getData() {
+  play() {
     this.druginfoService.getGameItem().subscribe((item) => {
       this.gameItem = item;
       // console.log('game item', item);
@@ -294,7 +294,8 @@ export class GamePage implements OnInit {
             if (!this.checkCompletedAllLevels()) {
               this.getScreenInfo();
             } else {
-              this.goToMenu();
+              await this.druginfoService.changePlayed(this.game.drug.drug_id);
+              this.play();
             }
           }
         } else {

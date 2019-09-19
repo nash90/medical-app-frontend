@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { Storage } from '@ionic/storage';
 
 import { environment } from 'src/environments/environment';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,24 @@ export class DruginfoService {
 
   api_url = environment.apiUrl;
 
-  constructor(private http: HttpClient, private storage: Storage) {}
+  constructor(
+    private http: HttpClient,
+    private storage: Storage,
+    private navCtrl: NavController
+    ) {}
 
   getDrugList(): Observable<Drug[]> {
     return this.http.get<Drug[]>(this.api_url + '/api/drugs/?format=json');
+  }
+
+  getDrugInfoById(id): Observable<any> {
+    const url = this.api_url + `/api/drugs/${id}/info/?format=json`;
+    console.log('getDrugInfoByID url:', url);
+    return this.http.get<any>(url);
+  }
+
+  getRandomDrugInfo(): Observable<any> {
+    return this.http.get<any>(this.api_url + `/api/drugs/0/info/?format=json`);
   }
 
   async saveSelectedDrug(selectedDrug) {
@@ -38,18 +53,44 @@ export class DruginfoService {
     return await this.storage.get('SELECTED_DRUGS');
   }
 
-  getDrugInfoById(id): Observable<any> {
-    const url = this.api_url + `/api/drugs/${id}/info/?format=json`;
-    console.log('getDrugInfoByID url:', url);
-    return this.http.get<any>(url);
+  checkPlayedAll(selectedDrugs) {
+    let played = true;
+    if (!selectedDrugs) {
+      return played;
+    }
+    selectedDrugs.forEach(element => {
+      if (element.played === false) {
+        played = false;
+      }
+    });
+    return played;
   }
 
-  getRandomDrugInfo(): Observable<any> {
-    return this.http.get<any>(this.api_url + `/api/drugs/0/info/?format=json`);
+  async changePlayed(drug_id) {
+    await this.getSelectedDrug().then(
+      async (selectList) => {
+        if (!selectList) {
+          selectList.forEach(
+            (item) => {
+              if (item.drug_id === drug_id) {
+                item.played = true;
+              }
+            }
+          );
+          await this.storage.set('SELECTED_DRUGS', selectList);
+        }
+      }
+    );
   }
 
   async getGameItemId() {
     const selectedDrugs = await this.getSelectedDrug();
+    const playedAll = this.checkPlayedAll(selectedDrugs);
+
+    if (playedAll) {
+      this.navCtrl.navigateRoot('/drug-select');
+    }
+
     console.log('getGameItemId: selectedDrugs', selectedDrugs);
     let gameItemId = null;
     for (const element of selectedDrugs) {
