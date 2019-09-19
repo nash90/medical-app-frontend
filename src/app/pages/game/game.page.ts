@@ -100,10 +100,12 @@ export class GamePage implements OnInit {
 
   play() {
     this.druginfoService.getGameItem().subscribe((item) => {
-      this.gameItem = item;
-      // console.log('game item', item);
-      this.setGame(item);
-      this.getScreenInfo();
+      if (item && item.length > 0) {
+        this.gameItem = item;
+        console.log('game item', item);
+        this.setGame(item);
+        this.getScreenInfo();
+      }
     },
     (err) => console.log('get Game Item subscribe Failure', err)
     );
