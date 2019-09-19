@@ -7,6 +7,7 @@
           <ion-text class="header">
             <ion-icon name="menu" (click)="goToMenu()"></ion-icon>
           </ion-text>
+          <ion-title class="medscrab">MedScrab</ion-title>
         </ion-toolbar>
       </ion-header>
     </div>
@@ -20,28 +21,29 @@
     <div class="gamehere" *ngIf="game">
 
       <div class="divinfo">
-        <div class="info" align="center">
-          <ion-text class="infob">{{game.drug.drug_name | uppercase}}</ion-text>
-        </div>
-        <div *ngIf="warning" class="divwarning">
-          <div class="warning">  
-            <ion-text class="warninga"> WARNING: </ion-text>
-            <ion-text class="warningb">{{warning | lowercase}} </ion-text>
+          <div class="info" align="center">
+            <ion-text class="infob">{{game.drug.drug_name | titlecase}}</ion-text>
           </div>
-        </div>
+          <div *ngIf="warning" class="divwarning">
+            <div class="warning">  
+              <ion-text class="warninga"> WARNING: </ion-text>
+              <ion-text class="warningb">{{warning | lowercase}} </ion-text>
+            </div>
+          </div>
       </div>
 
       <div *ngIf= "hints" class="divhint">
-        <div class="hintbulb">         
-            <img src="../assets/bulb.png" height="100%">
+        <div class="hintbulb" align="right">         
+          <img src="../assets/bulb.png" height="80%">
         </div>
+
         <div class="hinta">
           <ul>
-          <div class="hintb" *ngFor="let hint of hints; let i = index">
-            <li>{{hint | lowercase}}
-          </div>
-        </ul>
-      </div>
+            <div class="hintb" *ngFor="let hint of hints; let i = index">
+              <li>{{hint | lowercase}}
+            </div>
+          </ul>
+        </div>
       </div>
       
       <div class="divword" align="center">
