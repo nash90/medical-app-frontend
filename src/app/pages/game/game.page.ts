@@ -174,6 +174,9 @@ export class GamePage implements OnInit {
   getHint() {
     let hints = this.game.scrabble_hint;
     hints = hints.split(';');
+    if (hints.length > 2) {
+      hints = hints.slice(0, 2);
+    }
     this.hints = hints;
     // console.log(hints);
   }
