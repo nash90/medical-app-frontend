@@ -295,6 +295,7 @@ export class GamePage implements OnInit {
             this.getScreenInfo();
           } else {
             await this.cacheGame();
+            await this.chacheQuizLevel();
             // console.log('Single level was complete');
             if (!this.checkCompletedAllLevels()) {
               this.goToQuiz();
@@ -362,15 +363,25 @@ export class GamePage implements OnInit {
 
   async cacheGame() {
     await this.storage.set('GAME', this.active_level);
+  }
+
+  async chacheQuizLevel() {
     await this.storage.set('QUIZ_LEVEL', this.current_level);
   }
 
   onReturnFromQuiz() {
     this.storage.get('GAME').then(
-      (game) => {
+      async (game) => {
+        console.log('retrived game', game);
         this.active_level = game;
         this.changeLevel();
-        this.getScreenInfo();
+        // this.cacheGame();
+        if (!this.checkCompletedAllLevels()) {
+          this.getScreenInfo();
+        } else {
+          await this.druginfoService.changePlayed(game['indication'].data[0].drug.drug_id);
+          this.play();
+        }
       }
     );
   }
