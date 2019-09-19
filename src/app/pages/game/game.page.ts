@@ -90,6 +90,10 @@ export class GamePage implements OnInit {
     this.navCtrl.navigateRoot('/menu');
   }
 
+  reload() {
+    this.navCtrl.navigateRoot('/game');
+  }
+
   goToQuiz() {
     this.navCtrl.navigateRoot('/quiz');
   }
@@ -116,6 +120,12 @@ export class GamePage implements OnInit {
   }
 
   setGame(drug_infos) {
+    this.active_level.indication.data = [];
+    this.active_level.warning.data = [];
+    this.active_level.adverse_effect.data = [];
+    this.active_level.interaction.data = [];
+    this.active_level.counseling_point.data = [];
+
     for (const item of drug_infos) {
       const type = item.drug_info_type.drug_information_type;
       if (type.toLowerCase() === 'Indication'.toLowerCase()) {
@@ -297,12 +307,7 @@ export class GamePage implements OnInit {
             await this.cacheGame();
             await this.chacheQuizLevel();
             // console.log('Single level was complete');
-            if (!this.checkCompletedAllLevels()) {
-              this.goToQuiz();
-            } else {
-              await this.druginfoService.changePlayed(this.game.drug.drug_id);
-              this.play();
-            }
+            this.goToQuiz();
           }
         } else {
           this.wrong_answer = true;
@@ -379,8 +384,9 @@ export class GamePage implements OnInit {
         if (!this.checkCompletedAllLevels()) {
           this.getScreenInfo();
         } else {
-          await this.druginfoService.changePlayed(game['indication'].data[0].drug.drug_id);
-          this.play();
+          const checkLevel = 'indication'; // TODO: store current drug id
+          await this.druginfoService.changePlayed(game[checkLevel].data[0].drug.drug_id);
+          this.reload();
         }
       }
     );

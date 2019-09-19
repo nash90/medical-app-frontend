@@ -67,23 +67,19 @@ export class DruginfoService {
   }
 
   async changePlayed(drug_id) {
-    console.log('here');
-    await this.getSelectedDrug().then(
-      async (selectList) => {
-        console.log('select list', selectList);
-        if (selectList) {
-          selectList.forEach(
-            (item) => {
-              if (item.drug_id === drug_id) {
-                item.played = true;
-              }
-            }
-          );
-          console.log('changed played', selectList);
-          await this.storage.set('SELECTED_DRUGS', selectList);
+    console.log('changePlayed');
+    const selectList = await this.getSelectedDrug();
+    if (selectList) {
+      selectList.forEach(
+        (item) => {
+          if (item.drug_id === drug_id) {
+            item.played = true;
+          }
         }
-      }
-    );
+      );
+    }
+    console.log('selectList', selectList);
+    await this.storage.set('SELECTED_DRUGS', selectList);
   }
 
   async getGameItemId() {
