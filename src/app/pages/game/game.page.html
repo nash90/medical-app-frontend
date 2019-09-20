@@ -7,7 +7,7 @@
           <ion-text class="header">
             <ion-icon name="menu" (click)="goToMenu()"></ion-icon>
           </ion-text>
-          <ion-title class="medscrab">MedScrab</ion-title>
+          <ion-title class="medscrab">MedScramble</ion-title>
         </ion-toolbar>
       </ion-header>
     </div>
@@ -20,18 +20,20 @@
 
     <div class="gamehere" *ngIf="game">
 
-      <div class="divinfo">
-        <div class="shineeffect">
-          <div class="glass">
-            <div class="info" align="center">
-              <ion-text class="infob">{{game.drug.drug_name | titlecase}}</ion-text>
-            </div>
-            <div *ngIf="warning" class="divwarning">
-              <div class="warning" align="center">  
-                <ion-text class="warninga"> WARNING: </ion-text> <br/>
-                <ion-text class="warningb">{{warning | lowercase}} </ion-text>
-              </div>
-            </div>
+      <div class="divinfo" >
+        <div class="info" align="">
+          <div class="symbol"><img src="../assets/medical.png" width="100%" align="left"></div>
+          <div class="rxlabel">
+          <div class="prescription">PRESCRIPTION</div>
+          <ion-text class="drug">{{game.drug.drug_name | uppercase}}</ion-text>
+          <hr>
+          </div>
+        </div>
+        <div *ngIf="warning" class="divwarning">
+          <div class="warning" align="center"> 
+            <mark>WARNING: {{warning | uppercase}}</mark>
+            <div>&nbsp;</div>
+            QTY: 010<br>REFILL AS DIRECTED
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 }
 
 .contentArea { 
-  --background: white;
+  --background: whitesmoke;
 }
 
 .divheader {
@@ -66,12 +66,119 @@
   height: 100%;
 }
 
-
 .divinfo {
   /*child flexbox*/
-  flex: .9;
+  flex: 1;
 
   /*PARENT: BLUE INFO BOX*/
+  display: flex;
+  flex-direction: column;  
+  flex-wrap: nowrap;
+
+  /*height + width*/
+  width:100%;
+  max-width: 700px;  
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+
+  border: solid 10px;
+  border-color: rgb(255, 155, 42);
+
+  background-color: white;
+}
+
+.info {
+  color: black;     
+  font-family: "garamond";
+  justify-content: center;
+  flex-direction: column;    
+  flex-wrap: nowrap;  
+
+  //CHILD #1/2: BLUE INFO BOX
+  display: flex;
+  flex: 1;
+
+  //background
+  width: 100%;
+
+  /*PARENT: BLUE INFO BOX*/
+  flex-direction: row;  
+  flex-wrap: nowrap; 
+}
+
+.symbol {
+  padding-left: 5px;
+
+  flex: .2;
+  }
+
+.rxlabel {
+  flex: .8;
+  text-align: left;
+  padding-left: 10px;  
+  }
+
+.prescription {
+  color: black;  
+  font-size: 12px;    
+  font-weight: normal;  
+  letter-spacing: 2px;   
+  text-align: left;
+  line-height: 1em;
+}
+
+hr {
+  color: rgb(255, 155, 42);
+  background-color: rgb(255, 155, 42);
+  height: 2px;
+  margin-top: 4px;
+  margin-bottom: 5px;
+}
+
+td {
+  vertical-align: top;
+  padding-right: 3px;
+}
+
+.drug {
+  color: black;  
+  font-size: 20px;    
+  font-weight: normal;  
+  letter-spacing: 1px;   
+  text-align: left;
+  
+  line-height: 1;
+}
+
+.divwarning {
+  //CHILD #2/2: BLUE INFO BOX
+  display: flex;
+  align-items: left;
+  flex: 1;
+
+  //background
+  width: 97%;  
+}
+
+.warning {
+ color: #000000;
+ font-family: "ARIAL";
+ font-size: 12px;
+ font-weight: bold;
+ letter-spacing: 0px;
+ text-align: left;
+}
+
+/* 
+//ORIGINAL .DIVINVO .INFO .INFOB .DIVWARNING .WARNING
+
+.divinfo {
+  //child flexbox
+  flex: .9;
+
+  //PARENT: BLUE INFO BOX
   display: flex;
   flex-direction: column;  
   flex-wrap: nowrap;
@@ -82,24 +189,23 @@
   justify-content: center;
 
 
-  /*height + width*/
+  //height + width
   width:100%;
   max-width: 700px;  
   height: 100%;
   margin-left: auto;
   margin-right: auto;
 
-  /*background*/
+  //background
   background: linear-gradient(to right, rgb(140, 185, 232,.8), rgb(153, 237, 246,.3));
-  /*blue: (0, 169, 255, 0.1)   red:(131, 27, 27, 0.07)  yellow:(253, 236, 123, 0.7)*/
+  //blue: (0, 169, 255, 0.1)   red:(131, 27, 27, 0.07)  yellow:(253, 236, 123, 0.7)
 
-  /*padding*/
+  //padding
   padding-left: 5px;
   padding-right: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 10px; 
-
 }
 
 .info {
@@ -107,7 +213,7 @@
   font-family: "permanent";
   justify-content: center;
 
-  /*CHILD #1/2: BLUE INFO BOX*/
+  //CHILD #1/2: BLUE INFO BOX
   display: flex;
   align-items: center;
   flex: 1;
@@ -121,8 +227,9 @@
   line-height: 1;
 }
 
+
 .divwarning {
-   /*CHILD #2/2: BLUE INFO BOX*/
+   //CHILD #2/2: BLUE INFO BOX
    display: flex;
    align-items: center;
    flex: .5;
@@ -139,22 +246,13 @@
   font-weight: bold;
   letter-spacing: 0px;
 }
-
-.warninga {
-  /*text*/
-  font-weight:bold;
-}
-
-.warningb {
-  /*text*/
-  font-size: px; 
-}
+*/
 
 .divhint { 
-  /*flexbox*/
+  //flexbox
   flex: 1;
 
-  /*flexbox*/
+  //flexbox
   display: flex;
   flex-direction: row; 
 
@@ -166,14 +264,14 @@
 }
 
 .hintbulb {
- /*flexbox*/
+ //flexbox
  flex: .3;
 
- /*padding*/
+ //padding
  padding-top: 40px;
  padding-left: 20px;
 
- /*rotation*/
+ //rotation
  transform: rotate(-10deg);
 }
 
