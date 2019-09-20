@@ -19,7 +19,7 @@
 }
 
 .medscrab {
-  color: #831B1B;
+  color: #620000;
   font-weight: bold;
   font-family: "";
   font-size: 18px;
@@ -66,6 +66,7 @@
   height: 100%;
 }
 
+
 .divinfo {
   /*child flexbox*/
   flex: .9;
@@ -89,21 +90,22 @@
   margin-right: auto;
 
   /*background*/
-  background-image: linear-gradient(to right, rgba(0, 169, 255, .5), rgba(0, 169, 255, .05));
+  background: linear-gradient(to right, rgb(140, 185, 232,.8), rgb(153, 237, 246,.3));
   /*blue: (0, 169, 255, 0.1)   red:(131, 27, 27, 0.07)  yellow:(253, 236, 123, 0.7)*/
 
   /*padding*/
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-radius: 10px; 
+
 }
 
 .info {
   color: black;     
   font-family: "permanent";
-  align-self: center;
+  justify-content: center;
 
   /*CHILD #1/2: BLUE INFO BOX*/
   display: flex;
@@ -112,10 +114,11 @@
 }
 .infob {
   color: black;  
-  font-size: 28px;    
+  font-size: 24px;    
   font-weight: normal;  
-  letter-spacing: 0px;   
+  letter-spacing: 3px;   
   text-align: center;
+  line-height: 1;
 }
 
 .divwarning {
@@ -124,14 +127,15 @@
    align-items: center;
    flex: .5;
    padding-left: 10px;
-   padding-top: 10px;
+   padding-right: 10px;
+   padding-top: 20px;
    padding-bottom: 5px;
 }
 
 .warning {
-  color: #831B1B;
+  color: #620000;
   font-family: "quicksand";
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   letter-spacing: 0px;
 }
@@ -169,11 +173,24 @@
  padding-top: 40px;
  padding-left: 20px;
 
- -webkit-transform:rotate(-10deg);
- -moz-transform: rotate(-10deg);
- -ms-transform: rotate(-10deg);
- -o-transform: rotate(-10deg);
+ /*rotation*/
  transform: rotate(-10deg);
+}
+
+
+.hintbulb {
+  animation: wiggle infinite;
+  animation-delay: 3000ms;
+  animation-duration: 6000ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(-10deg); }
+  10% { transform: rotate(20deg); }
+  20% { transform: rotate(-10deg); }
+  100% { transform: rotate(-10deg); }
 }
 
 .hinta{

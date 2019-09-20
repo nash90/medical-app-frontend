@@ -21,15 +21,19 @@
     <div class="gamehere" *ngIf="game">
 
       <div class="divinfo">
-          <div class="info" align="center">
-            <ion-text class="infob">{{game.drug.drug_name | titlecase}}</ion-text>
-          </div>
-          <div *ngIf="warning" class="divwarning">
-            <div class="warning">  
-              <ion-text class="warninga"> WARNING: </ion-text>
-              <ion-text class="warningb">{{warning | lowercase}} </ion-text>
+        <div class="shineeffect">
+          <div class="glass">
+            <div class="info" align="center">
+              <ion-text class="infob">{{game.drug.drug_name | titlecase}}</ion-text>
+            </div>
+            <div *ngIf="warning" class="divwarning">
+              <div class="warning" align="center">  
+                <ion-text class="warninga"> WARNING: </ion-text> <br/>
+                <ion-text class="warningb">{{warning | lowercase}} </ion-text>
+              </div>
             </div>
           </div>
+        </div>
       </div>
 
       <div *ngIf= "hints" class="divhint">
@@ -70,13 +74,13 @@
       </div> 
 
       <div class="divletterbank" align="center">
-        <div class="letterbank">
-          <div *ngFor="let char of option_list; let i = index" class="char">
-            <div >
-              <ion-button class="btnletter" size="large" color="medium" (click)="addChar(i)">{{char.value | uppercase}}</ion-button>
+          <div class="letterbank">
+            <div *ngFor="let char of option_list; let i = index" class="char">
+              <div>
+                <ion-button class="btnletter" size="large" color="medium" (click)="addChar(i)">{{char.value | uppercase}}</ion-button>
+              </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
