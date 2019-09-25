@@ -4,6 +4,7 @@ import { UsernameValidator } from '../../validators/username.validator';
 import { BirthdateValidator } from '../../validators/birthdate.validator';
 import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from "@angular/router";
+import { EighteenPlusValidator } from 'src/app/validators/eieghteenplus.validator';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,8 @@ export class RegisterPage implements OnInit {
   public profile;
 
   validations_form: FormGroup;
+
+  //birthdateValue: String;
 
   constructor(private authService: AuthService,
     public formBuilder: FormBuilder,
@@ -39,19 +42,20 @@ export class RegisterPage implements OnInit {
       ])),
       birthdate: new FormControl('', Validators.compose([
         BirthdateValidator.validUsDate,
+        EighteenPlusValidator.validEighteenPlus,
         Validators.required
       ]))
     });
   }
 
   register() {
-    this.authService.register({
+    /*this.authService.register({
       user: {
         email: this.validations_form.get('username').value
       },
         date_of_birth: this.validations_form.get('birthdate').value
-    });
-    /*console.log(this.validations_form.get('username').value);*/
+    });*/
+    console.log(this.validations_form.get('birthdate').value.substring(0,4));
   }
 
   /* validation message when input formate is invalid */
@@ -66,6 +70,7 @@ export class RegisterPage implements OnInit {
     'birthdate': [
       { type: 'required', message: 'Birthdate is required.' },
       { type: 'validUsDate', message: 'Please enter birthdate with format: YYYY-MM-DD'},
+      { type: 'validEighteenPlus', message: 'You must be over 18 years old'}
     ]
   };
 

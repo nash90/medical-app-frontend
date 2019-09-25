@@ -37,7 +37,9 @@ export class LoginPage implements OnInit {
         Validators.required
       ])),
       birthdate: new FormControl('', Validators.compose([
-        BirthdateValidator.validUsDate,
+        //BirthdateValidator.validUsDate,
+        Validators.minLength(4),
+        Validators.maxLength(4),
         Validators.required
       ]))
     });
@@ -70,7 +72,9 @@ export class LoginPage implements OnInit {
       ],
       'birthdate': [
         { type: 'required', message: 'Birthdate is required.' },
-        { type: 'validUsDate', message: 'Please enter birthdate with format: YYYY-MM-DD'},
+        { type: 'minlength', message: 'Please enter the year of your birthdate with format: YYYY' },
+        { type: 'maxlength', message: 'Please enter the year of your birthdate with format: YYYY' }
+        //{ type: 'validUsDate', message: 'Please enter the year of your birthdate with format: YYYY'},
       ]
     };
 
