@@ -43,7 +43,7 @@
             </div>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="!validations_form.valid" expand="block">Login</ion-button>
+            <ion-button size="large" type="submit" (click)="login()" [disabled]="!validations_form.valid" expand="block">Login</ion-button>
           </div>
           <div text-center>
             If you don't have an account, please <a routerLink='/register'>register</a> first!

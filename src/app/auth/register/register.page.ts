@@ -49,13 +49,12 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    /*this.authService.register({
+    this.authService.register({
       user: {
         email: this.validations_form.get('username').value
       },
         date_of_birth: this.validations_form.get('birthdate').value
-    });*/
-    console.log(this.validations_form.get('birthdate').value.substring(0,4));
+    });
   }
 
   /* validation message when input formate is invalid */
