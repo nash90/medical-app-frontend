@@ -1,10 +1,37 @@
-.char {
-  display: inline-block;
-}
-
 
 .contentArea { 
-  --background: white;
+  --background: rgb(255, 255, 255);
+  height: 100%;
+}
+
+  /*flex structure - COLUMN:
+  PARENT: .FLEXCONTAINER & .box
+    CHILD: BOX DIVHEADER - NO FLEX
+    CHILD: BOX DIVLEVEL - FLEX 1
+    CHILD: BOX DIVGAME - NO FLEX
+    
+    PARENT: .divgame & .box
+      subchild: divinfo - no flex
+      subchild: divhint - flex 1 (divhint needs a container around it to make it vertically centered^^)
+      subchild: divword - no flex
+      subchild: divletterbank - no flex
+  */
+
+.flexcontainer {
+  padding-left: 10px;
+  padding-right: 10px;
+
+  /*parent flex setup*/
+  height: 100%;
+  min-height: 100%;
+	display: flex;
+  flex-direction: column;  
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .divheader {
@@ -15,7 +42,7 @@
 }
 .header {
   color: black;
-  font-family: "tahoma";
+  font-family: "arial";
   font-size: 20px;
   font-weight: bold;
   letter-spacing: 2px;
@@ -23,81 +50,79 @@
   padding-right: 10px; 
 }
 
-.divlevel {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:20px;
-  padding-bottom:20px;
+.medscrab {
+  color: #620000;
+  font-weight: bold;
+  font-family: "arial";
+  font-size: 18px;
 }
+
+.divlevel {
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
 .level {
   color: black;
-  font-family: "tahoma";
-  font-size: 20px;
+  font-family: "quicksand"; /*quicksand*/
+  font-size: 16px;
   font-weight: bold;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  letter-spacing: 1px;
+}
+
+.divgame {
+  /*child flex of 1*/
+  flex: 1 1 auto;
+
+  /*parent flex setup for subchildren: divinfo, divhint, divword, and divletterbank*/
+  display: flex;
+  flex-direction: column;
 }
 
 .divinfo {
   color: black;    
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+
+  /*placement*/
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+
+  /*background*/
+  background-color: #C3D2FF;
+  border-radius: 10px; 
+  
+  /*padding*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  flex: .4;
 }
+
 .info {
   color: black;
-  font-family: "tahoma";
-  letter-spacing: 2px;      
-  
-  background-color: #BCE9F0;
-  border: 1px solid #BCE9F0;
-  /*opacity: .6;*/    
-  filter: alpha(opacity=5);    
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;    
-}
-.infoa {
-  font-size: 12px;    
-  font-weight: bold;  
+  font-family: "quicksand";
+  font-weight: bold;    
+  font-size: 22px;      
   letter-spacing: 3px;         
 }
 
 .divwarning {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom:20px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  max-width: 500px;
+
+  /*top padding for warning IF there IS a warning*/
+  padding-top: 10px;
 }
 
 .warning {
-  color: white;
-  font-family: "tahoma";
+  color: #620000;
+  font-family: "quicksand";
   font-size: 12px;
   letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  background-color: #E74343;    
-  border: 1px solid #E74343;
-  /*opacity: .6;*/
-  filter: alpha(opacity=5);
-
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
+ 
 }
 
 .warninga {
@@ -109,58 +134,84 @@
 }
 
 .divhint {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:20px;
+  flex: .6;    
+
+  /*placement*/
   width: fit-content;
   margin-left: auto;
-  margin-right: auto;    
-}
-.hint {
-  color: black;
-  font-family: "tahoma";
-  font-weight: bold;      
-  font-size: 20px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-right: auto;  
 }
 
-.hinta {
-  color: #E49E09;  
-  font-size: 20px;  
+.hints {
+  /*FLEXBOX STRUCTURE - ROW:
+  PARENT: HINTS 
+  CHILD: HINTBULB - FLEX .3
+  CHILD: HINT - FLEX .7 */
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row; 
+}
+
+.hintbulb {
+  /*child 1/2 of divhint flexbox*/
+  flex: .3;
+
+  /*rotation*/
+  transform: rotate(-10deg);
+
+  /*animation*/
+  animation: wiggle infinite;
+  animation-delay: 3000ms;
+  animation-duration: 6000ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(-10deg); }
+  10% { transform: rotate(20deg); }
+  20% { transform: rotate(-10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+.hint {
+  /*child 2/2 of divhint flexbox*/
+  flex: .7;
+
+  color: black;
+  font-family: "quicksand";
+  font-weight: bold;      
+  font-size: 16px;
+  letter-spacing: 0px;
 }
 
 .divword {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:30px;
-  padding-bottom:20px;  
+  height: 130px;
+  /*padding*/
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .divletterbank {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: fit-content;
+  height: 150px;
   margin-left: auto;
   margin-right: auto;
+
+  /*letters in a row*/
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  /*padding*/
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.letterbank {
-  background-color: #0929AB;
-  border: 1px solid #0929AB;
-  opacity: .6;
-  filter: alpha(opacity=5);
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
+.char {
+  display: inline-block;
 }
+
+
 
 
 
