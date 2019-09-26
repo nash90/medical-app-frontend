@@ -44,38 +44,53 @@
         </div>
       </div>
       
-      <div class="box divword" align="center">
-        <div class="word">
-          <div *ngFor="let char of scrabbled_value; let i = index" class="char">
-            <div *ngIf="char.value === '*', else blank">
-              <div class="blankletter" color="light" size="small"><font color="#FFC799">_</font></div>
+      <div *ngIf="!wrong_answer">
+        <div class="box divword" align="center">
+          <div class="word">
+            <div *ngFor="let char of scrabbled_value; let i = index" class="char">
+              <div *ngIf="char.value === '*', else blank">
+                <div class="blankletter" color="light" size="small"><font color="#FFC799">_</font></div>
+              </div>
+              <ng-template #blank>
+                <div *ngIf="char.value === ' ', else showchanged">
+                  <div padding></div>
+                </div>
+              </ng-template>
+              <ng-template #showchanged>
+                <div *ngIf="!char.is_fixed, else showfixed">
+                  <div class="blankletter" size="small" color="medium" (click)="removeChar(i)">{{char.value | uppercase}}</div>
+                </div>
+              </ng-template>      
+              <ng-template #showfixed>
+                <div class="populatedletter" size="small" disabled color="light" >{{char.value | uppercase}}</div>
+              </ng-template>
             </div>
-            <ng-template #blank>
-              <div *ngIf="char.value === ' ', else showchanged">
-                <div padding></div>
-              </div>
-            </ng-template>
-            <ng-template #showchanged>
-              <div *ngIf="!char.is_fixed, else showfixed">
-                <div class="blankletter" size="small" color="medium" (click)="removeChar(i)">{{char.value | uppercase}}</div>
-              </div>
-            </ng-template>      
-            <ng-template #showfixed>
-              <div class="populatedletter" size="small" disabled color="light" >{{char.value | uppercase}}</div>
-            </ng-template>
           </div>
-        </div>
-      </div> 
+        </div> 
 
-      <div class="box divletterbank" align="center">
-        <div *ngFor="let char of option_list; let i = index" class="char">
-          <div >
-            <div class="letterbank" size="large" color="medium" (click)="addChar(i)">{{char.value | uppercase}}</div>
+        <div class="box divletterbank" align="center">
+          <div *ngFor="let char of option_list; let i = index" class="char">
+            <div >
+              <div class="letterbank" size="large" color="medium" (click)="addChar(i)">{{char.value | uppercase}}</div>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
+      <div padding *ngIf="wrong_answer" align="center">
+        <ion-text color="danger">INCORRECT!!!</ion-text>
+        <div class="box divword">
+          <div padding class="word">
+            <div *ngFor="let char of current_keyword.keyword.split(''); let i = index" class="char">
+              <div *ngIf="char === ' '" padding></div>
+              <div *ngIf="char !== ' '" class="blankletter" size="small" color="medium" >{{char | uppercase}}</div>
+            </div>
+          </div>
+        </div>
+        <ion-button class="submit" shape="round" fill="solid" (click)="skip()">NEXT</ion-button> 
+      </div>
 
+
+    </div>
   </div>
 </ion-content>
