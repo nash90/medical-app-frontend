@@ -186,8 +186,8 @@ export class GamePage implements OnInit {
   getHint() {
     let hints = this.game.scrabble_hint;
     hints = hints.split(';');
-    if (hints.length > 2) {
-      hints = hints.slice(0, 2);
+    if (hints.length > 4) {
+      hints = hints.slice(0, 4);
     }
     this.hints = hints;
     // console.log(hints);
@@ -302,15 +302,7 @@ export class GamePage implements OnInit {
       async (data) => {
         console.log('ans response ', data);
         if (data.correct) {
-          this.changeLevelIndex();
-          if (!this.checkCompletedSingleLevel()) {
-            this.getScreenInfo();
-          } else {
-            await this.cacheGame();
-            await this.chacheQuizLevel();
-            // console.log('Single level was complete');
-            this.goToQuiz();
-          }
+          this.changeKeyword();
         } else {
           this.wrong_answer = true;
         }
@@ -319,6 +311,18 @@ export class GamePage implements OnInit {
         console.log('err', err);
       }
     );
+  }
+
+  async changeKeyword() {
+    this.changeLevelIndex();
+    if (!this.checkCompletedSingleLevel()) {
+      this.getScreenInfo();
+    } else {
+      await this.cacheGame();
+      await this.chacheQuizLevel();
+      // console.log('Single level was complete');
+      this.goToQuiz();
+    }
   }
 
   changeLevelIndex() {
@@ -392,6 +396,11 @@ export class GamePage implements OnInit {
         }
       }
     );
+  }
+
+  skip() {
+    this.wrong_answer = false;
+    this.changeKeyword();
   }
 
   shuffle(array) {
