@@ -116,9 +116,13 @@ export class GamePage implements OnInit {
     console.log('current level', this.current_level);
     this.getCurrentInformation();
     this.getKeyword();
-    this.scrabble_key();
-    this.getHint();
-    this.getWarning();
+    if (this.current_keyword) {
+      this.scrabble_key();
+      this.getHint();
+      this.getWarning();
+    } else {
+      this.changeKeyword();
+    }
   }
 
   setGame(drug_infos) {
@@ -214,10 +218,6 @@ export class GamePage implements OnInit {
     const key_list = [];
     const option_list = [];
     for (const char of key) {
-        const char_state = {
-          value: '',
-          is_fixed: false,
-        };
         if (char !== ' ' && Math.random() >= 0.5) {
           key_list.push({
             value: '*',
@@ -238,9 +238,14 @@ export class GamePage implements OnInit {
     this.option_list = option_list;
     // useful in short keyword to aviod zero blank
     if (this.checkCompletion()) {
-      this.option_list.push(this.scrabbled_value[0]);
-      this.scrabbled_value[0] = '*';
-
+      this.option_list.push({
+        value: this.scrabbled_value[0].value,
+        is_fixed: false
+      });
+      this.scrabbled_value[0] = {
+        value: '*',
+        is_fixed: false
+      };
     }
 
     this.shuffle(this.option_list);
