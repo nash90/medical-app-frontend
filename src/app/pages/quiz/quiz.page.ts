@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from 'src/app/service/quiz.service';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { DruginfoService } from 'src/app/service/druginfo.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-quiz',
@@ -14,13 +17,32 @@ export class QuizPage implements OnInit {
   public answers = {};
   public error = false;
   public feedback = null;
+  public state = '';
 
   constructor(
     private quizService: QuizService,
     private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private storage: Storage,
+    private druginfoService: DruginfoService,
     ) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(
+      (params) => {
+        const state = params.state;
+        this.state = state;
+        // console.log('state', this.state);
+        if (state === '1') {
+          this.setEndLevelData();
+        } else {
+          this.setLevelData();
+        }
+      }
+    );
+  }
+
+  setLevelData() {
     this.quizService.getQuizInfo().subscribe((data) => {
       // console.log('api return', data);
       this.setScreenData(data);
@@ -28,8 +50,20 @@ export class QuizPage implements OnInit {
     });
   }
 
-  goToGame() {
-    this.navCtrl.navigateRoot('/game?state=1');
+  setEndLevelData() {
+    this.quizService.getEndLevelQuizInfo().subscribe((data) => {
+      // console.log('api return', data);
+      this.setScreenData(data);
+      this.setAnswers();
+    });
+  }
+
+  goToGame(state = null) {
+    if (state) {
+      this.navCtrl.navigateRoot(`/game?state=${state}`);
+    } else {
+      this.navCtrl.navigateRoot('/game');
+    }
   }
 
   setScreenData(data) {
@@ -78,7 +112,18 @@ export class QuizPage implements OnInit {
   }
 
   next() {
-    this.goToGame();
+    // if final quiz was played change the status of selected medicine drug to played
+    if (this.state === '1') {
+      this.storage.get('GAME').then(
+        async (game) => {
+          const checkLevel = 'indication'; // TODO: store current drug id
+          await this.druginfoService.changePlayed(game[checkLevel].data[0].drug.drug_id);
+          this.goToGame();
+        }
+      );
+    } else {
+      this.goToGame('1');
+    }
   }
 
 }

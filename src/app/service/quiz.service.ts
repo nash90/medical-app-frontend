@@ -28,6 +28,10 @@ export class QuizService {
     return this.http.get<any>(this.api_url + `/api/quiz/filter/?drug=${drug_id}&drug_info_type=${drug_info_type}&format=json`);
   }
 
+  getEndLevelQuizData(drug_id): Observable<any> {
+    return this.http.get<any>(this.api_url + `/api/quiz/filter/?drug=${drug_id}&quiz_type=End&format=json`);
+  }
+
   getQuizInfo(): Observable<any> {
     return from(this.storage.get('QUIZ_LEVEL')).pipe(
       mergeMap((level) => {
@@ -36,6 +40,16 @@ export class QuizService {
         const drug_info_type = data.drug_info_type.drug_info_type_id;
 
         return this.getLevelQuizData(drug_id, drug_info_type);
+      })
+    );
+  }
+
+  getEndLevelQuizInfo(): Observable<any> {
+    return from(this.storage.get('QUIZ_LEVEL')).pipe(
+      mergeMap((level) => {
+        const data = level.data[0];
+        const drug_id = data.drug.drug_id;
+        return this.getEndLevelQuizData(drug_id);
       })
     );
   }
