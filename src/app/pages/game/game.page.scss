@@ -1,166 +1,293 @@
-.char {
-  display: inline-block;
-}
-
 
 .contentArea { 
-  --background: white;
+  --background: rgb(255, 255, 255);
+  height: 100%;
+}
+
+  /*flex structure - COLUMN:
+  PARENT: .FLEXCONTAINER & .box
+    CHILD: BOX DIVHEADER - NO FLEX
+    CHILD: BOX DIVLEVEL - FLEX 1
+    CHILD: BOX DIVGAME - NO FLEX
+    
+    PARENT: .divgame & .box
+      subchild: divinfo - no flex
+      subchild: divhint - flex 1 (divhint needs a container around it to make it vertically centered^^)
+      subchild: divword - no flex
+      subchild: divletterbank - no flex
+  */
+
+.flexcontainer {
+
+  /*parent flex setup*/
+  height: 100%;
+  min-height: 100%;
+	display: flex;
+  flex-direction: column;  
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .divheader {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+  /*parent flex setup for */
+	display: flex;
+  flex-direction: row; 
+  height: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .header {
+  /*side padding for menu icon and medscrab logo*/
+  padding-left: 10px;
+  padding-right: 10px;
+  
   color: black;
-  font-family: "tahoma";
-  font-size: 20px;
+  font-family: "arial";
+  font-size: 24px;
   font-weight: bold;
   letter-spacing: 2px;
+}
+.headerblank {
   padding-left: 10px;
-  padding-right: 10px; 
+  padding-right: 10px;
+
+  color: white;
+  font-family: "arial";
+  font-size: 24px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.medscrab {
+  color: #620000;
+  font-weight: bold;
+  font-family: "arial";
+  font-size: 18px;
 }
 
 .divlevel {
+  /*side padding for divlevel only*/
   padding-left: 10px;
   padding-right: 10px;
-  padding-top:20px;
-  padding-bottom:20px;
+
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
+
 .level {
   color: black;
-  font-family: "tahoma";
-  font-size: 20px;
+  font-family: "quicksand"; /*quicksand*/
+  font-size: 16px;
   font-weight: bold;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+}
+
+.divgame {
+  /*side padding for divinfo, divhint, divword, and divletterbank*/
   padding-left: 10px;
   padding-right: 10px;
+
+  /*child flex of 1*/
+  flex: 1 1 auto;
+
+  /*parent flex setup for subchildren: divinfo, divhint, divword, and divletterbank*/
+  display: flex;
+  flex-direction: column;
 }
 
 .divinfo {
   color: black;    
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+
+  /*placement*/
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+
+  /*background*/
+  background-color: #C3D2FF;
+  border-radius: 10px; 
+  /*box-shadow: 2px 2px 2px #6D83C4;  */
+  
+  /*padding*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  flex: .4;
 }
+
 .info {
   color: black;
-  font-family: "tahoma";
-  letter-spacing: 2px;      
-  
-  background-color: #BCE9F0;
-  border: 1px solid #BCE9F0;
-  /*opacity: .6;*/    
-  filter: alpha(opacity=5);    
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;    
-}
-.infoa {
-  font-size: 12px;    
-  font-weight: bold;  
-  letter-spacing: 3px;         
+  font-family: "quicksand";
+  font-weight: bold;    
+  font-size: 24px;      
+  letter-spacing: 3px; 
 }
 
 .divwarning {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom:20px;
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
-  max-width: 500px;
+
+  /*top padding for warning IF there IS a warning*/
+  padding-top: 10px;
 }
 
 .warning {
-  color: white;
-  font-family: "tahoma";
+  color: #620000;
+  font-family: "quicksand";
   font-size: 12px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
-
-  background-color: #E74343;    
-  border: 1px solid #E74343;
-  /*opacity: .6;*/
-  filter: alpha(opacity=5);
-
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border-radius: 10px;
-}
-
-.warninga {
-  font-weight: bold;  
-}
-
-.warningb {
-  font-size: 12px;        
+  letter-spacing: 1px;
+  font-weight: bold;   
 }
 
 .divhint {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:20px;
+  flex: .6;    
+
+  /*placement*/
   width: fit-content;
   margin-left: auto;
-  margin-right: auto;    
-}
-.hint {
-  color: black;
-  font-family: "tahoma";
-  font-weight: bold;      
-  font-size: 20px;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-right: auto;  
 }
 
-.hinta {
-  color: #E49E09;  
-  font-size: 20px;  
+.hints {
+  /*FLEXBOX STRUCTURE - ROW:
+  PARENT: HINTS 
+  CHILD: HINTBULB - FLEX .3
+  CHILD: HINT - FLEX .7 */
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row; 
+}
+
+.hintbulb {
+  /*child 1/2 of divhint flexbox*/
+  flex: .3;
+
+  /*rotation*/
+  transform: rotate(-10deg);
+
+  /*animation*/
+  animation: wiggle infinite;
+  animation-delay: 3000ms;
+  animation-duration: 6000ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(-10deg); }
+  10% { transform: rotate(20deg); }
+  20% { transform: rotate(-10deg); }
+  100% { transform: rotate(-10deg); }
+}
+
+.hint {
+  /*child 2/2 of divhint flexbox*/
+  flex: .7;
+
+  color: black;
+  font-family: "quicksand";
+  font-weight: bold;      
+  font-size: 16px;
+  letter-spacing: 0px;
 }
 
 .divword {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:30px;
-  padding-bottom:20px;  
+  height: 90px;
+  /*padding*/
+  padding-bottom: 10px;
 }
 
 .divletterbank {
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: fit-content;
+  height: 150px;
   margin-left: auto;
   margin-right: auto;
+
+  /*letters in a row*/
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  /*padding*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.char {
+  display: inline-block;
+}
+
+.blankletter {
+  --border-radius: 0px;
+  --opacity: 0%;
+  --background-hover: #0929AB;  
+}
+
+div.blankletter {
+  color: #000000;
+  font-weight: bold;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url('/assets/tiles.jpg');
+  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  border-radius: 0px;
+  margin: 4px;
+  line-height: 30px;  
+  font-size: 20px;  
+}
+
+.populatedletter {
+  font-weight: bold;
+  --border-radius: 0px;
+  --opacity: 0%;
+  --background-hover: #0929AB;  
+}
+
+div.populatedletter {
+  color: black; /* #644B32; */
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-image: url('/assets/tilelighttan.jpg');
+  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  border-radius: 0px;
+  margin: 4px;
+  line-height: 30px;
+  font-weight: bold;
+  font-size: 20px;  
 }
 
 .letterbank {
-  background-color: #0929AB;
-  border: 1px solid #0929AB;
-  opacity: .6;
-  filter: alpha(opacity=5);
-
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-radius: 10px;
+  font-weight: bold;
+  --border-radius: 0px;
+  --opacity: 0%;
+  --background-hover: #0929AB;  
 }
+
+div.letterbank {
+  color: black; /* #644B32; */
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-image: url('/assets/tiles.jpg');
+  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  border-radius: 0px;
+  margin: 4px;
+  line-height: 60px;
+/*  text-shadow: 2px 2px 3px rgba(255,255,255,1); */
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+
 
 
 
