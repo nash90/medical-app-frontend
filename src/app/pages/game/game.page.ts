@@ -74,14 +74,13 @@ export class GamePage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(
       (params) => {
-        console.log('all_params', params);
         const state = params.state;
         this.state = state;
         console.log('state', this.state);
         if (state === '1') {
-          console.log('here');
+          this.onReturnFromQuiz();
         } else {
-          this.getData();
+          this.play();
         }
       }
     );
@@ -91,12 +90,22 @@ export class GamePage implements OnInit {
     this.navCtrl.navigateRoot('/menu');
   }
 
-  getData() {
+  reload() {
+    this.navCtrl.navigateRoot('/game');
+  }
+
+  goToQuiz() {
+    this.navCtrl.navigateRoot('/quiz');
+  }
+
+  play() {
     this.druginfoService.getGameItem().subscribe((item) => {
-      this.gameItem = item;
-      // console.log('game item', item);
-      this.setGame(item);
-      this.getScreenInfo();
+      if (item && item.length > 0) {
+        this.gameItem = item;
+        console.log('game item', item);
+        this.setGame(item);
+        this.getScreenInfo();
+      }
     },
     (err) => console.log('get Game Item subscribe Failure', err)
     );
@@ -113,6 +122,12 @@ export class GamePage implements OnInit {
   }
 
   setGame(drug_infos) {
+    this.active_level.indication.data = [];
+    this.active_level.warning.data = [];
+    this.active_level.adverse_effect.data = [];
+    this.active_level.interaction.data = [];
+    this.active_level.counseling_point.data = [];
+
     for (const item of drug_infos) {
       const type = item.drug_info_type.drug_information_type;
       if (type.toLowerCase() === 'Indication'.toLowerCase()) {
@@ -171,8 +186,11 @@ export class GamePage implements OnInit {
   getHint() {
     let hints = this.game.scrabble_hint;
     hints = hints.split(';');
+    if (hints.length > 2) {
+      hints = hints.slice(0, 2);
+    }
     this.hints = hints;
-    console.log(hints);
+    // console.log(hints);
   }
 
   getWarning() {
@@ -226,8 +244,8 @@ export class GamePage implements OnInit {
     }
 
     this.shuffle(this.option_list);
-    console.log(key_list);
-    console.log(option_list);
+    // console.log(key_list);
+    // console.log(option_list);
   }
 
   addChar(idx) {
@@ -243,11 +261,11 @@ export class GamePage implements OnInit {
         break;
       }
     }
-    console.log('pop', pop);
+    // console.log('pop', pop);
     this.scrabbled_value[position] = pop;
-    console.log(this.scrabbled_value);
+    // console.log(this.scrabbled_value);
     this.completed_word = this.checkCompletion();
-    console.log(this.completed_word);
+    // console.log(this.completed_word);
 
     if (this.completed_word) {
       this.checkCorrectKeyword();
@@ -289,13 +307,9 @@ export class GamePage implements OnInit {
             this.getScreenInfo();
           } else {
             await this.cacheGame();
-            console.log('Single level was complete');
-            this.changeLevel();
-            if (!this.checkCompletedAllLevels()) {
-              this.getScreenInfo();
-            } else {
-              this.goToMenu();
-            }
+            await this.chacheQuizLevel();
+            // console.log('Single level was complete');
+            this.goToQuiz();
           }
         } else {
           this.wrong_answer = true;
@@ -356,7 +370,28 @@ export class GamePage implements OnInit {
 
   async cacheGame() {
     await this.storage.set('GAME', this.active_level);
+  }
+
+  async chacheQuizLevel() {
     await this.storage.set('QUIZ_LEVEL', this.current_level);
+  }
+
+  onReturnFromQuiz() {
+    this.storage.get('GAME').then(
+      async (game) => {
+        console.log('retrived game', game);
+        this.active_level = game;
+        this.changeLevel();
+        // this.cacheGame();
+        if (!this.checkCompletedAllLevels()) {
+          this.getScreenInfo();
+        } else {
+          const checkLevel = 'indication'; // TODO: store current drug id
+          await this.druginfoService.changePlayed(game[checkLevel].data[0].drug.drug_id);
+          this.reload();
+        }
+      }
+    );
   }
 
   shuffle(array) {

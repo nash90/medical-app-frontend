@@ -58,20 +58,26 @@
             feedback[item.drug_quiz.drug_quiz_id]['correct'],
             else showRed  " lines="none" color="transparent">
               <ion-label color="success">{{option.quiz_option}}</ion-label>
-              <ion-radio checked color="success" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
+              <ion-radio disabled checked color="success" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
             </ion-item>
             <ng-template #showRed>
               <ion-item 
               *ngIf="feedback[item.drug_quiz.drug_quiz_id]['answer'] === option.quiz_option_id,
-              else showTransparent  " lines="none" color="transparent">
+              else showAnswer  " lines="none" color="transparent">
                   <ion-label color="danger">{{option.quiz_option}}</ion-label>
-                  <ion-radio checked color="danger" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
+                  <ion-radio disabled checked color="danger" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
                 </ion-item>        
             </ng-template>
+            <ng-template #showAnswer>
+              <ion-item *ngIf="feedback[item.drug_quiz.drug_quiz_id]['correct_option_id'] === option.quiz_option_id, else showTransparent" lines="none" color="transparent">
+                <ion-label color="success">{{option.quiz_option}}</ion-label>
+                <ion-radio disabled mode="md" color="success" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
+              </ion-item>            
+            </ng-template>            
             <ng-template #showTransparent>
               <ion-item lines="none" color="transparent">
                 <ion-label>{{option.quiz_option}}</ion-label>
-                <ion-radio mode="md" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
+                <ion-radio disabled mode="md" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
               </ion-item>            
             </ng-template>
           </div>
@@ -85,7 +91,7 @@
     </div>
 
     <div>
-      <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="submitAnswer()">NEXT</ion-button>
+      <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="next()">NEXT</ion-button>
     </div>
   </div>
 
