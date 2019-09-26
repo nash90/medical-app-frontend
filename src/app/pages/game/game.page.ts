@@ -324,11 +324,11 @@ export class GamePage implements OnInit {
 
   async changeKeyword() {
     this.changeLevelIndex();
+    await this.cacheGame();
+    await this.chacheQuizLevel();
     if (!this.checkCompletedSingleLevel()) {
       this.getScreenInfo();
     } else {
-      await this.cacheGame();
-      await this.chacheQuizLevel();
       // console.log('Single level was complete');
       this.goToQuiz();
     }
