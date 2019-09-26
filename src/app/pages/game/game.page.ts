@@ -78,7 +78,7 @@ export class GamePage implements OnInit {
         this.state = state;
         console.log('state', this.state);
         if (state === '1') {
-          this.onReturnFromQuiz();
+          this.onReturnFromLevelQuiz();
         } else {
           this.play();
         }
@@ -94,8 +94,12 @@ export class GamePage implements OnInit {
     this.navCtrl.navigateRoot('/game');
   }
 
-  goToQuiz() {
-    this.navCtrl.navigateRoot('/quiz');
+  goToQuiz(state = null) {
+    if (state) {
+      this.navCtrl.navigateRoot(`/quiz?state=${state}`);
+    } else {
+      this.navCtrl.navigateRoot('/quiz');
+    }
   }
 
   play() {
@@ -385,7 +389,7 @@ export class GamePage implements OnInit {
     await this.storage.set('QUIZ_LEVEL', this.current_level);
   }
 
-  onReturnFromQuiz() {
+  onReturnFromLevelQuiz() {
     this.storage.get('GAME').then(
       async (game) => {
         console.log('retrived game', game);
@@ -395,9 +399,7 @@ export class GamePage implements OnInit {
         if (!this.checkCompletedAllLevels()) {
           this.getScreenInfo();
         } else {
-          const checkLevel = 'indication'; // TODO: store current drug id
-          await this.druginfoService.changePlayed(game[checkLevel].data[0].drug.drug_id);
-          this.reload();
+          this.goToQuiz('1'); // go to full end quiz
         }
       }
     );
