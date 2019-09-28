@@ -23,6 +23,7 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
+  public retry = 0;
 
   public active_level = {
     indication: {
@@ -335,9 +336,16 @@ export class GamePage implements OnInit {
       async (data) => {
         console.log('ans response ', data);
         if (data.correct) {
+          this.retry = 0;
           this.changeKeyword();
         } else {
-          this.wrong_answer = true;
+          if (this.retry < 1) {
+            this.retry++;
+            this.getScreenInfo();
+          } else {
+            this.retry = 0;
+            this.wrong_answer = true;
+          }
         }
       },
       (err) => {
