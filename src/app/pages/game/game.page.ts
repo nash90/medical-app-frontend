@@ -221,8 +221,9 @@ export class GamePage implements OnInit {
     const key = this.current_keyword.keyword;
     const key_list = [];
     const option_list = [];
-    for (const char of key) {
-        if (char !== ' ' && Math.random() >= 0.5) {
+    const replace_s = this.getReplaceMarker(key);
+    key.split('').forEach((char, i) => {
+        if (replace_s[i] === '*') {
           key_list.push({
             value: '*',
             is_fixed: false
@@ -237,7 +238,7 @@ export class GamePage implements OnInit {
             is_fixed: true
           });
         }
-      }
+      });
     this.scrabbled_value = key_list;
     this.option_list = option_list;
     // useful in short keyword to aviod zero blank
@@ -255,6 +256,29 @@ export class GamePage implements OnInit {
     this.shuffle(this.option_list);
     // console.log(key_list);
     // console.log(option_list);
+  }
+
+  getReplaceMarker(keyword) {
+    let key_list = keyword.split(' ');
+
+    key_list = key_list.map((key) => {
+      const suffle_range = [];
+      let replace_length = 0;
+      for (let i = 1; i < key.length - 1; i++) {
+        suffle_range.push(i);
+      }
+      // console.log("suffle range:", suffle_range);
+      replace_length = Math.round(suffle_range.length / 2);
+      this.shuffle(suffle_range);
+      const keys = key.split('');
+      for (let i = 0; i < replace_length; i++) {
+        keys[suffle_range[i]] = '*';
+      }
+      return keys.join('');
+    });
+    const transformed_key = key_list.join(' ');
+    // console.log('transformed key', transformed_key);
+    return transformed_key;
   }
 
   addChar(idx) {
@@ -324,11 +348,11 @@ export class GamePage implements OnInit {
 
   async changeKeyword() {
     this.changeLevelIndex();
+    await this.cacheGame();
+    await this.chacheQuizLevel();
     if (!this.checkCompletedSingleLevel()) {
       this.getScreenInfo();
     } else {
-      await this.cacheGame();
-      await this.chacheQuizLevel();
       // console.log('Single level was complete');
       this.goToQuiz();
     }
