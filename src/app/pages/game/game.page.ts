@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-game',
@@ -23,6 +24,7 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
+  public points = null;
 
   public active_level = {
     indication: {
@@ -68,7 +70,8 @@ export class GamePage implements OnInit {
     private druginfoService: DruginfoService,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private storage: Storage
+    private storage: Storage,
+    private profileService: ProfileService
     ) {}
 
   ngOnInit() {
@@ -116,6 +119,7 @@ export class GamePage implements OnInit {
   }
 
   getScreenInfo() {
+    this.getProfile();
     this.getLevel();
     console.log('current level', this.current_level);
     this.getCurrentInformation();
@@ -160,6 +164,15 @@ export class GamePage implements OnInit {
         this.active_level.counseling_point.completed = false;
       }
     }
+  }
+
+  getProfile() {
+    this.profileService.getProfileData().subscribe(
+      (data) => {
+        this.points = data.points;
+        // console.log(data);
+      }
+    );
   }
 
   getLevel() {
