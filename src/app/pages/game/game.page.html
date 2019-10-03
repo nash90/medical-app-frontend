@@ -78,17 +78,22 @@
         </div>
       </div>
 
-      <div padding *ngIf="wrong_answer" align="center">
-        <ion-text color="danger">INCORRECT!!!</ion-text>
+      <div *ngIf="wrong_answer" align="center">
         <div class="box divword">
-          <div padding class="word">
-            <div *ngFor="let char of current_keyword.keyword.split(''); let i = index" class="char">
-              <div *ngIf="char === ' '" padding></div>
-              <div *ngIf="char !== ' '" class="blankletter" size="small" color="medium" >{{char | uppercase}}</div>
+          <ion-text color="danger">Sorry, the answer is</ion-text>
+          <div class="box divword">
+            <div padding class="word">
+              <div *ngFor="let char of current_keyword.keyword.split(''); let i = index;" 
+              [ngClass]="{char: !newline_rule(current_keyword.keyword,i, false), newline: newline_rule(current_keyword.keyword,i, false)}">
+                <div *ngIf="char === ' '">
+                  <div *ngIf="!newline_rule(current_keyword.keyword,i, false)" padding></div>
+                </div>
+                <div *ngIf="char !== ' '" class="populatedletter" size="small" color="medium" >{{char | uppercase}}</div>
+              </div>
             </div>
           </div>
         </div>
-        <ion-button class="submit" shape="round" fill="solid" (click)="skip()">NEXT</ion-button> 
+        <ion-button align="center" shape="round" fill="solid" (click)="skip()">NEXT</ion-button>   
       </div>
 
 

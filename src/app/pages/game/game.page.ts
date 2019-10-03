@@ -472,9 +472,13 @@ export class GamePage implements OnInit {
     return(sorted_obj);
   }
 
-  newline_rule(keyObj, pos) {
-
-    const keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
+  newline_rule(keyObj, pos, is_obj = true) {
+    let keyword = null;
+    if (is_obj) {
+      keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
+    } else {
+      keyword = keyObj;
+    }
 
     //
     // Decision tree determining what spaces to break on based

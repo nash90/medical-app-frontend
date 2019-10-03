@@ -42,6 +42,10 @@ export class QuizPage implements OnInit {
     );
   }
 
+  goToMenu() {
+    this.navCtrl.navigateRoot('/menu');
+  }
+
   setLevelData() {
     this.quizService.getQuizInfo().subscribe((data) => {
       // console.log('api return', data);
