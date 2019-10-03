@@ -21,7 +21,7 @@ export class RegisterPage implements OnInit {
   /* validation message when input formate is invalid */
   validation_messages = {
     username: [
-      { type: 'required', message: 'Username is required.' },
+      { type: 'required', message: 'Email is required.' },
       { type: 'minlength', message: 'Username must be at least 5 characters long.' },
       { type: 'maxlength', message: 'Username cannot be more than 25 characters long.' },
       { type: 'pattern', message: 'Please enter a valid email.' },
@@ -51,8 +51,6 @@ export class RegisterPage implements OnInit {
     /* validation control for username & birthdate input on register page */
     this.validations_form = this.formBuilder.group({
       username: new FormControl('', Validators.compose([
-        Validators.maxLength(25),
-        Validators.minLength(5),
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
         Validators.required
       ])),
