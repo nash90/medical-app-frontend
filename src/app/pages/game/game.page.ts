@@ -65,6 +65,7 @@ export class GamePage implements OnInit {
   public hide_option = false;
   public wrong_answer = false;
   public state = '';
+  public new_line = false;
 
   constructor(
     private druginfoService: DruginfoService,
@@ -472,9 +473,13 @@ export class GamePage implements OnInit {
     return(sorted_obj);
   }
 
-  newline_rule(keyObj, pos) {
-
-    const keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
+  newline_rule(keyObj, pos, is_obj = true) {
+    let keyword = null;
+    if (is_obj) {
+      keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
+    } else {
+      keyword = keyObj;
+    }
 
     //
     // Decision tree determining what spaces to break on based
@@ -498,6 +503,7 @@ export class GamePage implements OnInit {
           return true;
       }
     }
+    this.new_line = true;
     return false; // most character positions default ot not a break
   }
 }
