@@ -43,7 +43,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 3,
-      name: 'adverse_effect'
+      name: 'adverse effect'
     },
     interaction: {
       completed: false,
@@ -55,7 +55,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 5,
-      name: 'counseling_point'
+      name: 'counseling point'
     }
   };
 
@@ -188,7 +188,8 @@ export class GamePage implements OnInit {
   }
 
   getCurrentGameIndex() {
-    const level_obj = this.active_level[this.current_level.name].data;
+    // const level_obj = this.active_level[this.current_level.name].data;
+    const level_obj = this.current_level.data;
     for (let i = 0; i < level_obj.length; i++) {
       if (!level_obj[i].completed) {
         return i;
