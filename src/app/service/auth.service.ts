@@ -43,26 +43,11 @@ export class AuthService {
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    this.http.post(this.api_url + '/api/login/', JSON.stringify(user), this.httpOptions).subscribe(
-      data => {
-        this.updateData(data['token']);
-        this.navCtrl.navigateRoot('/menu');
-      },
-      err => {
-        this.errors = err['error'];
-      }
-    );
+    return this.http.post(this.api_url + '/api/login/', JSON.stringify(user), this.httpOptions);
   }
 
   public register(profile) {
-    this.http.post(this.api_url + '/api/register/', JSON.stringify(profile), this.httpOptions).subscribe(
-      data => {
-        this.navCtrl.navigateRoot('/login');
-      },
-      err => {
-        this.errors = err['error'];
-      }
-    );
+    return this.http.post(this.api_url + '/api/register/', JSON.stringify(profile), this.httpOptions);
   }
 
   // Refreshes the JWT token, to extend the time the user is logged in
@@ -89,22 +74,14 @@ export class AuthService {
     );
   }
 
-  private updateData(token) {
+  public updateData(token) {
     this.token = token;
-    this.errors = [];
     this.storeToken(token);
 
-    // decode the token to read the username and expiration timestamp
-    // tslint:disable-next-line:variable-name
-    const token_parts = this.token.split(/\./);
-    const token_decoded = JSON.parse(window.atob(token_parts[1]));
-    this.token_expires = new Date(token_decoded.exp * 1000);
-    this.username = token_decoded.username;
-    console.log({username: this.username, expiry: this.token_expires});
   }
 
   private storeToken(token) {
-    console.log('storing token in storage');
+    // console.log('storing token in storage');
     this.storage.set('ACCESS_TOKEN', token).then(
       () => {
         this.$token.next(token);
