@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content color="primary" padding>
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form [formGroup]="validations_form">
+  <!-- <form #form="ngForm" (ngSubmit)="login(form)"> -->
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -13,18 +14,36 @@
             <h3>Login</h3>
           </div>
           <div padding>
+            <!-- username input with validator -->
             <ion-item>
-              <ion-input name="email" type="email" placeholder="Email" [(ngModel)]="user.email" required></ion-input>
+              <ion-input type="text" placeholder="Email" formControlName="username"></ion-input>
             </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.username">
+                  <div class="error-message" *ngIf="validations_form.get('username').hasError(validation.type) && (validations_form.get('username').dirty || validations_form.get('username').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                  </div>
+                </ng-container>
+            </div>
+
             <!--<ion-item>
               <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="user.password" required></ion-input>
             </ion-item>-->
+
+            <!-- birthdate input with validator -->
             <ion-item>
-              <ion-input name="year_of_birth" type="text" placeholder="year of birth" [(ngModel)]="user.year_of_birth" required></ion-input>
-            </ion-item>            
+              <ion-input type="date" placeholder="YYYY" formControlName='birthdate'></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.birthdate">
+                  <div class="error-message" *ngIf="validations_form.get('birthdate').hasError(validation.type) && (validations_form.get('birthdate').dirty || validations_form.get('birthdate').touched)">
+                    <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                  </div>
+                </ng-container>
+            </div>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+            <ion-button size="large" type="submit" (click)="login()" [disabled]="!validations_form.valid" expand="block">Login</ion-button>
           </div>
           <div text-center>
             If you don't have an account, please <a routerLink='/register'>register</a> first!
