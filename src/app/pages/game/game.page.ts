@@ -65,7 +65,6 @@ export class GamePage implements OnInit {
   public hide_option = false;
   public wrong_answer = false;
   public state = '';
-  public new_line = false;
 
   constructor(
     private druginfoService: DruginfoService,
@@ -503,7 +502,6 @@ export class GamePage implements OnInit {
           return true;
       }
     }
-    this.new_line = true;
     return false; // most character positions default ot not a break
   }
 }
