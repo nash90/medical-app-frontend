@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-game',
@@ -23,6 +24,7 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
+  public points = null;
 
   public active_level = {
     indication: {
@@ -41,7 +43,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 3,
-      name: 'adverse_effect'
+      name: 'adverse effect'
     },
     interaction: {
       completed: false,
@@ -53,7 +55,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 5,
-      name: 'counseling_point'
+      name: 'counseling point'
     }
   };
 
@@ -68,7 +70,8 @@ export class GamePage implements OnInit {
     private druginfoService: DruginfoService,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private storage: Storage
+    private storage: Storage,
+    private profileService: ProfileService
     ) {}
 
   ngOnInit() {
@@ -116,6 +119,7 @@ export class GamePage implements OnInit {
   }
 
   getScreenInfo() {
+    this.getProfile();
     this.getLevel();
     console.log('current level', this.current_level);
     this.getCurrentInformation();
@@ -162,6 +166,15 @@ export class GamePage implements OnInit {
     }
   }
 
+  getProfile() {
+    this.profileService.getProfileData().subscribe(
+      (data) => {
+        this.points = data.points;
+        // console.log(data);
+      }
+    );
+  }
+
   getLevel() {
     const levels = this.sort_object(this.active_level);
 
@@ -175,7 +188,8 @@ export class GamePage implements OnInit {
   }
 
   getCurrentGameIndex() {
-    const level_obj = this.active_level[this.current_level.name].data;
+    // const level_obj = this.active_level[this.current_level.name].data;
+    const level_obj = this.current_level.data;
     for (let i = 0; i < level_obj.length; i++) {
       if (!level_obj[i].completed) {
         return i;
@@ -458,30 +472,31 @@ export class GamePage implements OnInit {
     return(sorted_obj);
   }
 
-  newline_rule(keyObj,pos) {
+  newline_rule(keyObj, pos) {
 
-    let keyword = keyObj.reduce((tot,cur)=>(tot = tot + cur.value),'');
+    const keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
 
     //
     // Decision tree determining what spaces to break on based
     // on a maximum of three words in 'keyword' phrase, and
     // a maximum of 10 characters of space per line.
     //
-    if (keyword[pos] == ' ') { // only consider breaking if we are on a space
-      let words = keyword.split(' ');
-      let len1 = words[0].length;
-      let len2 = words[1].length; // we know there is 2nd word due to space
-      let len3 = words.length > 2 ? words[2].length : 0;
-      if ( len1 + len2 + 1 > 10) // we'll break at first space
-      {
-        if (pos == len1) // return to break if this IS the first space
-          return true;
-        else if ( len2 + len3 + 1 > 10 ) // otherwise assume this is 2nd space and break if last two words > 10chars
+    if (keyword[pos] === ' ') { // only consider breaking if we are on a space
+      const words = keyword.split(' ');
+      const len1 = words[0].length;
+      const len2 = words[1].length; // we know there is 2nd word due to space
+      const len3 = words.length > 2 ? words[2].length : 0;
+      if ( len1 + len2 + 1 > 10) { // we'll break at first space
+        if (pos === len1) {
+          return true; // return to break if this IS the first space
+        } else if ( len2 + len3 + 1 > 10 ) {
+          return true; // otherwise assume this is 2nd space and break if last two words > 10chars
+        }
+      // no break on first space, so add word lengths for full phrase to see if break needed on 2nd space
+      // and break IF on the 2nd space
+      } else if ( len1 + len2 + len3 + 2 > 10 && pos === len1 + len2 + 1) {
           return true;
       }
-      else // no break on first space, so add word lengths for full phrase to see if break needed on 2nd space 
-        if ( len1 + len2 + len3 + 2 > 10 && pos == len1 + len2 + 1) // and break IF on the 2nd space
-          return true;
     }
     return false; // most character positions default ot not a break
   }
