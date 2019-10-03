@@ -3,12 +3,12 @@
           
     <ion-header>
       <ion-toolbar class="divheader">
-        <ion-icon class="header" name="menu" (click)="goToMenu()"></ion-icon>
-        <ion-title class="medscrab" align="center">MedScrab</ion-title>
-        <ion-icon class="headerblank" name="menu" (click)="goToMenu()"></ion-icon>
+        <div class="boxrow header" align="left"><ion-icon name="home" (click)="goToMenu()"></ion-icon></div>
+        <div class="boxrow medscrab" align="center">MedScrab</div>
+        <div class="boxrow headerpoints" align="right">100<font class="points">Pts</font></div>
       </ion-toolbar>
     </ion-header>
-
+        
     <div class="box divlevel">        
       <ion-text class="level" color="black">
         {{'Level ' + current_level.level + ": " + current_level.name | uppercase}}
@@ -47,13 +47,14 @@
       <div *ngIf="!wrong_answer">
         <div class="box divword" align="center">
           <div class="word">
-            <div *ngFor="let char of scrabbled_value; let i = index" class="char">
+            <div *ngFor="let char of scrabbled_value; let i = index"
+                  [ngClass]="{char: !newline_rule(scrabbled_value,i), newline: newline_rule(scrabbled_value,i)}" >
               <div *ngIf="char.value === '*', else blank">
-                <div class="blankletter" color="light" size="small"><font color="#FFC799">_</font></div>
+                <div class="blankletter" color="light" size="small"><font color="#DCB781">_</font></div>
               </div>
               <ng-template #blank>
                 <div *ngIf="char.value === ' ', else showchanged">
-                  <div padding></div>
+                  <div *ngIf="!newline_rule(scrabbled_value,i)" padding></div>
                 </div>
               </ng-template>
               <ng-template #showchanged>
