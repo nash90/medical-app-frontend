@@ -4,6 +4,7 @@ import { BirthdateValidator } from '../../validators/birthdate.validator';
 import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EighteenPlusValidator } from 'src/app/validators/eieghteenplus.validator';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,9 @@ import { EighteenPlusValidator } from 'src/app/validators/eieghteenplus.validato
 })
 export class RegisterPage implements OnInit {
 
-  public profile;
+  profile;
+  server_errors;
+  error_key = 'non_field_errors';
 
   validations_form: FormGroup;
   /* validation message when input formate is invalid */
@@ -34,7 +37,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private authService: AuthService,
     public formBuilder: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     this.profile = {
@@ -66,7 +70,18 @@ export class RegisterPage implements OnInit {
         email: this.validations_form.get('username').value
       },
         date_of_birth: this.validations_form.get('birthdate').value
-    });
+    }).subscribe(
+      data => {
+        this.navCtrl.navigateRoot('/login');
+      },
+      err => {
+        if (err.user && err.user.email) {
+          this.server_errors = ['User Email already exist'];
+        } else {
+          this.server_errors = ['Unexpected error occured'];
+        }
+      }
+    );
   }
 
   onSubmit(values) {

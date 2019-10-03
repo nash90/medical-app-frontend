@@ -14,6 +14,9 @@
             <h3>Create your account!</h3>
           </div>
           <div padding>
+            <div class="error-message" *ngFor="let error of server_errors">
+              <ion-icon name="information-circle-outline"></ion-icon> {{ error }}
+            </div>
             <!-- username input on register page -->
             <ion-item>
               <ion-input type="email" placeholder="your@email.com" formControlName="username"></ion-input>

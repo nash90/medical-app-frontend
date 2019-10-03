@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,11 @@ export class LoginPage implements OnInit {
   /**
    * An object representing the user for the login form
    */
+  token_key = 'token';
+  error_key = 'non_field_errors';
   public user: any;
   validations_form: FormGroup;
+  server_errors = [];
 
   // validation message when input information is incorrect
   validation_messages = {
@@ -34,7 +38,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    public formBuilder: FormBuilder) { }
+    public formBuilder: FormBuilder,
+    private navCtrl: NavController) { }
 
   ngOnInit() {
 
@@ -62,7 +67,15 @@ export class LoginPage implements OnInit {
       email: this.validations_form.get('username').value,
       year_of_birth: this.validations_form.get('birthdate').value,
       password: 'dummy value'
-    });
+    }).subscribe(
+      data => {
+        this.authService.updateData(data[this.token_key]);
+        this.navCtrl.navigateRoot('/menu');
+      },
+      err => {
+        this.server_errors = err[this.error_key];
+      }
+    );
   }
 
   refreshToken() {
