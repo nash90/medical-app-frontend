@@ -457,4 +457,32 @@ export class GamePage implements OnInit {
     });
     return(sorted_obj);
   }
+
+  newline_rule(keyObj,pos) {
+
+    let keyword = keyObj.reduce((tot,cur)=>(tot = tot + cur.value),'');
+
+    //
+    // Decision tree determining what spaces to break on based
+    // on a maximum of three words in 'keyword' phrase, and
+    // a maximum of 10 characters of space per line.
+    //
+    if (keyword[pos] == ' ') { // only consider breaking if we are on a space
+      let words = keyword.split(' ');
+      let len1 = words[0].length;
+      let len2 = words[1].length; // we know there is 2nd word due to space
+      let len3 = words.length > 2 ? words[2].length : 0;
+      if ( len1 + len2 + 1 > 10) // we'll break at first space
+      {
+        if (pos == len1) // return to break if this IS the first space
+          return true;
+        else if ( len2 + len3 + 1 > 10 ) // otherwise assume this is 2nd space and break if last two words > 10chars
+          return true;
+      }
+      else // no break on first space, so add word lengths for full phrase to see if break needed on 2nd space 
+        if ( len1 + len2 + len3 + 2 > 10 && pos == len1 + len2 + 1) // and break IF on the 2nd space
+          return true;
+    }
+    return false; // most character positions default ot not a break
+  }
 }

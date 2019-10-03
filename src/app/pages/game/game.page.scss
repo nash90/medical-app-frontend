@@ -1,3 +1,6 @@
+/*
+<div *ngIf="char === ' '" padding></div>*/
+
 
 .contentArea { 
   --background: rgb(255, 255, 255);
@@ -17,49 +20,39 @@
       subchild: divletterbank - no flex
   */
 
-.flexcontainer {
-
-  /*parent flex setup*/
-  height: 100%;
-  min-height: 100%;
-	display: flex;
-  flex-direction: column;  
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  .flexcontainer {
+    /*parent flex setup*/
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;  
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
 .divheader {
-  /*parent flex setup for */
-	display: flex;
-  flex-direction: row; 
-  height: 60px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.header {
-  /*side padding for menu icon and medscrab logo*/
-  padding-left: 10px;
-  padding-right: 10px;
-  
-  color: black;
-  font-family: "arial";
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-.headerblank {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 
-  color: white;
-  font-family: "arial";
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  /*parent flex setup for */
+  height: 50px;
+  padding-top: 10px;
+  padding-bottom: 0px;
+}
+
+.boxrow {
+  display: inline-block;
+}
+
+.header {
+  height: 100%;
+  width: 30%;
+  color: #620000;  
+  font-size: 18px;
 }
 
 .medscrab {
@@ -67,29 +60,48 @@
   font-weight: bold;
   font-family: "arial";
   font-size: 18px;
+
+  height: 100%;  
+  width: 40%;
+}
+
+.headerpoints {
+  height: 100%;  
+  width: 30%;
+  font-family: quicksand;
+  font-size: 18px;
+  font-weight: bold;
+  color: #620000;  
+}
+
+.points {
+  font-family: quicksand;
+  font-size: 12px;
+  font-weight: bold;
+  color: #620000; 
 }
 
 .divlevel {
   /*side padding for divlevel only*/
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .level {
   color: black;
   font-family: "quicksand"; /*quicksand*/
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
 }
 
 .divgame {
   /*side padding for divinfo, divhint, divword, and divletterbank*/
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   /*child flex of 1*/
   flex: 1 1 auto;
@@ -103,34 +115,35 @@
   color: black;    
 
   /*placement*/
-  width: fit-content;
+  width: 100%;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
 
   /*background*/
-  background-color: #C3D2FF;
+  background-color: #F9EEDA; /*#C3D2FF;*/
   border-radius: 10px; 
-  /*box-shadow: 2px 2px 2px #6D83C4;  */
+  box-shadow: 2px 2px 2px gray; /*#6D83C4;  */
   
   /*padding*/
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 
   flex: .4;
 }
 
 .info {
-  color: black;
+  color: 2A200B;
   font-family: "quicksand";
   font-weight: bold;    
-  font-size: 24px;      
-  letter-spacing: 3px; 
+  font-size: 21px;      
+  letter-spacing: 2px; 
 }
 
 .divwarning {
-  width: fit-content;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 
@@ -150,7 +163,8 @@
   flex: .6;    
 
   /*placement*/
-  width: fit-content;
+  width: 100%;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;  
 }
@@ -168,7 +182,8 @@
 
 .hintbulb {
   /*child 1/2 of divhint flexbox*/
-  flex: .3;
+  flex: .27;
+  padding-left: 15px;
 
   /*rotation*/
   transform: rotate(-10deg);
@@ -190,8 +205,7 @@
 
 .hint {
   /*child 2/2 of divhint flexbox*/
-  flex: .7;
-
+  flex: .73;
   color: black;
   font-family: "quicksand";
   font-weight: bold;      
@@ -200,9 +214,9 @@
 }
 
 .divword {
-  height: 90px;
+  height: 120px;
   /*padding*/
-  padding-bottom: 10px;
+  padding-bottom: 2px;
 }
 
 .divletterbank {
@@ -215,12 +229,18 @@
   flex-wrap: wrap;
 
   /*padding*/
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 2px;
+  padding-bottom: 3px;
 }
 
 .char {
   display: inline-block;
+  margin-bottom: 5px;
+}
+
+.newline {
+  display: block;
+  width: 0px;
 }
 
 .blankletter {
@@ -233,14 +253,14 @@ div.blankletter {
   color: #000000;
   font-weight: bold;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   background-image: url('/assets/tiles.jpg');
-  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  box-shadow: 1px 2px 1px rgb(137, 137, 137);  
   border-radius: 0px;
-  margin: 4px;
-  line-height: 30px;  
-  font-size: 20px;  
+  margin: 2px;
+  line-height: 27px;  
+  font-size: 22px;  
 }
 
 .populatedletter {
@@ -253,15 +273,15 @@ div.blankletter {
 div.populatedletter {
   color: black; /* #644B32; */
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   background-image: url('/assets/tilelighttan.jpg');
-  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  box-shadow: 1px 2px 1px rgb(137, 137, 137);  
   border-radius: 0px;
-  margin: 4px;
-  line-height: 30px;
+  margin: 2px;
+  line-height: 27px;
   font-weight: bold;
-  font-size: 20px;  
+  font-size: 22px;  
 }
 
 .letterbank {
@@ -277,13 +297,13 @@ div.letterbank {
   width: 60px;
   height: 60px;
   background-image: url('/assets/tiles.jpg');
-  /*box-shadow: 1px 2px 1px rgb(137, 137, 137);  */
+  box-shadow: 1px 2px 1px rgb(137, 137, 137);  
   border-radius: 0px;
   margin: 4px;
   line-height: 60px;
 /*  text-shadow: 2px 2px 3px rgba(255,255,255,1); */
   font-weight: bold;
-  font-size: 30px;
+  font-size: 32px;
 }
 
 
