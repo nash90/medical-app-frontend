@@ -43,7 +43,9 @@
           </div>
         </div>
       </div>
-      
+      <div *ngIf="try > 0" align="center">
+        <ion-text color="danger">Try Again !!!</ion-text>
+      </div>
       <div *ngIf="!wrong_answer">
         <div class="box divword" align="center">
           <div class="word">
@@ -78,7 +80,7 @@
         </div>
       </div>
 
-      <div *ngIf="wrong_answer" align="center">
+      <div *ngIf="wrong_answer" align="center" padding-bottom>
         <div class="box divword">
           <ion-text color="danger">Sorry, the answer is</ion-text>
           <div class="box divword">

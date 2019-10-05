@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +14,8 @@ import { ProfileService } from 'src/app/service/profile.service';
 })
 export class GamePage implements OnInit {
 
+  public retry_flag = environment.retry_flag;
+  public max_retry_count = environment.retry_count;
   public gameItem = [];
   public current_level = {
     completed: false,
@@ -24,8 +27,8 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
+  public try = 0;
   public points = null;
-
   public active_level = {
     indication: {
       completed: false,
@@ -349,9 +352,16 @@ export class GamePage implements OnInit {
       async (data) => {
         console.log('ans response ', data);
         if (data.correct) {
+          this.try = 0;
           this.changeKeyword();
         } else {
-          this.wrong_answer = true;
+          if (this.retry_flag && this.try < this.max_retry_count) {
+            this.try++;
+            this.getScreenInfo();
+          } else {
+            this.try = 0;
+            this.wrong_answer = true;
+          }
         }
       },
       (err) => {
