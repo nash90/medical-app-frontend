@@ -3,12 +3,12 @@
           
     <ion-header>
       <ion-toolbar class="divheader">
-        <ion-icon class="header" name="menu" (click)="goToMenu()"></ion-icon>
-        <ion-title class="medscrab" align="center">MedScrab</ion-title>
-        <ion-icon class="headerblank" name="menu" (click)="goToMenu()"></ion-icon>
+        <div class="boxrow header" align="left"><ion-icon name="home" (click)="goToMenu()"></ion-icon></div>
+        <div class="boxrow medscrab" align="center">MedScrab</div>
+        <div class="boxrow headerpoints" align="right">{{points}}<font class="points">Pts</font></div>
       </ion-toolbar>
     </ion-header>
-
+        
     <div class="box divlevel">        
       <ion-text class="level" color="black">
         {{'Level ' + current_level.level + ": " + current_level.name | uppercase}}
@@ -43,17 +43,20 @@
           </div>
         </div>
       </div>
-      
+      <div *ngIf="try > 0" align="center">
+        <ion-text color="danger">Try Again !!!</ion-text>
+      </div>
       <div *ngIf="!wrong_answer">
         <div class="box divword" align="center">
           <div class="word">
-            <div *ngFor="let char of scrabbled_value; let i = index" class="char">
+            <div *ngFor="let char of scrabbled_value; let i = index"
+                  [ngClass]="{char: !newline_rule(scrabbled_value,i), newline: newline_rule(scrabbled_value,i)}" >
               <div *ngIf="char.value === '*', else blank">
-                <div class="blankletter" color="light" size="small"><font color="#FFC799">_</font></div>
+                <div class="blankletter" color="light" size="small"><font color="#DCB781">_</font></div>
               </div>
               <ng-template #blank>
                 <div *ngIf="char.value === ' ', else showchanged">
-                  <div padding></div>
+                  <div *ngIf="!newline_rule(scrabbled_value,i)" padding></div>
                 </div>
               </ng-template>
               <ng-template #showchanged>
@@ -77,17 +80,22 @@
         </div>
       </div>
 
-      <div padding *ngIf="wrong_answer" align="center">
-        <ion-text color="danger">INCORRECT!!!</ion-text>
+      <div *ngIf="wrong_answer" align="center" padding-bottom>
         <div class="box divword">
-          <div padding class="word">
-            <div *ngFor="let char of current_keyword.keyword.split(''); let i = index" class="char">
-              <div *ngIf="char === ' '" padding></div>
-              <div *ngIf="char !== ' '" class="blankletter" size="small" color="medium" >{{char | uppercase}}</div>
+          <ion-text color="danger">Sorry, the answer is</ion-text>
+          <div class="box divword">
+            <div padding class="word">
+              <div *ngFor="let char of current_keyword.keyword.split(''); let i = index;" 
+              [ngClass]="{char: !newline_rule(current_keyword.keyword,i, false), newline: newline_rule(current_keyword.keyword,i, false)}">
+                <div *ngIf="char === ' '">
+                  <div *ngIf="!newline_rule(current_keyword.keyword,i, false)" padding></div>
+                </div>
+                <div *ngIf="char !== ' '" class="populatedletter" size="small" color="medium" >{{char | uppercase}}</div>
+              </div>
             </div>
           </div>
         </div>
-        <ion-button class="submit" shape="round" fill="solid" (click)="skip()">NEXT</ion-button> 
+        <ion-button align="center" shape="round" fill="solid" (click)="skip()">NEXT</ion-button>   
       </div>
 
 

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-game',
@@ -12,6 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class GamePage implements OnInit {
 
+  public retry_flag = environment.retry_flag;
+  public max_retry_count = environment.retry_count;
   public gameItem = [];
   public current_level = {
     completed: false,
@@ -23,8 +27,8 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
-  public retry = 0;
-
+  public try = 0;
+  public points = null;
   public active_level = {
     indication: {
       completed: false,
@@ -42,7 +46,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 3,
-      name: 'adverse_effect'
+      name: 'adverse effect'
     },
     interaction: {
       completed: false,
@@ -54,7 +58,7 @@ export class GamePage implements OnInit {
       completed: false,
       data: [],
       level: 5,
-      name: 'counseling_point'
+      name: 'counseling point'
     }
   };
 
@@ -69,7 +73,8 @@ export class GamePage implements OnInit {
     private druginfoService: DruginfoService,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private storage: Storage
+    private storage: Storage,
+    private profileService: ProfileService
     ) {}
 
   ngOnInit() {
@@ -117,6 +122,7 @@ export class GamePage implements OnInit {
   }
 
   getScreenInfo() {
+    this.getProfile();
     this.getLevel();
     console.log('current level', this.current_level);
     this.getCurrentInformation();
@@ -163,6 +169,15 @@ export class GamePage implements OnInit {
     }
   }
 
+  getProfile() {
+    this.profileService.getProfileData().subscribe(
+      (data) => {
+        this.points = data.points;
+        // console.log(data);
+      }
+    );
+  }
+
   getLevel() {
     const levels = this.sort_object(this.active_level);
 
@@ -176,7 +191,8 @@ export class GamePage implements OnInit {
   }
 
   getCurrentGameIndex() {
-    const level_obj = this.active_level[this.current_level.name].data;
+    // const level_obj = this.active_level[this.current_level.name].data;
+    const level_obj = this.current_level.data;
     for (let i = 0; i < level_obj.length; i++) {
       if (!level_obj[i].completed) {
         return i;
@@ -336,14 +352,14 @@ export class GamePage implements OnInit {
       async (data) => {
         console.log('ans response ', data);
         if (data.correct) {
-          this.retry = 0;
+          this.try = 0;
           this.changeKeyword();
         } else {
-          if (this.retry < 1) {
-            this.retry++;
+          if (this.retry_flag && this.try < this.max_retry_count) {
+            this.try++;
             this.getScreenInfo();
           } else {
-            this.retry = 0;
+            this.try = 0;
             this.wrong_answer = true;
           }
         }
@@ -464,5 +480,38 @@ export class GamePage implements OnInit {
         sorted_obj[use_key] = use_value;
     });
     return(sorted_obj);
+  }
+
+  newline_rule(keyObj, pos, is_obj = true) {
+    let keyword = null;
+    if (is_obj) {
+      keyword = keyObj.reduce((tot, cur) => (tot = tot + cur.value), '');
+    } else {
+      keyword = keyObj;
+    }
+
+    //
+    // Decision tree determining what spaces to break on based
+    // on a maximum of three words in 'keyword' phrase, and
+    // a maximum of 10 characters of space per line.
+    //
+    if (keyword[pos] === ' ') { // only consider breaking if we are on a space
+      const words = keyword.split(' ');
+      const len1 = words[0].length;
+      const len2 = words[1].length; // we know there is 2nd word due to space
+      const len3 = words.length > 2 ? words[2].length : 0;
+      if ( len1 + len2 + 1 > 10) { // we'll break at first space
+        if (pos === len1) {
+          return true; // return to break if this IS the first space
+        } else if ( len2 + len3 + 1 > 10 ) {
+          return true; // otherwise assume this is 2nd space and break if last two words > 10chars
+        }
+      // no break on first space, so add word lengths for full phrase to see if break needed on 2nd space
+      // and break IF on the 2nd space
+      } else if ( len1 + len2 + len3 + 2 > 10 && pos === len1 + len2 + 1) {
+          return true;
+      }
+    }
+    return false; // most character positions default ot not a break
   }
 }

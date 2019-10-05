@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class QuizPage implements OnInit {
 
-  public quiz = null;
+  public quiz = [];
   public drug = null;
   public answers = {};
   public error = false;
@@ -42,11 +42,19 @@ export class QuizPage implements OnInit {
     );
   }
 
+  goToMenu() {
+    this.navCtrl.navigateRoot('/menu');
+  }
+
   setLevelData() {
     this.quizService.getQuizInfo().subscribe((data) => {
       // console.log('api return', data);
-      this.setScreenData(data);
-      this.setAnswers();
+      if (data.length > 0) {
+        this.setScreenData(data);
+        this.setAnswers();
+      } else {
+        this.goToGame('1');
+      }
     });
   }
 
