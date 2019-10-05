@@ -84,7 +84,7 @@
         <div class="box divword">
           <ion-text class="warning">Sorry, the answer is</ion-text>
           <div class="box divword">
-            <div padding class="word">
+            <div class="word">
               <div *ngFor="let char of current_keyword.keyword.split(''); let i = index;" 
               [ngClass]="{char: !newline_rule(current_keyword.keyword,i, false), newline: newline_rule(current_keyword.keyword,i, false)}">
                 <div *ngIf="char === ' '">

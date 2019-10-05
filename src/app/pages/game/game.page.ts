@@ -82,7 +82,7 @@ export class GamePage implements OnInit {
       (params) => {
         const state = params.state;
         this.state = state;
-        console.log('state', this.state);
+        // console.log('state', this.state);
         if (state === '1') {
           this.onReturnFromLevelQuiz();
         } else {
@@ -112,7 +112,7 @@ export class GamePage implements OnInit {
     this.druginfoService.getGameItem().subscribe((item) => {
       if (item && item.length > 0) {
         this.gameItem = item;
-        console.log('game item', item);
+        // console.log('game item', item);
         this.setGame(item);
         this.getScreenInfo();
       }
@@ -124,7 +124,7 @@ export class GamePage implements OnInit {
   getScreenInfo() {
     this.getProfile();
     this.getLevel();
-    console.log('current level', this.current_level);
+    // console.log('current level', this.current_level);
     this.getCurrentInformation();
     this.getKeyword();
     if (this.current_keyword) {
@@ -205,7 +205,7 @@ export class GamePage implements OnInit {
     const level_obj = this.current_level;
     const current_index = this.getCurrentGameIndex();
     this.game = level_obj.data[current_index];
-    console.log('getCurrentInfo', this.game);
+    // console.log('getCurrentInfo', this.game);
   }
 
   getHint() {
@@ -231,7 +231,7 @@ export class GamePage implements OnInit {
     const keys_list = this.game.keyword;
     const choice_idx = Math.floor(Math.random() * keys_length);
     this.current_keyword = keys_list[choice_idx];
-    console.log('getKeyword', this.current_keyword);
+    // console.log('getKeyword', this.current_keyword);
   }
 
   scrabble_key() {
@@ -350,7 +350,7 @@ export class GamePage implements OnInit {
     }
     this.druginfoService.checkAnswer(this.current_keyword.keyword_id, answer).subscribe(
       async (data) => {
-        console.log('ans response ', data);
+        // console.log('ans response ', data);
         if (data.correct) {
           this.try = 0;
           this.changeKeyword();
@@ -440,7 +440,7 @@ export class GamePage implements OnInit {
   onReturnFromLevelQuiz() {
     this.storage.get('GAME').then(
       async (game) => {
-        console.log('retrived game', game);
+        // console.log('retrived game', game);
         this.active_level = game;
         this.changeLevel();
         // this.cacheGame();
