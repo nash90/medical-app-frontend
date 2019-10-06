@@ -1,26 +1,37 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>drug-select</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar class="divheader">
+      <div class="boxrow medscrab" align="center">MedScrab</div>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-<ion-item>
-  <ion-label>Select Drug</ion-label>
-  <ionic-selectable
-    [(ngModel)]="selectedDrug"
-    [items]="drugs$ | async"
-    itemValueField="drug_id"
-    itemTextField="drug_name"
-    [canSearch]="true"
-    [isMultiple]="true"
-    (onChange)="selectDrug($event)">
-  </ionic-selectable>
-</ion-item>
-<div padding>
-  <ion-button size="default" type="submit" expand="block" (click)='saveDrug()'>Play</ion-button>
-</div>
-<div padding>
-  <ion-button size="default" type="submit" expand="block" (click)='goBack()'>Go Back</ion-button>
-</div>
+<ion-content color="medium">
+  <div class="flexcontainer">           
+    <br>
+    <div class="num">Step 1</div>
+    <br>
+    <div class="selectdrug">Select Drug</div>
+    <ion-item padding>
+      <ionic-selectable
+        [(ngModel)]="selectedDrug"
+        [items]="drugs$ | async"
+        itemValueField="drug_id"
+        itemTextField="drug_name"
+        [canSearch]="true"
+        [isMultiple]="true"
+        (onChange)="selectDrug($event)">
+      </ionic-selectable>
+    </ion-item>
+    <br>
+    <div class="num">Step 2</div>
+    <div padding>
+      <ion-button color="danger" size="default" type="submit" expand="block" (click)='saveDrug()'>PLAY GAME</ion-button>
+    </div>
+    
+    <div class="filler"></div>
+
+    <div padding>
+      <ion-button color="danger" size="default" type="submit" expand="block" (click)='goBack()'>RETURN HOME</ion-button>
+    </div>
+
+  </div>
 </ion-content>

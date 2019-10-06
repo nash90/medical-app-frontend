@@ -1,11 +1,85 @@
+.divheader {
+  padding-left: 5px;
+  padding-right: 5px;
+
+  /*parent flex setup for */
+  height: 75px;
+  padding-top: 35px;
+  padding-bottom: 0px;
+}
+
+.medscrab {
+  color: #620000;
+  font-weight: bold;
+  font-family: "arial";
+  font-size: 20px;
+
+  height: 100%;  
+  width: 100%;
+}
+
+.flexcontainer {
+  /*parent flex setup*/
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; 
+  
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 ion-item{
-  --background: #3880ff;
-  --color: #fff;
+  --background: medium;
+  --color: black;
 }
 ion-button{
-  --background: #062f77;
+  --background: #620000;
 }
 
 a{
-  color: #fff;
+  color: black;
 }
+
+.login {
+  color: black;    
+  
+    /*background*/
+    background-image: url('/assets/tiles.jpg');          
+    background-color: #F9EEDA; /*#C3D2FF;*/
+    border-radius: 10px; 
+    box-shadow: 2px 2px 2px gray; /*#6D83C4;  */
+    
+    /*padding*/
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    /*text*/
+    color: black; //2A200B;
+    font-family: "quicksand";
+    font-weight: bold;    
+    font-size: 21px;      
+    letter-spacing: 2px; 
+}
+
+.ifnoaccount {
+  font-size: 18px;
+  color: black;
+}
+
+.filler {
+  flex: 1 1 auto;
+}
+
+.mustbe18 {
+  font-size: 18px;
+  color: #620000;
+
+  height: 30px;
+}
+
