@@ -1,61 +1,71 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+  <ion-toolbar class="divheader">
+    <div class="boxrow medscrab" align="center">MedScrab</div>
   </ion-toolbar>
-</ion-header>
-
-<ion-content  color="primary">
-  <form [formGroup]="validations_form">
-  <!-- <form  #form="ngForm" (ngSubmit)="register(form)"> -->
-    <ion-grid>
-      <ion-row color="primary" justify-content-center>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div text-center>
-            <h3>Create your account!</h3>
-          </div>
-          <div padding>
-            <div class="error-message" *ngFor="let error of server_errors">
-              <ion-icon name="information-circle-outline"></ion-icon> {{ error }}
+</ion-header>   
+  
+<ion-content color="medium" padding>
+  <div class="flexcontainer">
+    
+    <form [formGroup]="validations_form">
+    <!-- <form  #form="ngForm" (ngSubmit)="register(form)"> -->
+      <ion-grid>
+        <ion-row color="medium" justify-content-center>
+          <ion-col align-self-center>
+            <div class="create" text-center>
+              CREATE ACCOUNT
             </div>
-            <!-- username input on register page -->
-            <ion-item>
-              <ion-input type="email" placeholder="your@email.com" formControlName="username"></ion-input>
-            </ion-item>
-            <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.username">
-                  <div class="error-message" *ngIf="validations_form.get('username').hasError(validation.type) && (validations_form.get('username').dirty || validations_form.get('username').touched)">
-                    <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-                  </div>
-                </ng-container>
+            <div padding>
+              <div class="error-message" *ngFor="let error of server_errors">
+                <ion-icon name="information-circle-outline"></ion-icon> {{ error }}
+              </div>
+              <!-- username input on register page -->
+              <ion-item>
+                <ion-input type="email" placeholder="your@email.com" formControlName="username"></ion-input>
+              </ion-item>
+              <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.username">
+                    <div class="error-message" *ngIf="validations_form.get('username').hasError(validation.type) && (validations_form.get('username').dirty || validations_form.get('username').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+              </div>
+
+              <!--<ion-item>
+                <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
+              </ion-item>-->
+
+              <!-- birthdate input on register page -->
+              <ion-item>
+                <ion-input type="date" placeholder="YYYY-MM-DD" formControlName="birthdate"></ion-input>
+              </ion-item>
+              <div class="validation-errors">
+                  <ng-container *ngFor="let validation of validation_messages.birthdate">
+                    <div class="error-message" *ngIf="validations_form.get('birthdate').hasError(validation.type) && (validations_form.get('birthdate').dirty || validations_form.get('birthdate').touched)">
+                      <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                  </ng-container>
+              </div>            
             </div>
+            <div padding>
+              <ion-button  size="large" type="button" (click)="register()" [disabled]="!validations_form.valid" expand="block">R E G I S T E R</ion-button>
+            </div>
+            <div class="ifhaveaccount" text-center>
+              If you already have account<br>please <a routerLink='/login'><b>Log In</b></a>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
 
-            <!--<ion-item>
-              <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
-            </ion-item>-->
+    <div class="filler"></div>
 
-            <!-- birthdate input on register page -->
-            <ion-item>
-              <ion-input type="date" placeholder="YYYY-MM-DD" formControlName="birthdate"></ion-input>
-            </ion-item>
-            <div class="validation-errors">
-                <ng-container *ngFor="let validation of validation_messages.birthdate">
-                  <div class="error-message" *ngIf="validations_form.get('birthdate').hasError(validation.type) && (validations_form.get('birthdate').dirty || validations_form.get('birthdate').touched)">
-                    <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
-                  </div>
-                </ng-container>
-            </div>            
-          </div>
-          <div padding>
-            <ion-button  size="large" type="button" (click)="register()" [disabled]="!validations_form.valid" expand="block">Register</ion-button>
-          </div>
-          <div text-center>
-            If you already have account please <a routerLink='/login'>login</a>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+    <div class="mustbe18" text-center>
+      *Must be 18 years or older to play.
+    </div>
+
+  </div>
 </ion-content>

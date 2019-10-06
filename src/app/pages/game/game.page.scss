@@ -39,8 +39,8 @@
   padding-right: 5px;
 
   /*parent flex setup for */
-  height: 50px;
-  padding-top: 10px;
+  height: 75px;
+  padding-top: 35px;
   padding-bottom: 0px;
 }
 
@@ -52,14 +52,14 @@
   height: 100%;
   width: 30%;
   color: #620000;  
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .medscrab {
   color: #620000;
   font-weight: bold;
   font-family: "arial";
-  font-size: 18px;
+  font-size: 20px;
 
   height: 100%;  
   width: 40%;
@@ -68,15 +68,15 @@
 .headerpoints {
   height: 100%;  
   width: 30%;
-  font-family: quicksand;
-  font-size: 18px;
+  font-family: arial;
+  font-size: 20px;
   font-weight: bold;
   color: #620000;  
 }
 
 .points {
-  font-family: quicksand;
-  font-size: 12px;
+  font-family: arial;
+  font-size: 14px;
   font-weight: bold;
   color: #620000; 
 }
@@ -93,9 +93,9 @@
 .level {
   color: black;
   font-family: "quicksand"; /*quicksand*/
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  letter-spacing: 0px;
+  letter-spacing: 1px;
 }
 
 .divgame {
@@ -126,8 +126,8 @@
   box-shadow: 2px 2px 2px gray; /*#6D83C4;  */
   
   /*padding*/
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   padding-left: 5px;
   padding-right: 5px;
 
@@ -135,7 +135,7 @@
 }
 
 .info {
-  color: 2A200B;
+  color: black; //2A200B;
   font-family: "quicksand";
   font-weight: bold;    
   font-size: 21px;      
@@ -154,7 +154,7 @@
 .warning {
   color: #620000;
   font-family: "quicksand";
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 1px;
   font-weight: bold;   
 }
@@ -243,6 +243,14 @@
   width: 0px;
 }
 
+.warning2 {
+  color: #620000;
+  font-family: "quicksand";
+  font-size: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;   
+}
+
 .blankletter {
   --border-radius: 0px;
   --opacity: 0%;
@@ -267,7 +275,7 @@ div.blankletter {
   font-weight: bold;
   --border-radius: 0px;
   --opacity: 0%;
-  --background-hover: #0929AB;  
+  --background-hover: #F9EEDA;  
 }
 
 div.populatedletter {
@@ -288,7 +296,7 @@ div.populatedletter {
   font-weight: bold;
   --border-radius: 0px;
   --opacity: 0%;
-  --background-hover: #0929AB;  
+  --background-hover: transparent;  
 }
 
 div.letterbank {

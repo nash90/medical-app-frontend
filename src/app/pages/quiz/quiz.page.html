@@ -1,99 +1,109 @@
-<ion-header align="left">
-  <ion-toolbar class="toolbar">
-    <ion-title>MedScrab</ion-title>
+<ion-header>
+  <ion-toolbar class="divheader">
+    <div class="boxrow header" align="left"><ion-icon name="home" (click)="goToMenu()"></ion-icon></div>
+    <div class="boxrow medscrab" align="center">MedScrab</div>
+    <div class="boxrow headerpoints" align="right">{{points}}<font class="points">Pts</font></div>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content class="contentArea" >  
+<ion-content class="contentArea">  
+  <div class="flexcontainer">
+
+  <!-- ***********  FIRST COPY OF CODE: !FEEDBACK (NOT YET SUBMITTED CASE) ******** -->
+
   <div *ngIf="quiz.length > 0 && !feedback" class="parent">
 
-    <div class="quizdrug" align="center">        
-      <ion-text class="quizdrugname">
+    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
+      <div class="quizdrugname">
         {{drug.drug_name | uppercase}}
-      </ion-text>
+      </div>
     </div>
+
+    <div class="whitespace"></div>
 
     <div *ngFor="let item of quiz; let i = index" class="qBox">
       <div class="question">  
         <ion-text class="prompt">{{item.drug_quiz.quiz_question}}</ion-text>
       </div>
-      <div class="choices" align="left">
-      <ion-list>
-        <ion-radio-group>
-          <div *ngFor="let option of item.quiz_option; let z = index">
+      <ion-list class="choices">
+        <ion-radio-group >
+          <div *ngFor="let option of item.quiz_option; let z = index" class="choicesBackground">
               <ion-item lines="none" color="transparent">
-                <ion-label>{{option.quiz_option}}</ion-label>
-                <ion-radio mode="md" slot="start" value="{{option.quiz_option_id}}" (ionSelect)="radioSelect(item.drug_quiz.drug_quiz_id, option.quiz_option_id)" ></ion-radio>
+                <ion-radio mode="md" class="radiobtn" color="danger" slot="start" value="{{option.quiz_option_id}}" (ionSelect)="radioSelect(item.drug_quiz.drug_quiz_id, option.quiz_option_id)" ></ion-radio>
+                <ion-label class="quizLabel">{{option.quiz_option}}</ion-label>
               </ion-item>            
           </div>
         </ion-radio-group>
       </ion-list>
-      </div>
     </div>
 
     <div>
-      <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="submitAnswer()">S U B M I T</ion-button>
+      <ion-button class="submit" expand="full" shape="round" fill="solid" color="danger" (click)="submitAnswer()">S U B M I T</ion-button>
     </div>
   </div>
 
+<!-- *********** DUPLICATED CODE FOR POST-SUBMIT / FEEDBACK PAGE *********** -->
+
   <div *ngIf="feedback" class="parent">
 
-    <div class="quizdrug" align="center">        
+    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
       <ion-text class="quizdrugname">
         {{drug.drug_name | uppercase}}
       </ion-text>
     </div>
 
+    <div class="whitespace"></div>    
+
     <div *ngFor="let item of quiz; let i = index" class="qBox">
       <div class="question">  
         <ion-text class="prompt">{{item.drug_quiz.quiz_question}}</ion-text>
       </div>
-      <div class="choices" align="left">
-      <ion-list>
+      <ion-list class="choices">
         <ion-radio-group>
           <div *ngFor="let option of item.quiz_option; let z = index">
             <ion-item 
             *ngIf="feedback[item.drug_quiz.drug_quiz_id]['answer'] === option.quiz_option_id &&
             feedback[item.drug_quiz.drug_quiz_id]['correct'],
             else showRed  " lines="none" color="transparent">
-              <ion-label color="success">{{option.quiz_option}}</ion-label>
+              <ion-label color="success" class="quizLabel">{{option.quiz_option}}</ion-label>
               <ion-radio disabled checked color="success" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
             </ion-item>
             <ng-template #showRed>
               <ion-item 
               *ngIf="feedback[item.drug_quiz.drug_quiz_id]['answer'] === option.quiz_option_id,
               else showAnswer  " lines="none" color="transparent">
-                  <ion-label color="danger">{{option.quiz_option}}</ion-label>
+                  <ion-label color="danger" class="quizLabel">{{option.quiz_option}}</ion-label>
                   <ion-radio disabled checked color="danger" mode="md" slot="start" value="{{option.quiz_option_id}}"></ion-radio>
                 </ion-item>        
             </ng-template>
             <ng-template #showAnswer>
               <ion-item *ngIf="feedback[item.drug_quiz.drug_quiz_id]['correct_option_id'] === option.quiz_option_id, else showTransparent" lines="none" color="transparent">
-                <ion-label color="success">{{option.quiz_option}}</ion-label>
+                <ion-label color="success" class="quizLabel">{{option.quiz_option}}</ion-label>
                 <ion-radio disabled mode="md" color="success" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
               </ion-item>            
             </ng-template>            
             <ng-template #showTransparent>
               <ion-item lines="none" color="transparent">
-                <ion-label>{{option.quiz_option}}</ion-label>
+                <ion-label class="quizLabel">{{option.quiz_option}}</ion-label>
                 <ion-radio disabled mode="md" slot="start" value="{{option.quiz_option_id}}" ></ion-radio>
               </ion-item>            
             </ng-template>
           </div>
         </ion-radio-group>
       </ion-list>
-      <ion-text *ngIf="!feedback[item.drug_quiz.drug_quiz_id]['correct'], else showCorrect" color="danger">WRONG!! {{feedback[item.drug_quiz.drug_quiz_id]['message']}}</ion-text>
+      <ion-text class="answerfeedback" *ngIf="!feedback[item.drug_quiz.drug_quiz_id]['correct'], else showCorrect" color="danger">INCORRECT: {{feedback[item.drug_quiz.drug_quiz_id]['message']}}</ion-text>
       <ng-template #showCorrect>
-        <ion-text color="success">CORRECT</ion-text>
+        <ion-text class="answerfeedback" color="success">CORRECT</ion-text>
       </ng-template>
-      </div>
     </div>
 
     <div>
-      <ion-button class="submit" expand="full" shape="round" fill="solid" (click)="next()">NEXT</ion-button>
+      <ion-button class="submit" expand="full" shape="round" fill="solid" color="danger" (click)="next()">NEXT</ion-button>
     </div>
   </div>
 
+
+</div>
 </ion-content>  
       
