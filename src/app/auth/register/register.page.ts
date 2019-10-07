@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ModuleWithComponentFactories } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { BirthdateValidator } from '../../validators/birthdate.validator';
 import { Validators, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EighteenPlusValidator } from 'src/app/validators/eieghteenplus.validator';
 import { NavController } from '@ionic/angular';
+import { IonicSelectableModalComponent } from 'ionic-selectable';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-register',
@@ -63,6 +65,7 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
+    this.changeDateFormat;
     this.authService.register({
       user: {
         email: this.validations_form.get('username').value
@@ -80,6 +83,12 @@ export class RegisterPage implements OnInit {
         }
       }
     );
+  }
+
+  changeDateFormat() {
+    var date = new Date(this.validations_form.get("birthdate").value);
+    this.validations_form.get("birthdate").setValue(date.getFullYear.toString + 
+      "-" + date.getMonth.toString + "-" + date.getDay.toString);
   }
 
   onSubmit(values) {
