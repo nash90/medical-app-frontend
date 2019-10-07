@@ -29,7 +29,7 @@ export class DrugSelectPage implements OnInit {
   }
 
   selectDrug() {
-    console.log('selected', this.selectedDrug);
+    // console.log('selected', this.selectedDrug);
   }
 
   saveDrug() {

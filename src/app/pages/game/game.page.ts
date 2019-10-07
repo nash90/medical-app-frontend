@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
@@ -13,6 +14,8 @@ import { ProfileService } from 'src/app/service/profile.service';
 })
 export class GamePage implements OnInit {
 
+  public retry_flag = environment.retry_flag;
+  public max_retry_count = environment.retry_count;
   public gameItem = [];
   public current_level = {
     completed: false,
@@ -24,8 +27,8 @@ export class GamePage implements OnInit {
   public scrabbled_value = null;
   public option_list = null;
   public completed_word = false;
-  public points = null;
-
+  public try = 0;
+  public points = 0;
   public active_level = {
     indication: {
       completed: false,
@@ -79,7 +82,7 @@ export class GamePage implements OnInit {
       (params) => {
         const state = params.state;
         this.state = state;
-        console.log('state', this.state);
+        // console.log('state', this.state);
         if (state === '1') {
           this.onReturnFromLevelQuiz();
         } else {
@@ -109,7 +112,7 @@ export class GamePage implements OnInit {
     this.druginfoService.getGameItem().subscribe((item) => {
       if (item && item.length > 0) {
         this.gameItem = item;
-        console.log('game item', item);
+        // console.log('game item', item);
         this.setGame(item);
         this.getScreenInfo();
       }
@@ -121,7 +124,7 @@ export class GamePage implements OnInit {
   getScreenInfo() {
     this.getProfile();
     this.getLevel();
-    console.log('current level', this.current_level);
+    // console.log('current level', this.current_level);
     this.getCurrentInformation();
     this.getKeyword();
     if (this.current_keyword) {
@@ -169,7 +172,9 @@ export class GamePage implements OnInit {
   getProfile() {
     this.profileService.getProfileData().subscribe(
       (data) => {
-        this.points = data.points;
+        if (data.points) {
+          this.points = data.points;
+          }
         // console.log(data);
       }
     );
@@ -202,7 +207,7 @@ export class GamePage implements OnInit {
     const level_obj = this.current_level;
     const current_index = this.getCurrentGameIndex();
     this.game = level_obj.data[current_index];
-    console.log('getCurrentInfo', this.game);
+    // console.log('getCurrentInfo', this.game);
   }
 
   getHint() {
@@ -228,7 +233,7 @@ export class GamePage implements OnInit {
     const keys_list = this.game.keyword;
     const choice_idx = Math.floor(Math.random() * keys_length);
     this.current_keyword = keys_list[choice_idx];
-    console.log('getKeyword', this.current_keyword);
+    // console.log('getKeyword', this.current_keyword);
   }
 
   scrabble_key() {
@@ -347,11 +352,18 @@ export class GamePage implements OnInit {
     }
     this.druginfoService.checkAnswer(this.current_keyword.keyword_id, answer).subscribe(
       async (data) => {
-        console.log('ans response ', data);
+        // console.log('ans response ', data);
         if (data.correct) {
+          this.try = 0;
           this.changeKeyword();
         } else {
-          this.wrong_answer = true;
+          if (this.retry_flag && this.try < this.max_retry_count) {
+            this.try++;
+            this.getScreenInfo();
+          } else {
+            this.try = 0;
+            this.wrong_answer = true;
+          }
         }
       },
       (err) => {
@@ -430,7 +442,7 @@ export class GamePage implements OnInit {
   onReturnFromLevelQuiz() {
     this.storage.get('GAME').then(
       async (game) => {
-        console.log('retrived game', game);
+        // console.log('retrived game', game);
         this.active_level = game;
         this.changeLevel();
         // this.cacheGame();

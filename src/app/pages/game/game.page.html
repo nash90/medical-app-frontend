@@ -43,7 +43,9 @@
           </div>
         </div>
       </div>
-      
+      <div *ngIf="try > 0" align="center">
+        <ion-text class="warning2">Please try again...</ion-text>
+      </div>
       <div *ngIf="!wrong_answer">
         <div class="box divword" align="center">
           <div class="word">
@@ -78,11 +80,11 @@
         </div>
       </div>
 
-      <div *ngIf="wrong_answer" align="center">
+      <div *ngIf="wrong_answer" align="center" padding-bottom>
         <div class="box divword">
-          <ion-text color="danger">Sorry, the answer is</ion-text>
+          <ion-text class="warning2">Sorry, the correct answer is:</ion-text>
           <div class="box divword">
-            <div padding class="word">
+            <div class="word">
               <div *ngFor="let char of current_keyword.keyword.split(''); let i = index;" 
               [ngClass]="{char: !newline_rule(current_keyword.keyword,i, false), newline: newline_rule(current_keyword.keyword,i, false)}">
                 <div *ngIf="char === ' '">

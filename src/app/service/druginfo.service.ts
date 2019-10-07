@@ -37,7 +37,7 @@ export class DruginfoService {
   }
 
   async saveSelectedDrug(selectedDrug) {
-    console.log('save selected drugs');
+    // console.log('save selected drugs');
     const id_list = selectedDrug.map((item, idx) => {
       const obj = {
         drug_id : item.drug_id,
@@ -67,7 +67,7 @@ export class DruginfoService {
   }
 
   async changePlayed(drug_id) {
-    console.log('changePlayed');
+    // console.log('changePlayed');
     const selectList = await this.getSelectedDrug();
     if (selectList) {
       selectList.forEach(
@@ -78,7 +78,7 @@ export class DruginfoService {
         }
       );
     }
-    console.log('selectList', selectList);
+    // console.log('selectList', selectList);
     await this.storage.set('SELECTED_DRUGS', selectList);
   }
 

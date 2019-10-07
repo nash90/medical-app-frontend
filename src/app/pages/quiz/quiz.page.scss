@@ -1,148 +1,160 @@
-.toolbar {
-  align-self:left;
+.divheader {
+  padding-left: 5px;
+  padding-right: 5px;
+
+  /*parent flex setup for */
+  height: 75px;
+  padding-top: 35px;
+  padding-bottom: 0px;
 }
 
-
-.parent {
-  /*parent flexbox - whole page*/
-  display: flex;
-  flex-wrap:wrap;
-  width:100%;
-  justify-content:center;    
-  padding-left: 10px;
-  padding-right: 10px;
+.boxrow {
+  display: inline-block;
 }
 
-.quiztitle {
-  /*text*/
-  color: #D37203;
-  font-family: Courier New, Courier, monospace;
-  font-style: normal;
-  font-size: 12px;
-  font-weight: normal;
-  letter-spacing: 2px;
+.header {
+  height: 100%;
+  width: 30%;
+  color: #620000;  
+  font-size: 20px;
+}
 
-  /*flexbox*/
+.medscrab {
+  color: #620000;
+  font-weight: bold;
+  font-family: "arial";
+  font-size: 20px;
+
+  height: 100%;  
+  width: 40%;
+}
+
+.headerpoints {
+  height: 100%;  
+  width: 30%;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #620000;  
+}
+
+.points {
+  font-family: arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: #620000; 
+}
+
+.contentArea { 
+  --background: rgb(255, 255, 255);
+  width: 100%; 
+}
+
+.flexcontainer {
+  /*parent flex setup*/
+  width: 100%;
+  max-width: 500px;
   display: flex;
-
-  /*padding*/
+  flex-direction: column;  
+  
   padding-left: 10px;
   padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .quizdrug {
-  /*text*/
-  color: #f99820;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  /*text - same as game page "level" section*/
+  color: black; //2A200B;
+  font-family: "quicksand";
+  font-weight: bold;    
+  font-size: 21px;      
+  letter-spacing: 2px; 
 
-  /*flexbox*/
-  display: flex;
-  flex-direction: column;    
-  flex-wrap:wrap;
-
-  /*padding*/
+  padding-top: 20px;
+  padding-bottom: 20px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+
+  position: fixed;
+}
+
+.whitespace {
+  height: 90px;
 }
 
 .qBox {
   /*flexbox*/
   display: flex; 
   flex-direction: column;
-
-  /*padding*/
-  padding-top:7px;
-  padding-bottom:7px;
-}
-
-.prompt {
-  font-size: 20px;
-  color: white;
-}
-
-.radio  {
-  background: white;
-  border-radius: 10px; 
+  padding-top: 5px;
+  padding-bottom: 10px;
 }
 
 .question {
-  /*text*/
-  color: white; 
-  font-family: "tahoma";
-  letter-spacing: 2px;    
-
   /*padding*/
   padding-left: 10px;
   padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 
-  /*
-  color scheme:
-  terra cotta: ED6A5A
-  oxford blue: 0A014F
-  blond: F4F1BB
-  very pale yellow: F1FEC6
-  cambridge blue: 9BC1BC
-  */  
-
-  /*background
-  colors:
-  oxford blue: 0A014F 
-  */
-  background-color: #0A014F;
-  border: 1px solid #0A014F;
+  background-color: #DCB781;
   border-top-right-radius: 10px; 
-  border-top-left-radius: 10px;   
+  border-top-left-radius: 10px;  
+  background-image: url('/assets/tiles.jpg');
+  box-shadow: 2px 2px 2px gray; /*#6D83C4;  */  
+}
 
-  /*flexbox*/
-  width: calc(100vw - 20px);
+.prompt {
+  color: black; //2A200B;
+  font-family: "quicksand";
+  font-weight: bold;    
+  font-size: 18px;      
+  letter-spacing: 0px; 
+}
+
+.radiobtn  {
+  background-color: white;
+  border-radius: 360%; 
+  color: black !important;
+  --color: rgb(0,0,0);
 }
 
 .choices {
   /*text*/
   color: black; 
-  font-family: "tahoma";
-  letter-spacing: 2px; 
-  
-  /*padding*/
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top:10px;
-  padding-bottom:10px;
+  font-family: "quicksand";
+  font-weight: normal;
+  letter-spacing: 0px; 
 
-  /*placement
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;*/  
-  
-  /*background
-  colors:
-  light cyan: CCFBFE
-  very pale yellow: F1FEC6
-  aero blue: D4F4DD
-  */
-  background-color: #F1FFE7;
-  border: 1px solid #F1FFE7;
   border-bottom-right-radius: 10px; 
   border-bottom-left-radius: 10px; 
-
-  /*flexbox*/
-  flex-wrap: wrap;
-  width:100%; 
-  justify-content:center;  
-  
-  .submit {
-      background-color: #f87203;
-  }
-  
+  background-color: transparent;
+  background-image: url('/assets/tilelighttan.jpg');        
+  box-shadow: 2px 2px 2px gray; /*#6D83C4;  */  
 }
 
+.choicesBackground {
+  background-image: url('/assets/tilelighttan.jpg');      
+}
+
+.submit {
+  padding-top: 0px;
+}
+
+.answerfeedback {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 4px;
+  padding-bottom: 0px;
+
+  font-family: "quicksand";
+  font-weight: bold;    
+  font-size: 16px;    
+}
+
+.quizLabel {
+  white-space: pre-wrap;
+  overflow-wrap: normal;
+}
