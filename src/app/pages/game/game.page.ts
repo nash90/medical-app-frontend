@@ -28,7 +28,7 @@ export class GamePage implements OnInit {
   public option_list = null;
   public completed_word = false;
   public try = 0;
-  public points = null;
+  public points = 0;
   public active_level = {
     indication: {
       completed: false,
@@ -172,7 +172,9 @@ export class GamePage implements OnInit {
   getProfile() {
     this.profileService.getProfileData().subscribe(
       (data) => {
-        this.points = data.points;
+        if (data.points) {
+          this.points = data.points;
+          }
         // console.log(data);
       }
     );
