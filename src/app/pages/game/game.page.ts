@@ -125,6 +125,12 @@ export class GamePage implements OnInit {
     this.getProfile();
     this.getLevel();
     // console.log('current level', this.current_level);
+    if (this.current_level.data.length < 1) {
+      this.changeLevel();
+      this.getScreenInfo();
+      return;
+    }
+
     this.getCurrentInformation();
     this.getKeyword();
     if (this.current_keyword) {
