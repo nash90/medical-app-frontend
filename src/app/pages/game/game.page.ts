@@ -359,7 +359,7 @@ export class GamePage implements OnInit {
         } else {
           if (this.retry_flag && this.try < this.max_retry_count) {
             this.try++;
-            this.getScreenInfo();
+            this.scrabble_key();
           } else {
             this.try = 0;
             this.wrong_answer = true;
