@@ -125,6 +125,12 @@ export class GamePage implements OnInit {
     this.getProfile();
     this.getLevel();
     // console.log('current level', this.current_level);
+    if (this.current_level.data.length < 1) {
+      this.changeLevel();
+      this.getScreenInfo();
+      return;
+    }
+
     this.getCurrentInformation();
     this.getKeyword();
     if (this.current_keyword) {
@@ -359,7 +365,7 @@ export class GamePage implements OnInit {
         } else {
           if (this.retry_flag && this.try < this.max_retry_count) {
             this.try++;
-            this.getScreenInfo();
+            this.scrabble_key();
           } else {
             this.try = 0;
             this.wrong_answer = true;
