@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { DruginfoService } from 'src/app/service/druginfo.service';
 import { Storage } from '@ionic/storage';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-quiz',
@@ -18,6 +19,7 @@ export class QuizPage implements OnInit {
   public error = false;
   public feedback = null;
   public state = '';
+  public points = 0;
 
   constructor(
     private quizService: QuizService,
@@ -25,9 +27,11 @@ export class QuizPage implements OnInit {
     private route: ActivatedRoute,
     private storage: Storage,
     private druginfoService: DruginfoService,
+    private profileService: ProfileService
     ) { }
 
   ngOnInit() {
+    this.getProfile();
     this.route.queryParams.subscribe(
       (params) => {
         const state = params.state;
@@ -44,6 +48,17 @@ export class QuizPage implements OnInit {
 
   goToMenu() {
     this.navCtrl.navigateRoot('/menu');
+  }
+
+  getProfile() {
+    this.profileService.getProfileData().subscribe(
+      (data) => {
+        if (data.points) {
+          this.points = data.points;
+          }
+        // console.log(data);
+      }
+    );
   }
 
   setLevelData() {

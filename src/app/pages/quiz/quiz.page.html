@@ -14,7 +14,7 @@
 
   <div *ngIf="quiz.length > 0 && !feedback" class="parent">
 
-    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
+    <div class="box quizdrug" style= "left: 0; z-index: 1000">        
       <div class="quizdrugname">
         {{drug.drug_name | uppercase}}
       </div>
@@ -47,7 +47,7 @@
 
   <div *ngIf="feedback" class="parent">
 
-    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
+    <div class="box quizdrug" style= "left: 0; z-index: 1000">        
       <ion-text class="quizdrugname">
         {{drug.drug_name | uppercase}}
       </ion-text>
