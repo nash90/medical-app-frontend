@@ -16,7 +16,6 @@
     </div>
 
     <div *ngIf="game" class="box divgame">
-
       <div class="box divinfo" align="center">
         <div class="info">
           <ion-text class="infob">{{game.drug.drug_name | uppercase}}</ion-text> 
@@ -28,7 +27,7 @@
             </div>
           </div>
       </div>
-      
+    
       <div class="box divhint">
         <div *ngIf= "hints" class = "hints">
           <div class="hintbulb" align="right">         
@@ -43,6 +42,7 @@
           </div>
         </div>
       </div>
+      
       <div *ngIf="try > 0" align="center">
         <ion-text class="warning2">Please try again...</ion-text>
       </div>

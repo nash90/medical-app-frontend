@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'quiz',
     loadChildren: './pages/quiz/quiz.module#QuizPageModule',
     canActivate: [AuthGuardService]
-  }
+  },
+  { path: 'help', loadChildren: './help/help.module#HelpPageModule' }
 ];
 @NgModule({
   imports: [
