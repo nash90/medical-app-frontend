@@ -1,9 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>help</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar class="divheader">
+      <div class="boxrow header" align="left"><ion-icon name="home" (click)="goToMenu()"></ion-icon></div>
+      <div class="boxrow medscrab" align="center">MedScrab</div>
+      <div class="boxrow headerpoints" align="right"><font class="points"></font></div>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
+  <ion-content class="contentarea">
+    <div class="flexcontainer"> 
 
+    <div class="box selectdrugbuttontop">
+      <div class="selectdrugbtntop">HELP</div>
+    </div>
+          
+    <div class="box step1background">
+      <div class="howtoplay">GOAL #1</div>
+      <div class="helptext">Complete the word or phrase by filling in the blanks</div>
+      <div class="helpimage"><img src="../assets/goalword.png" width="90%"></div>
+      <br>
+      <div class="howtoplay">How To Play</div>      
+      <div class="helptext">Select a letter to fill in the word or phrase</div>
+      <div class="helpimage"><img src="../assets/letterbank.png" width="90%"></div>
+      <br>
+      <div class="helptext">To remove a letter from the word or phrase, simply click on the letter</div>
+      <div class="helpimage"><img src="../assets/mistake.png" width="60%"></div>
+      <br><br>
+      <div class="howtoplay">GOAL #2</div>
+      <div class="helptext">Complete the quiz by answering all the multiple choice questions</div>
+      <div class="helpimage"><img src="../assets/quiz.png" width="90%"></div>
+      <br>
+      <div class="howtoplay">How To Play</div>      
+      <div class="helptext">Make a selection and click submit</div>
+      <div class="helpimage"><img src="../assets/selectsubmit.png" width="90%"></div>
+      
+      
+    </div>
+
+  </div>
 </ion-content>
