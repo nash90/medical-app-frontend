@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
+import { ProfileService } from 'src/app/service/profile.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,13 +9,30 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class MenuPage implements OnInit {
 
-  constructor(private authService: AuthService) {}
+  public points = 0;
+
+  constructor(
+    private authService: AuthService,
+    private profileService: ProfileService
+  ) {}
+
+  ngOnInit() {
+    this.getProfile();
+  }
 
   logout() {
     this.authService.logout();
   }
 
-  ngOnInit() {
+  getProfile() {
+    this.profileService.getProfileData().subscribe(
+      (data) => {
+        if (data.points) {
+        this.points = data.points;
+        }
+        // console.log(data);
+      }
+    );
   }
 
 }
