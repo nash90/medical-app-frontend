@@ -65,7 +65,7 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    this.changeDateFormat;
+    //this.changeDateFormat;
     this.authService.register({
       user: {
         email: this.validations_form.get('username').value

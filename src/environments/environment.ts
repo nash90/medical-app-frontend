@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://medscrab.com:8000',
+  apiUrl: 'http://medscrab.com',
   retry_count: 1,
   retry_flag: true
 };
