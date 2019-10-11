@@ -1,51 +1,150 @@
+
+.contentArea { 
+  --background:white;
+  height: 100%;
+}
+
+.flexcontainer {
+  /*parent flex setup*/
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; 
+  
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .divheader {
-    padding-left: 5px;
-    padding-right: 5px;
-  
-    /*parent flex setup for */
-    height: 75px;
-    padding-top: 35px;
-    padding-bottom: 0px;
-  }
-  
-  .medscrab {
-    color: #620000;
-    font-weight: bold;
-    font-family: "arial";
-    font-size: 20px;
-  
-    height: 100%;  
-    width: 100%;
-  }
-  
-  .flexcontainer {
-    /*parent flex setup*/
-    height: 100%;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column; 
+  padding-left: 5px;
+  padding-right: 5px;
+
+  /*parent flex setup for */
+  height: 75px;
+  padding-top: 35px;
+  padding-bottom: 0px;
+}
+
+.boxrow {
+  display: inline-block;
+}
+
+.header {
+  height: 100%;
+  width: 30%;
+  color: #620000;  
+  font-size: 20px;
+}
+
+.medscrab {
+  color: #620000;
+  font-weight: bold;
+  font-family: "arial";
+  font-size: 20px;
+
+  height: 100%;  
+  width: 40%;
+}
+
+.headerpoints {
+  height: 100%;  
+  width: 30%;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: bold;
+  color: #620000;  
+}
+
+.points {
+  font-family: arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: #620000; 
+}
+
+.selectdrugbuttontop {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 70px;
+}
+
+.selectdrugbtntop {
+      /*placement*/
+      width: 100%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     
-    width: 100%;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+      /*background*/
+      background-image: url('/assets/tilelighttan.jpg');          
+      background-color: #F9EEDA; /*#C3D2FF;*/
+      border-radius: 10px; 
+      box-shadow: 2px 2px 2px gray; /*#6D83C4;  */
+      
+      /*padding*/
+      padding-top: 14px;
+      padding-bottom: 14px;
+      text-align: center;
+      margin-top: 5px;
+      margin-bottom: 5px;
 
-  .selectdrug {
-    font-size: 20px;
-    text-align: left;
-    padding-left: 20px;
-    color: #620000;
-  }
+      /*text*/
+      color: black; //2A200B;
+      font-family: "quicksand";
+      font-weight: bold;    
+      font-size: 21px;      
+      letter-spacing: 2px; 
+}
+
+.step1background {
+  flex: 1 1 auto;
   
-  .num {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 24px;
-    text-align: center;
-    color: #620000;
-  }
+  /*placement*/
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 
-  .filler {
-    flex: 1 1 auto;
-  }
+  /*background*/
+  background-image: url('/assets/tilelighttan.jpg');          
+  background-color: #F9EEDA; /*#C3D2FF;*/
+  border-radius: 10px; 
+  box-shadow: 2px 2px 2px gray; /*#6D83C4;  */
+  
+  /*padding*/
+  padding-top: 14px;
+  padding-bottom: 14px;
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.selectdrug {
+  font-size: 20px;
+  text-align: left;
+  padding-left: 20px;
+  color: #620000;
+}
+
+.num {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 24px;
+  text-align: center;
+  color: #620000;
+}
+
+.filler {
+  flex: 1 1 auto;
+}

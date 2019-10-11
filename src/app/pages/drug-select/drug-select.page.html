@@ -1,36 +1,36 @@
-<ion-header>
+  <ion-header>
     <ion-toolbar class="divheader">
+      <div class="boxrow header" align="left"><ion-icon name="home" (click)="goToMenu()"></ion-icon></div>
       <div class="boxrow medscrab" align="center">MedScrab</div>
+      <div class="boxrow headerpoints" align="right">{{points}}<font class="points">Pts</font></div>
     </ion-toolbar>
   </ion-header>
 
-<ion-content color="medium">
-  <div class="flexcontainer">           
-    <br>
-    <div class="num">Step 1</div>
-    <br>
-    <div class="selectdrug">Select Drug</div>
-    <ion-item padding>
-      <ionic-selectable
-        [(ngModel)]="selectedDrug"
-        [items]="drugs$ | async"
-        itemValueField="drug_id"
-        itemTextField="drug_name"
-        [canSearch]="true"
-        [isMultiple]="true"
-        (onChange)="selectDrug($event)">
-      </ionic-selectable>
-    </ion-item>
-    <br>
-    <div class="num">Step 2</div>
-    <div padding>
-      <ion-button color="danger" size="default" type="submit" expand="block" (click)='saveDrug()'>PLAY GAME</ion-button>
-    </div>
-    
-    <div class="filler"></div>
+  <ion-content class="contentarea">
+    <div class="flexcontainer"> 
 
-    <div padding>
-      <ion-button color="danger" size="default" type="submit" expand="block" (click)='goBack()'>RETURN HOME</ion-button>
+    <div class="box selectdrugbuttontop">
+      <div class="selectdrugbtntop">SELECT DRUG</div>
+    </div>
+          
+    <div class="box step1background">
+      <div class="num">Step 1</div>
+      <ion-item padding>
+        <ionic-selectable
+          [(ngModel)]="selectedDrug"
+          [items]="drugs$ | async"
+          itemValueField="drug_id"
+          itemTextField="drug_name"
+          [canSearch]="true"
+          [isMultiple]="true"
+          (onChange)="selectDrug($event)">
+        </ionic-selectable>
+      </ion-item>
+
+      <div class="num">Step 2</div>
+      <div padding>
+        <ion-button color="danger" size="default" type="submit" expand="block" (click)='saveDrug()'>P L A Y &nbsp; G A M E</ion-button>
+      </div>
     </div>
 
   </div>
