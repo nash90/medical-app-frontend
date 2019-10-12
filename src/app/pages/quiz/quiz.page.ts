@@ -17,6 +17,7 @@ export class QuizPage implements OnInit {
   public drug = null;
   public answers = {};
   public error = false;
+  public not_valid = false;
   public feedback = null;
   public state = '';
   public points = 0;
@@ -120,10 +121,12 @@ export class QuizPage implements OnInit {
   submitAnswer() {
     // console.log('submitAns');
     if (this.validateAnswers() === false) {
-      this.error = true;
+      this.not_valid = true;
       return;
     }
+    this.not_valid = false;
     this.quizService.checkAnswers(this.answers).subscribe((ans) => {
+      this.error = false;
       const dic = {};
       ans.forEach((item) => {
         dic[item.quiz_id] = item;
@@ -131,6 +134,9 @@ export class QuizPage implements OnInit {
       this.feedback = dic;
       // console.log('answer check', dic);
 
+    },
+    (err) => {
+      this.error = true;
     });
   }
 
