@@ -37,7 +37,12 @@
         </ion-radio-group>
       </ion-list>
     </div>
-
+    <div *ngIf="not_valid">
+      <ion-text class="warning2">Please answer all the questions</ion-text>
+    </div>
+    <div *ngIf="error">
+      <ion-text class="warning2">Error: Try again later</ion-text>
+    </div>    
     <div>
       <ion-button class="submit" expand="full" shape="round" fill="solid" color="danger" (click)="submitAnswer()">S U B M I T</ion-button>
     </div>
