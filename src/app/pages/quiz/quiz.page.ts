@@ -119,7 +119,6 @@ export class QuizPage implements OnInit {
   }
 
   submitAnswer() {
-    // console.log('submitAns');
     if (this.validateAnswers() === false) {
       this.not_valid = true;
       return;
@@ -132,8 +131,6 @@ export class QuizPage implements OnInit {
         dic[item.quiz_id] = item;
       });
       this.feedback = dic;
-      // console.log('answer check', dic);
-
     },
     (err) => {
       this.error = true;
