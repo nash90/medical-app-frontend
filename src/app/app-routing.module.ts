@@ -6,7 +6,6 @@ const routes: Routes = [
   {
     path: '',
     // loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    // canActivate: [AuthGuardService]
     redirectTo: 'menu',
     pathMatch: 'full'
   },
@@ -31,7 +30,8 @@ const routes: Routes = [
   { path: 'quiz',
     loadChildren: './pages/quiz/quiz.module#QuizPageModule',
     canActivate: [AuthGuardService]
-  }
+  },
+  { path: 'help', loadChildren: './pages/help/help.module#HelpPageModule' }
 ];
 @NgModule({
   imports: [

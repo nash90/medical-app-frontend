@@ -41,7 +41,7 @@ export class DrugSelectPage implements OnInit {
   }
 
   goBack() {
-    console.log('go back');
+    // console.log('go back');
     this.navCtrl.navigateRoot('/menu');
   }
 }

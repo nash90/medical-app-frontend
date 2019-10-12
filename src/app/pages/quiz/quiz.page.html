@@ -14,7 +14,7 @@
 
   <div *ngIf="quiz.length > 0 && !feedback" class="parent">
 
-    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
+    <div class="box quizdrug" style= "left: 0; z-index: 1000">        
       <div class="quizdrugname">
         {{drug.drug_name | uppercase}}
       </div>
@@ -37,7 +37,12 @@
         </ion-radio-group>
       </ion-list>
     </div>
-
+    <div *ngIf="not_valid">
+      <ion-text class="warning2">Please answer all the questions</ion-text>
+    </div>
+    <div *ngIf="error">
+      <ion-text class="warning2">Error: Try again later</ion-text>
+    </div>    
     <div>
       <ion-button class="submit" expand="full" shape="round" fill="solid" color="danger" (click)="submitAnswer()">S U B M I T</ion-button>
     </div>
@@ -47,7 +52,7 @@
 
   <div *ngIf="feedback" class="parent">
 
-    <div class="quizdrug" style= "width: 100%; left: 0; text-align: center; background-color: white; z-index: 1000">        
+    <div class="box quizdrug" style= "left: 0; z-index: 1000">        
       <ion-text class="quizdrugname">
         {{drug.drug_name | uppercase}}
       </ion-text>

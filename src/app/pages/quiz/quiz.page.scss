@@ -64,6 +64,12 @@
   margin-right: auto;
 }
 
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .quizdrug {
   /*text - same as game page "level" section*/
   color: black; //2A200B;
@@ -72,12 +78,16 @@
   font-size: 21px;      
   letter-spacing: 2px; 
 
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
 
   position: fixed;
+  height: 90px;
+  background-color: white;
+  width: 100%;
+  text-align: center;
 }
 
 .whitespace {
@@ -111,7 +121,7 @@
   font-family: "quicksand";
   font-weight: bold;    
   font-size: 18px;      
-  letter-spacing: 0px; 
+  letter-spacing: 1px; 
 }
 
 .radiobtn  {
@@ -136,7 +146,10 @@
 }
 
 .choicesBackground {
-  background-image: url('/assets/tilelighttan.jpg');      
+  background-image: url('/assets/tilelighttan.jpg');   
+  background-color: #DCB781;
+  border-bottom-right-radius: 10px; 
+  border-bottom-left-radius: 10px; 
 }
 
 .submit {
@@ -157,4 +170,12 @@
 .quizLabel {
   white-space: pre-wrap;
   overflow-wrap: normal;
+}
+
+.warning2 {
+  color: #620000;
+  font-family: "quicksand";
+  font-size: 18px;
+  letter-spacing: 0px;
+  font-weight: bold;   
 }
