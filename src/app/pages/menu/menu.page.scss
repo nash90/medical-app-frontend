@@ -35,6 +35,12 @@
     display: inline-block;
   }
   
+.header {
+  height: 100%;
+  width: 18%;
+  //background-color:green;
+}  
+
 .medscrab {
     color: #620000;
     font-weight: bold;
@@ -42,8 +48,14 @@
     font-size: 20px;
   
     height: 100%;  
-    width: 100%;
+    width: 52%;
   }
+
+.headerpoints {
+  height: 100%;  
+  width: 30%;
+  //background-color:green;  
+}
 
   .menubuttonstop {
     padding-top: 5px;
