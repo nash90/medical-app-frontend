@@ -1,13 +1,10 @@
 
 .contentArea { 
     --background:white;
-    height: 100%;
   }
   
   .flexcontainer {
     /*parent flex setup*/
-    height: 100%;
-    min-height: 100%;
     display: flex;
     flex-direction: column; 
     
@@ -42,7 +39,7 @@
   
   .header {
     height: 100%;
-    width: 30%;
+    width: 18%;
     color: #620000;  
     font-size: 20px;
   }
@@ -54,7 +51,7 @@
     font-size: 20px;
   
     height: 100%;  
-    width: 40%;
+    width: 52%;
   }
   
   .headerpoints {
