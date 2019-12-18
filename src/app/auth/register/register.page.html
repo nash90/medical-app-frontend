@@ -42,7 +42,7 @@
 
               <!-- birthdate input on register page -->
               <ion-item>
-                <ion-input type="date" placeholder="YYYY-MM-DD" formControlName="birthdate"></ion-input>
+                <ion-input type="text" placeholder="YYYY-MM-DD" formControlName="birthdate" onfocusin="(this.type='date')" onfocusout="(this.type='text')"></ion-input>
               </ion-item>
               <div class="validation-errors">
                   <ng-container *ngFor="let validation of validation_messages.birthdate">

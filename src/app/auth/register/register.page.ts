@@ -65,7 +65,6 @@ export class RegisterPage implements OnInit {
   }
 
   register() {
-    //this.changeDateFormat;
     this.authService.register({
       user: {
         email: this.validations_form.get('username').value
@@ -84,13 +83,7 @@ export class RegisterPage implements OnInit {
       }
     );
   }
-
-  changeDateFormat() {
-    var date = new Date(this.validations_form.get("birthdate").value);
-    this.validations_form.get("birthdate").setValue(date.getFullYear.toString + 
-      "-" + date.getMonth.toString + "-" + date.getDay.toString);
-  }
-
+  
   onSubmit(values) {
     // console.log(values);
     this.router.navigate(['/user']);
