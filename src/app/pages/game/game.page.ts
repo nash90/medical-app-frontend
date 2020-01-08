@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
 import { ProfileService } from 'src/app/service/profile.service';
+import { EventLoggerService } from 'src/app/event-logger.service';
+
 
 @Component({
   selector: 'app-game',
@@ -74,7 +76,8 @@ export class GamePage implements OnInit {
     private navCtrl: NavController,
     private route: ActivatedRoute,
     private storage: Storage,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    public logger: EventLoggerService
     ) {}
 
   ngOnInit() {
@@ -115,6 +118,8 @@ export class GamePage implements OnInit {
         // console.log('game item', item);
         this.setGame(item);
         this.getScreenInfo();
+        this.logger.logButton("Level"+this.current_level.level+this.current_level.name,{ pram: "paramValue" })
+        this.logger.setScreen("Level"+this.current_level.level+this.current_level.name)
       }
     },
     (err) => console.log('get Game Item subscribe Failure', err)
@@ -124,10 +129,12 @@ export class GamePage implements OnInit {
   getScreenInfo() {
     this.getProfile();
     this.getLevel();
-    // console.log('current level', this.current_level);
     if (this.current_level.data.length < 1) {
       this.changeLevel();
       this.getScreenInfo();
+    this.logger.logButton("Level"+this.current_level.level+this.current_level.name,{ pram: "paramValue" })
+      this.logger.setScreen("Level"+this.current_level.level+this.current_level.name)
+
       return;
     }
 
@@ -454,8 +461,14 @@ export class GamePage implements OnInit {
         // this.cacheGame();
         if (!this.checkCompletedAllLevels()) {
           this.getScreenInfo();
+          this.logger.logButton("Level"+this.current_level.level+this.current_level.name,{ pram: "paramValue" })
+            this.logger.setScreen("Level"+this.current_level.level+this.current_level.name)
         } else {
           this.goToQuiz('1'); // go to full end quiz
+        this.logger.logButton("Level"+this.current_level.level+this.current_level.name,{ pram: "paramValue" })
+          this.logger.setScreen("Level"+this.current_level.level+this.current_level.name)
+
+
         }
       }
     );

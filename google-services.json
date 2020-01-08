@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "929964672720",
+    "firebase_url": "https://drug-scrabble.firebaseio.com",
+    "project_id": "drug-scrabble",
+    "storage_bucket": "drug-scrabble.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929964672720:android:ecc9136b527c3c96dc00d5",
+        "android_client_info": {
+          "package_name": "com.medscrab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929964672720-169b8l6gvs67tp4mttdq00k67jqkdi6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnspUCIWO8uwCxjKXQ8RqL7nXsWuzK22E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929964672720-169b8l6gvs67tp4mttdq00k67jqkdi6e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "929964672720-hap5in3h1ft2cbbqi4fh4q7j1uc1lgct.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.medscrab"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

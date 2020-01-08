@@ -30,11 +30,37 @@
     
       <div class="box divhint">
         <div *ngIf= "hints" class = "hints">
-          <div class="hintbulb" align="right">         
-            <img src="../assets/bulbclearbackground.png" height="100px">
-          </div>
+
+          <div  class="hintbulb" align="right">
+
+
+            </div>
+
+
+            <div *ngIf="try > 0" align="center">
+
+                <div class="warning2" align="right">
+
+                    <img src="../assets/angry.png" height="100px">
+
+                </div>
+            </div>
+
+            <div *ngIf="wrong_answer">
+                <div class="warning2" align="right">
+
+                    <img src="../assets/angry.png" height="100px">
+
+                </div>
+            </div>
+
+
           <div class="hint">
+
             <ul>
+              <div class="hintbulb1"   align="left">
+                <img src="../assets/hand.png" height="50px">
+              </div>
               <div class="hintb" *ngFor="let hint of hints; let i = index">
               <li>{{hint | lowercase}}
               </div>
@@ -44,9 +70,15 @@
       </div>
       
       <div *ngIf="try > 0" align="center">
-        <ion-text class="warning2">Please try again...</ion-text>
+
+        <div class="warning2" align="center">
+
+          <p>Please try again</p>
+
+        </div>
       </div>
       <div *ngIf="!wrong_answer">
+
         <div class="box divword" align="center">
           <div class="word">
             <div *ngFor="let char of scrabbled_value; let i = index"
@@ -82,7 +114,7 @@
 
       <div *ngIf="wrong_answer" align="center" padding-bottom>
         <div class="box divword">
-          <ion-text class="warning2">Sorry, the correct answer is:</ion-text>
+          <ion-text class="warning1">Sorry, the correct answer is:</ion-text>
           <div class="box divword">
             <div class="word">
               <div *ngFor="let char of current_keyword.keyword.split(''); let i = index;" 

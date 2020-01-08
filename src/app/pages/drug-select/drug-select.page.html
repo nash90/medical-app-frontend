@@ -7,12 +7,12 @@
   </ion-header>
 
   <ion-content class="contentarea">
-    <div class="flexcontainer"> 
+    <div class="flexcontainer">
 
     <div class="box selectdrugbuttontop">
       <div class="selectdrugbtntop">SELECT DRUG</div>
     </div>
-          
+
     <div class="box step1background">
       <div class="num">Step 1</div>
       <ion-item padding>
@@ -23,7 +23,7 @@
           itemTextField="drug_name"
           [canSearch]="true"
           [isMultiple]="true"
-          (onChange)="selectDrug($event)">
+          >
         </ionic-selectable>
       </ion-item>
 

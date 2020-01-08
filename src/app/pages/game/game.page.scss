@@ -187,10 +187,9 @@
   /*child 1/2 of divhint flexbox*/
   flex: .27;
   padding-left: 15px;
-
+  padding-top: 10px;
   /*rotation*/
   transform: rotate(-10deg);
-
   /*animation*/
   animation: wiggle infinite;
   animation-delay: 3000ms;
@@ -247,12 +246,38 @@
 }
 
 .warning2 {
+  padding-top: 50px;
   color: #620000;
   font-family: "quicksand";
   font-size: 18px;
   letter-spacing: 0px;
-  font-weight: bold;   
+  font-weight: bold;
+
+  /*animation*/
+  animation: wiggle infinite;
+  animation-delay: 1000ms;
+  animation-duration: 4500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50% 50%;
+  position: relative;
 }
+
+.warning1 {
+  color: #620000;
+  font-family: "quicksand";
+  font-size: 18px;
+  letter-spacing: 0px;
+  font-weight: bold;
+
+  /*animation*/
+  animation: wiggle infinite;
+  animation-delay: 1000ms;
+  animation-duration: 4500ms;
+  animation-timing-function: ease-in-out;
+  transform-origin: 50% 50%;
+  position: relative;
+}
+
 
 .blankletter {
   --border-radius: 0px;
@@ -315,6 +340,64 @@ div.letterbank {
 /*  text-shadow: 2px 2px 3px rgba(255,255,255,1); */
   font-weight: bold;
   font-size: 32px;
+}
+
+
+
+//////
+
+.modal-window {
+  position: fixed;
+  background-color: rgba(200, 200, 200, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal-window:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-window>div {
+  width: 400px;
+  position: relative;
+  margin: 10% auto;
+  padding: 2rem;
+  background: #fff;
+  color: #444;
+}
+
+.modal-window header {
+  font-weight: bold;
+}
+
+.modal-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 80%;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  width: 70px;
+  text-decoration: none;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+.modal-window h1 {
+  font-size: 150%;
+  margin: 0 0 15px;
 }
 
 

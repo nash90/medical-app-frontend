@@ -15,6 +15,10 @@ import { IonicSelectableModule } from 'ionic-selectable';
 import { AuthService } from './service/auth.service';
 import { InterceptorService } from './service/interceptor.service';
 import { AuthGuardService } from './service/auth-guard.service';
+import { EventLoggerService } from 'src/app/event-logger.service';
+import { FirebaseAnalytics } from '@ionic-native/firebase-analytics/ngx';
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +39,8 @@ import { AuthGuardService } from './service/auth-guard.service';
   providers: [
     AuthService,
     AuthGuardService,
+    EventLoggerService,
+    FirebaseAnalytics,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
